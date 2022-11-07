@@ -23,6 +23,7 @@ class Dispatcher
             default:
                 $html = 'Bienvenue';
         }
+        $this->renderPage($html);
     }
 
     private function renderPage(string $html) : void
@@ -33,12 +34,11 @@ class Dispatcher
                 <head>
                     <title>NetVOD</title>
                     <meta charset="UTF-8">   
-                    <link rel="stylesheet" href="deefy.css"> 
                 </head>
                 <body>
                     <nav id="menu">
                         <ul>
-                            <li id="element"><a href="index.php">Accueil</li>
+                            <li id="element"><a href="index.php">Accueil</a></li>
                         </ul>
                     </nav>
                     <div class="content">
