@@ -46,5 +46,4 @@ class RegisterAction extends Action
         }
         return $html;
     }
-    }
 }
