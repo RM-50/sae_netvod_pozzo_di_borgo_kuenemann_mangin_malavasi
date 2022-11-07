@@ -31,7 +31,7 @@ class Dispatcher
             <!DOCTYPE html>
             <html lang="fr">
                 <head>
-                    <title>DeefyApp</title>
+                    <title>NetVOD</title>
                     <meta charset="UTF-8">   
                     <link rel="stylesheet" href="deefy.css"> 
                 </head>
