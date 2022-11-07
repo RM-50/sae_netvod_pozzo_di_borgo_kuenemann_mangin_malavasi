@@ -2,6 +2,8 @@
 
 namespace iutnc\netvod\dispatch;
 
+use iutnc\netvod\action\Signin;
+
 class Dispatcher
 {
 
@@ -20,6 +22,10 @@ class Dispatcher
     {
         switch ($this->action)
         {
+            case 'signin':
+                $action = new Signin();
+                $html = $action->execute();
+                break;
             default:
                 $html = 'Bienvenue';
         }
