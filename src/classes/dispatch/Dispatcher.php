@@ -2,7 +2,8 @@
 
 namespace iutnc\netvod\dispatch;
 
-use iutnc\netvod\action\Signin;
+use iutnc\netvod\action\RegisterAction;
+use iutnc\netvod\action\SigninAction;
 
 class Dispatcher
 {
@@ -22,8 +23,12 @@ class Dispatcher
     {
         switch ($this->action)
         {
+            case 'register':
+                $action = new RegisterAction();
+                $html = $action->execute();
+                break;
             case 'signin':
-                $action = new Signin();
+                $action = new SigninAction();
                 $html = $action->execute();
                 break;
             default:

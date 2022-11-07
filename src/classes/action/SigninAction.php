@@ -5,7 +5,7 @@ namespace iutnc\netvod\action;
 use \iutnc\netvod\exception\AuthException;
 use iutnc\netvod\auth\Auth;
 
-class Signin extends Action
+class SigninAction extends Action
 {
 
     public function execute(): string
