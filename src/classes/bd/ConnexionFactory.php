@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\netvod\db;
+namespace iutnc\netvod\bd;
 use PDO;
 ConnectionFactory::setConfig( 'db.config.ini' );
 

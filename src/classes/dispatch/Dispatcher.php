@@ -2,6 +2,8 @@
 
 namespace iutnc\netvod\dispatch;
 
+use iutnc\netvod\action\AddPreferencesAction;
+
 class Dispatcher
 {
 
@@ -20,8 +22,13 @@ class Dispatcher
     {
         switch ($this->action)
         {
+            case "add-preferences":
+                $html = new AddPreferencesAction();
+                $html->execute();
+                break;
             default:
                 $html = 'Bienvenue';
+                break;
         }
         $this->renderPage($html);
     }
