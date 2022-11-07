@@ -20,3 +20,11 @@ nav{
 .content{
     text-align: center;
 }
+
+.accueil-action > ul{
+    list-style-type: none;
+}
+
+.accueil-action > a{
+    size: 32pt;
+}

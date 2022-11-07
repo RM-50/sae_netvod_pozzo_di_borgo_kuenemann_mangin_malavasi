@@ -2,6 +2,7 @@
 
 namespace iutnc\netvod\dispatch;
 
+use iutnc\netvod\action\AccueilAction;
 use iutnc\netvod\action\RegisterAction;
 use iutnc\netvod\action\SigninAction;
 
@@ -32,7 +33,8 @@ class Dispatcher
                 $html = $action->execute();
                 break;
             default:
-
+                $action = new AccueilAction();
+                $html = $action->execute();
         }
         $this->renderPage($html);
     }
@@ -57,7 +59,7 @@ class Dispatcher
                 <body>
                     <nav id="menu">
                         <ul>
-                            '<li id="element"><a href="index.php">Accueil</a></li>';
+                            <li id="element"><a href="index.php">Accueil</a></li>
                         </ul>
                     </nav>
                     <div class="content">
