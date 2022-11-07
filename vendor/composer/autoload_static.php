@@ -9,12 +9,12 @@ class ComposerStaticInit2748e8162f6526e33e431075b320a662
     public static $prefixLengthsPsr4 = array (
         'i' => 
         array (
-            'iutnc\\action\\' => 13,
+            'iutnc\\netvod\\' => 13,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'iutnc\\action\\' => 
+        'iutnc\\netvod\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/classes',
         ),
