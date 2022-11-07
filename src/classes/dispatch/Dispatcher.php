@@ -32,24 +32,32 @@ class Dispatcher
                 $html = $action->execute();
                 break;
             default:
-                $html = 'Bienvenue';
+
         }
         $this->renderPage($html);
     }
 
     private function renderPage(string $html) : void
     {
+        if (isset($_SESSION['user_connected']))
+        {
+
+        }
+        else
+        {
+        }
         echo <<<END
             <!DOCTYPE html>
             <html lang="fr">
                 <head>
                     <title>NetVOD</title>
-                    <meta charset="UTF-8">   
+                    <meta charset="UTF-8"> 
+                    <link rel="stylesheet" href="netvod.css">  
                 </head>
                 <body>
                     <nav id="menu">
                         <ul>
-                            <li id="element"><a href="index.php">Accueil</a></li>
+                            '<li id="element"><a href="index.php">Accueil</a></li>';
                         </ul>
                     </nav>
                     <div class="content">

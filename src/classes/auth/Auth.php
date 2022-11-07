@@ -2,11 +2,13 @@
 
 namespace iutnc\netvod\auth;
 
+use iutnc\netvod\application\User;
 use iutnc\netvod\db\ConnectionFactory;
+use iutnc\netvod\exceptions\AuthException;
 
 class Auth
 {
-    public static function authenticate(string $emailn, string $passwd) : bool
+    public static function authenticate(string $email, string $passwd) : bool
     {
         $db = ConnectionFactory::makeConnection();
         $stmt = $db->prepare("SELECT * FROM user WHERE email = ?");
@@ -17,8 +19,8 @@ class Auth
         if (!$row)
             throw new AuthException("Auth failed : Invalid credentials");
         else {
-            if (password_verify($passwd, $row['passwd'])) {
-                $usr = new User($row['email'], $row['passwd'], $row['role']);
+            if (password_verify($passwd, $row['password'])) {
+                $usr = new User($row['email'], $row['password'], $row['role']);
                 $_SESSION['user_connected'] = serialize($usr);
                 return true;
             } else {
@@ -56,7 +58,6 @@ class Auth
             $hash = password_hash($passwd, PASSWORD_DEFAULT, ['cost' => 12]);
             $db = ConnectionFactory::makeConnection();
             $stmt = $db->prepare("INSERT INTO user (email, password, role) VALUES (:email, :passwd, 1)"); // L'identifiant de l'utilisateur est auto incrémenté
-            $stmt->bindParam(':id', $id);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':passwd', $hash);
             $stmt->execute();

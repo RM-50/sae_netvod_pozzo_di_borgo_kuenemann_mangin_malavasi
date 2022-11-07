@@ -1,0 +1,22 @@
+body {
+    padding: 10px;
+}
+
+nav{
+    border-bottom: 1px solid black;
+    margin-bottom: 100px;
+}
+
+#menu{
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#element{
+    display: inline-block;
+    margin-left: 50px;
+}
+
+.content{
+    text-align: center;
+}
