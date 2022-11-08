@@ -5,6 +5,7 @@ namespace iutnc\netvod\dispatch;
 use iutnc\netvod\action\AccueilAction;
 use iutnc\netvod\action\RegisterAction;
 use iutnc\netvod\action\SigninAction;
+use iutnc\netvod\action\Signout;
 
 class Dispatcher
 {
@@ -32,6 +33,10 @@ class Dispatcher
                 $action = new SigninAction();
                 $html = $action->execute();
                 break;
+            case 'signout':
+                $action = new Signout();
+                $html = $action->execute();
+                break;
             default:
                 $action = new AccueilAction();
                 $html = $action->execute();
@@ -44,7 +49,7 @@ class Dispatcher
         if (isset($_SESSION['user_connected']))
         {
             $inscription = '';
-            $connection = '';
+            $connection = '<li id="element"><a href="?action=signout">Se Deconnecter</a></li>';
         }
         else
         {
