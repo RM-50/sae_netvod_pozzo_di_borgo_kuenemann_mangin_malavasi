@@ -2,6 +2,10 @@
 
 namespace iutnc\netvod\dispatch;
 
+use iutnc\netvod\action\AccueilAction;
+use iutnc\netvod\action\RegisterAction;
+use iutnc\netvod\action\SigninAction;
+
 class Dispatcher
 {
 
@@ -20,25 +24,47 @@ class Dispatcher
     {
         switch ($this->action)
         {
+            case 'register':
+                $action = new RegisterAction();
+                $html = $action->execute();
+                break;
+            case 'signin':
+                $action = new SigninAction();
+                $html = $action->execute();
+                break;
             default:
-                $html = 'Bienvenue';
+                $action = new AccueilAction();
+                $html = $action->execute();
         }
         $this->renderPage($html);
     }
 
     private function renderPage(string $html) : void
     {
+        if (isset($_SESSION['user_connected']))
+        {
+            $inscription = '';
+            $connection = '';
+        }
+        else
+        {
+            $inscription = '<li id="element"><a href="?action=register">S\'inscrire</a></li>';
+            $connection = '<li id="element"><a href="?action=signin">Se Connecter</a></li>';
+        }
         echo <<<END
             <!DOCTYPE html>
             <html lang="fr">
                 <head>
                     <title>NetVOD</title>
-                    <meta charset="UTF-8">   
+                    <meta charset="UTF-8"> 
+                    <link rel="stylesheet" href="netvod.css">  
                 </head>
                 <body>
                     <nav id="menu">
                         <ul>
                             <li id="element"><a href="index.php">Accueil</a></li>
+                            $inscription
+                            $connection
                         </ul>
                     </nav>
                     <div class="content">
