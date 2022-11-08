@@ -4,6 +4,10 @@ namespace iutnc\netvod\dispatch;
 
 use iutnc\netvod\action\AddPreferencesAction;
 
+use iutnc\netvod\action\AccueilAction;
+use iutnc\netvod\action\RegisterAction;
+use iutnc\netvod\action\SigninAction;
+
 class Dispatcher
 {
 
@@ -26,21 +30,37 @@ class Dispatcher
                 $html = new AddPreferencesAction();
                 $html->execute();
                 break;
-            default:
-                $html = 'Bienvenue';
+            case 'register':
+                $action = new RegisterAction();
+                $html = $action->execute();
                 break;
+            case 'signin':
+                $action = new SigninAction();
+                $html = $action->execute();
+                break;
+            default:
+                $action = new AccueilAction();
+                $html = $action->execute();
         }
         $this->renderPage($html);
     }
 
     private function renderPage(string $html) : void
     {
+        if (isset($_SESSION['user_connected']))
+        {
+
+        }
+        else
+        {
+        }
         echo <<<END
             <!DOCTYPE html>
             <html lang="fr">
                 <head>
                     <title>NetVOD</title>
-                    <meta charset="UTF-8">   
+                    <meta charset="UTF-8"> 
+                    <link rel="stylesheet" href="netvod.css">  
                 </head>
                 <body>
                     <nav id="menu">

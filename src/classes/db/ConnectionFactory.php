@@ -2,7 +2,7 @@
 
 namespace iutnc\netvod\bd;
 use PDO;
-ConnectionFactory::setConfig( 'db.config.ini' );
+ConnectionFactory::setConfig( './conf/conf.ini' );
 
 class ConnectionFactory{
     public static $db = null;
