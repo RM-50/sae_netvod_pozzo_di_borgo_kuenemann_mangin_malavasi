@@ -7,10 +7,11 @@ use iutnc\netvod\exceptions\InvalidePropertyException;
 class User
 {
     private string $email, $passwd;
-    private int $role;
+    private int $role, $id;
 
-    public function __construct(string $email, string $passwd, int $role)
+    public function __construct(int $id, string $email, string $passwd, int $role)
     {
+        $this->id = $id;
         $this->email = $email;
         $this->passwd = $passwd;
         $this->role = $role;

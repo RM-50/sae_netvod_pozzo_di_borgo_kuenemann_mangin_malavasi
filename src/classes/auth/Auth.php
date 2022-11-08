@@ -20,7 +20,7 @@ class Auth
             throw new AuthException("Auth failed : Invalid credentials");
         else {
             if (password_verify($passwd, $row['password'])) {
-                $usr = new User($row['email'], $row['password'], $row['role']);
+                $usr = new User($row['id'], $row['email'], $row['password'], $row['role']);
                 $_SESSION['user_connected'] = serialize($usr);
                 return true;
             } else {
