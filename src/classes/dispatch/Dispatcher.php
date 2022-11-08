@@ -2,6 +2,8 @@
 
 namespace iutnc\netvod\dispatch;
 
+use iutnc\netvod\action;
+
 class Dispatcher
 {
 
@@ -18,8 +20,13 @@ class Dispatcher
 
     public function run() : void
     {
+        $html ="";
         switch ($this->action)
         {
+            case'note':
+                $action = new \iutnc\netvod\action\NoteAction();
+                $html = $action->execute();
+                break;
             default:
                 $html = 'Bienvenue';
         }
