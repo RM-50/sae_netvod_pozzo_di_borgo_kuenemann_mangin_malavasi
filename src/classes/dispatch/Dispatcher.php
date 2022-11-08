@@ -43,10 +43,13 @@ class Dispatcher
     {
         if (isset($_SESSION['user_connected']))
         {
-
+            $inscription = '';
+            $connection = '';
         }
         else
         {
+            $inscription = '<li id="element"><a href="?action=register">S\'inscrire</a></li>';
+            $connection = '<li id="element"><a href="?action=signin">Se Connecter</a></li>';
         }
         echo <<<END
             <!DOCTYPE html>
@@ -60,6 +63,8 @@ class Dispatcher
                     <nav id="menu">
                         <ul>
                             <li id="element"><a href="index.php">Accueil</a></li>
+                            $inscription
+                            $connection
                         </ul>
                     </nav>
                     <div class="content">
