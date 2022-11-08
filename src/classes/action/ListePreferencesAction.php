@@ -14,23 +14,36 @@ class ListePreferencesAction extends Action
             $seriesPref = $preferences->series;
             $html = <<<END
                 <div>
-                    <a href="index.php?action=">
-                        <table id="champ">
-                            <tr>
-                                <td><p>Hello</p></td>
-                                <td><p>Hello2</p></td>
-                            </tr>
-                        </table>
-                    </a>
-                </div>
+                     <table id="champ">
+                         <tr>
             END;
-
             foreach ($seriesPref as $value) {
                 $renderer = ""; //new SerieRenderer($value);
-                $html .= $renderer->render();
+                $contenu=$renderer->render();
+                $titre = $value->titre;
+                $html .= <<<END
+                    <td>
+                        <nav>
+                            <ul>
+                                <li class="menu-deroulant">
+                                    <a href="#">$titre</a>
+                                    <ul class="sous-menu">
+                                        <p>$contenu</p>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                    </td>
+                END;
             }
+            $html .= <<<END
+                        </tr>
+                    </table>                    
+                </div>
+                END;
         }else {
 
         }
+        return $html;
     }
 }

@@ -12,6 +12,8 @@ class AccueilAction extends Action
         {
             $user = unserialize($_SESSION['user_connected']);
             $mail = $user->email;
+            $prefs = new ListePreferencesAction();
+            $liste = $prefs->execute();
             $html = <<< END
                     <h1>Bienvenue $mail</h1>
                     <h2>Veuillez choisir une action dans la liste ci dessous</h2>
@@ -19,6 +21,7 @@ class AccueilAction extends Action
                         <ul>
                             <li><a href="?action=modify-passwd">Changer de mot de passe</a></li>
                             <li><a href="?action=modify-email">Changer d'adresse mail</a></li>
+                            <li>$liste</li>
                         </ul>
                     </div>
                     END;
