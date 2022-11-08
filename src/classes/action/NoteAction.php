@@ -2,6 +2,9 @@
 
 namespace iutnc\netvod\action;
 
+use PDO;
+use iutnc\netvod\db\ConnectionFactory;
+
 class NoteAction extends Action
 {
 
@@ -19,11 +22,13 @@ class NoteAction extends Action
             }
             else{
                 $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
-                $sql = "SELECT note FROM `serie` WHERE id_serie = ? AND id_user = ?";
-                $stmt = $this->db->prepare($sql);
+                $sql = "SELECT note FROM `avis` WHERE id_serie = ? AND id_user = ?";
+                $db = ConnectionFactory::makeConnection();
+                $stmt = $db->prepare($sql);
                 $stmt->bindParam(1, $id);
                 $user = unserialize($_SESSION['user_connected']);
-                $stmt->bindParam(2, $user->id);
+                $email = $user->email;
+                $stmt->bindParam(2, $email);
                 $stmt->execute();
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
                 if(!$result)
@@ -32,7 +37,7 @@ class NoteAction extends Action
                     if ($this->http_method === 'GET')
                     {
                         $html = <<<END
-                        <form method="post" action="index.php?action=note">
+                        <form method="post" action="index.php?action=note&id=$id">
                             <label>Note : <input type="number" min="1" max="5" name="note"></label>
                             <label>Commentaire : </label><br/>
                             <textarea name="commentaire" rows="7" cols="30"></textarea><br/>
@@ -44,9 +49,19 @@ class NoteAction extends Action
                     {
                         $note = filter_var($_POST['note'], FILTER_SANITIZE_NUMBER_INT);
                         $commentaire = filter_var($_POST['commentaire'], FILTER_SANITIZE_STRING);
+                        $db = ConnectionFactory::makeConnection();
+                        $sql = "INSERT INTO `avis` (`id_serie`, `id_user`, `note`, `commentaire`) VALUES (?, ?, ?, ?)";
+                        $stmt = $db->prepare($sql);
+                        $stmt->bindParam(1, $id);
+                        $user = unserialize($_SESSION['user_connected']);
+                        $email = $user->email;
+                        $stmt->bindParam(2, $email);
+                        $stmt->bindParam(3, $note);
+                        $stmt->bindParam(4, $commentaire);
                         $html = <<<END
                         <p>Vous avez donné la note de $note/5</p>
                         <p>Commentaire : $commentaire</p>
+                        <button onclick="window.location.href='index.php'">Retourner à la série</button>
                         END;
                     }
                 }

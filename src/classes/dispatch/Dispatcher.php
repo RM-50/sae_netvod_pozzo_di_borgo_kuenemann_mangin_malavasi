@@ -3,8 +3,10 @@
 namespace iutnc\netvod\dispatch;
 
 
-
-use iutnc\netvod\action;
+use iutnc\netvod\action\AccueilAction;
+use iutnc\netvod\action\NoteAction;
+use iutnc\netvod\action\RegisterAction;
+use iutnc\netvod\action\SigninAction;
 
 class Dispatcher
 {
@@ -33,7 +35,7 @@ class Dispatcher
                 $html = $action->execute();
                 break;
             case'note':
-                $action = new \iutnc\netvod\action\NoteAction();
+                $action = new NoteAction();
                 $html = $action->execute();
                 break;
             default:
