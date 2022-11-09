@@ -35,7 +35,14 @@ class SigninAction extends Action
             {
                 if (Auth::authenticate($email, $passwd))
                 {
-                    $html = "Connexion réussie !";
+                    $user = unserialize($_SESSION['user_connected']);
+                    if ($user->active === 1) {
+                        $html = "Connexion réussie !";
+                    }
+                    else
+                    {
+                        $html = "Le compte doit être activé pour vous connecter";
+                    }
                 }
             }
             catch (AuthException $e1)

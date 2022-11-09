@@ -13,10 +13,11 @@ class AccueilAction extends Action
         if (isset($_SESSION['user_connected']))
         {
             $user = unserialize($_SESSION['user_connected']);
-            $mail = $user->email;
-            $prefs = $user->pref;
-            $seriesPref = $prefs->series;
-            $html = <<< END
+            if ($user->active === 1) {
+                $mail = $user->email;
+                $prefs = $user->pref;
+                $seriesPref = $prefs->series;
+                $html = <<< END
                     <h1>Bienvenue $mail</h1>
                     <h2>Veuillez choisir une action dans la liste ci dessous</h2>
                     
@@ -28,17 +29,17 @@ class AccueilAction extends Action
                     </div> <br>
                 <div>
             END;
-            if (!sizeof($seriesPref) == 0) {
-                $html .= '<table id="champ">
+                if (!sizeof($seriesPref) == 0) {
+                    $html .= '<table id="champ">
                         <tr>
                         <td>
                             <nav id="deroule">
                                 <ul id="serie">';
-                foreach ($seriesPref as $value) {
-                    $renderer = new SerieRenderer($value);
-                    $contenu=$renderer->render(2);
-                    $titre = $value->titreSerie;
-                    $html .= <<<END
+                    foreach ($seriesPref as $value) {
+                        $renderer = new SerieRenderer($value);
+                        $contenu = $renderer->render(2);
+                        $titre = $value->titreSerie;
+                        $html .= <<<END
                         <li class="menu-deroulant">
                             <a href="">$titre</a>
                             <ul class="sous-menu">
@@ -46,8 +47,8 @@ class AccueilAction extends Action
                             </ul>
                         </li>
                         END;
-                }
-                $html .= <<<END
+                    }
+                    $html .= <<<END
                                 </ul>
                             </nav>
                             </td>
@@ -55,6 +56,11 @@ class AccueilAction extends Action
                      </table>          
                 </div>
                 END;
+                }
+            }
+            else
+            {
+                $html = "Le compte doit être activé";
             }
 
         }

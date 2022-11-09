@@ -21,6 +21,7 @@ class Auth
         else {
             if (password_verify($passwd, $row['password'])) {
                 $usr = new User($row['id'], $row['email'], $row['password'], $row['role']);
+                $usr->active = intval($row['active']);
                 $_SESSION['user_connected'] = serialize($usr);
                 return true;
             } else {
