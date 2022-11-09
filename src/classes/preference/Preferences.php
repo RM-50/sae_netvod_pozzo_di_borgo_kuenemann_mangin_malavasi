@@ -40,19 +40,22 @@ class Preferences
     }
 
     /**
-     * @param $serie
+     * @param int $idUser
+     * @param int $idSerie
+     * @param Serie $serie
      * @return bool
      */
-    public function addPreference($serie):bool
+    public function addPreference(int $idUser,int $idSerie,Serie $serie):bool
     {
-        if (!isset($this->series[$serie])) {
-            $this->series[] = $serie;
+        if (!isset($this->series[$idSerie])) {
+            $this->series[$idSerie] = $serie;
             $db = ConnectionFactory::makeConnection();
             $sql = <<<END
-            insert into preferences (nomSerie) values (?)
+            insert into preferences (id_user,id_serie) values (?,?)
             END;
             $st = $db->prepare($sql);
-            $st->bindParam(1, $serie);
+            $st->bindParam(1, $idUser);
+            $st->bindParam(2, $idSerie);
             $st->execute();
             return true;
         }
@@ -60,19 +63,34 @@ class Preferences
     }
 
     /**
-     * @param $serie
+     * @param int $id
      * @return bool
      */
-    public function delPreference($serie):bool
+    public function delPreference(int $id):bool
     {
-        if (!isset($this->series[$serie])) {
-            unset($this->series[$serie]);
+        if (!isset($this->series[$id])) {
+            unset($this->series[$id]);
             $db = ConnectionFactory::makeConnection();
-            $sql = "delete from preferences where nomSerie = ?";
+            $sql = "delete from preferences where id_serie = ?";
             $st = $db->prepare($sql);
-            $st->bindParam(1, $serie);
+            $st->bindParam(1, $id);
             $st->execute();
             return true;
+        }
+        return false;
+    }
+
+    public function isPref(int $id):bool
+    {
+        $db = ConnectionFactory::makeConnection();
+        $sql = "select id_serie from preferences";
+        $st = $db->prepare($sql);
+        $st->execute();
+        $this->series = [];
+        while ($values = $st->fetch()) {
+            if ($values["id_serie"] === $id) {
+                return true;
+            }
         }
         return false;
     }

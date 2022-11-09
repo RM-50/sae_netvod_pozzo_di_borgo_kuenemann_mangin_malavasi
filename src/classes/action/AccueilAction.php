@@ -26,7 +26,7 @@ class AccueilAction extends Action
                             <li><a href="?action=modify-email">Changer d'adresse mail</a></li>
                         </ul>
                     </div> <br>
-                <div>
+                
             END;
             if (!sizeof($seriesPref) == 0) {
                 $html .= '<table id="champ">
@@ -36,13 +36,12 @@ class AccueilAction extends Action
                                 <ul id="serie">';
                 foreach ($seriesPref as $value) {
                     $renderer = new SerieRenderer($value);
-                    $contenu=$renderer->render(2);
-                    $titre = $value->titreSerie;
+                    $titre=$renderer->render(1);
                     $html .= <<<END
                         <li class="menu-deroulant">
-                            <a href="">$titre</a>
+                            <a id="amenu" href="">$titre</a>
                             <ul class="sous-menu">
-                                <li><a href="">$contenu</a></li>
+                                <li><a id="amenu" href="">Episodes</a></li>
                             </ul>
                         </li>
                         END;
@@ -53,7 +52,7 @@ class AccueilAction extends Action
                             </td>
                         </tr>
                      </table>          
-                </div>
+                
                 END;
             }
 

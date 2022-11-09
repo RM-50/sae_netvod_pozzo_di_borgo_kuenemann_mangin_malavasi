@@ -36,9 +36,15 @@ class  DisplayCatalogueAction extends Action
                     $serie = new Serie($row_serie['titre'], $listeEpisode);
                     $renderer = new SerieRenderer($serie);
 
+                    $user = unserialize($_SESSION["user_connected"]);
+                    $pref = $user->pref;
+                    $favoris = "";
+                    if ($pref->isPref($row_serie["id"])) {
+                        $favoris = "&favoris=2";
+                    }
                     $html .= " 
                         
-                        <a href='?action=display-serie&id={$row_serie['id']}'>
+                        <a href='?action=display-serie&id={$row_serie['id']}$favoris'>
                          {$renderer->render(Renderer::COMPACT)} 
                         </a>     
                       "

@@ -16,7 +16,7 @@ class SerieRenderer implements Renderer
 
     protected function short(): string
     {
-        return '<p class="ep">'.$this->serie->titreSerie;
+        return $this->serie->titreSerie;
     }
 
     protected function long()
