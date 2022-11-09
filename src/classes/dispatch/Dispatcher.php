@@ -6,6 +6,7 @@ use iutnc\netvod\action\AddPreferencesAction;
 
 use iutnc\netvod\action\AccueilAction;
 use iutnc\netvod\action\ListePreferencesAction;
+use iutnc\netvod\action\ModifyEmailAction;
 use iutnc\netvod\action\RegisterAction;
 use iutnc\netvod\action\SigninAction;
 use iutnc\netvod\action\Signout;
@@ -28,10 +29,6 @@ class Dispatcher
     {
         switch ($this->action)
         {
-            case "add-preferences":
-                $html = new AddPreferencesAction();
-                $html->execute();
-                break;
             case 'register':
                 $action = new RegisterAction();
                 $html = $action->execute();
@@ -42,6 +39,10 @@ class Dispatcher
                 break;
             case 'signout':
                 $action = new Signout();
+                $html = $action->execute();
+                break;
+            case 'modify-email':
+                $action = new ModifyEmailAction();
                 $html = $action->execute();
                 break;
             default:
