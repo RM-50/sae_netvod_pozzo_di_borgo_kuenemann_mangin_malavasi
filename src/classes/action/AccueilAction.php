@@ -28,7 +28,7 @@ class AccueilAction extends Action
                     </div> <br>
                 <div>
             END;
-            if (!$seriesPref == []) {
+            if (!sizeof($seriesPref) == 0) {
                 $html .= '<table id="champ">
                         <tr>
                         <td>
