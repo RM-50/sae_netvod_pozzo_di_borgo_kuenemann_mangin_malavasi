@@ -3,6 +3,7 @@
 namespace iutnc\netvod\dispatch;
 
 use iutnc\netvod\action\AccueilAction;
+use iutnc\netvod\action\NoteAction;
 use iutnc\netvod\action\RegisterAction;
 use iutnc\netvod\action\SigninAction;
 use iutnc\netvod\action\Signout;
@@ -72,6 +73,8 @@ class Dispatcher
                     <nav id="menu">
                         <ul>
                             <li id="element"><a href="index.php">Accueil</a></li>
+                            $connection
+                            $inscription
                         </ul>
                     </nav>
                     <div class="content">
