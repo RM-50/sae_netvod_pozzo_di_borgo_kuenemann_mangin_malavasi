@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\netvod\exception;
+namespace iutnc\netvod\exceptions;
 
 use Exception;
 

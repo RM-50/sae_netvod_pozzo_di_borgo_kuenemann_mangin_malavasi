@@ -2,7 +2,7 @@
 
 namespace iutnc\netvod\video;
 
-use iutnc\netvod\exception\InvalidPropertyNameException;
+use iutnc\netvod\exceptions\InvalidPropertyNameException;
 
 class Serie
 {

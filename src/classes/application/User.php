@@ -2,7 +2,7 @@
 
 namespace iutnc\netvod\application;
 
-use iutnc\netvod\exceptions\InvalidePropertyException;
+use iutnc\netvod\exceptions\InvalidPropertyNameException;
 
 class User
 {
@@ -22,6 +22,6 @@ class User
         if (property_exists($this, $attribut))
             return $this->$attribut;
         else
-            throw new InvalidePropertyException("La classe user ne possede pas d'attribut : $attribut");
+            throw new InvalidPropertyNameException("La classe user ne possede pas d'attribut : $attribut");
     }
 }

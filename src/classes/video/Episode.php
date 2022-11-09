@@ -3,9 +3,9 @@
 namespace iutnc\netvod\video;
 
 
-use iutnc\netvod\exception\InvalidPropertyNameException;
-use iutnc\netvod\exception\InvalidPropertyValueException;
-use iutnc\netvod\exception\NonEditablePropertyException;
+use iutnc\netvod\exceptions\InvalidPropertyNameException;
+use iutnc\netvod\exceptions\InvalidPropertyValueException;
+use iutnc\netvod\exceptions\NonEditablePropertyException;
 
 class Episode
  {
