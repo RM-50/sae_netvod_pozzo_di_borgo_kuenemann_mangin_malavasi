@@ -3,6 +3,7 @@
 namespace iutnc\netvod\preference;
 
 use Exception;
+use iutnc\netvod\application\User;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\video\Episode;
 use iutnc\netvod\video\Serie;
@@ -14,21 +15,27 @@ class Preferences
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(int $id)
     {
-        /**
         $db = ConnectionFactory::makeConnection();
         $sql = <<<END
-            select nomSerie from preferences
-        END;
+            select s.id, titre from preferences p, serie s, user u
+            where p.id_serie = s.id and p.id_user = u.id and u.id = ?
+            END;
         $st = $db->prepare($sql);
+        $st->bindParam(1, $id);
         $st->execute();
         while ($values = $st->fetch()) {
-            $this->series[] = $values["nom"];
+            $stmt2 = $db->prepare("SELECT titre, file FROM episode WHERE serie_id = ?");
+            $stmt2->bindParam(1, $values['s.id']);
+            $stmt2->execute();
+            $liste_episodes = [];
+            while ($row = $stmt2->fetch(\PDO::FETCH_ASSOC))
+            {
+                $liste_episodes[] = new Episode($row['titre'], $row['file']);
+            }
+            $this->series[] = new Serie($values["titre"], $liste_episodes);
         }
-         */
-        $episode = [new Episode("Le lac", "lake.mp4"), new Episode("Le lac : les mystères de l'eau trouble", "lake.mp4"),];
-        $this->series = [new Serie("Le lac aux mystères",$episode),new Serie("Le lac",$episode)];
     }
 
     /**
