@@ -2,6 +2,7 @@
 
 namespace iutnc\netvod\application;
 
+use iutnc\netvod\auth\Auth;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\exceptions\InvalidPropertyNameException;
 use iutnc\netvod\preference\Preferences;
@@ -28,7 +29,8 @@ class User
     {
         if (property_exists($this, $attribut))
             return $this->$attribut;
-        else throw new InvalidPropertyNameException("La classe user ne possede pas d'attribut : $attribut");
+        else
+            throw new InvalidPropertyNameException("La classe user ne possede pas d'attribut : $attribut");
     }
 
     public function modifierEmail(string $email) : string
@@ -53,8 +55,11 @@ class User
         {
             $stmt = $db->prepare("UPDATE user SET email = ? WHERE id = ?");
             $stmt->bindParam(1, $email);
-            $stmt->bindParam(2, $this->id);
+            $id = $this->id;
+            $stmt->bindParam(2, $id);
             $stmt->execute();
+            $this->email = $email;
+            $_SESSION['user_connected'] = serialize($this);
             $html = 'Changement d\'adresse email réussi';
         }
         else
@@ -64,4 +69,25 @@ class User
         return $html;
     }
 
+    public function modifierMotDePasse(string $passwd) : string
+    {
+        if (!Auth::verifyPasswordStrength($passwd))
+        {
+            $html = "Mot de passe trop court";
+        }
+        else
+        {
+            $hash = password_hash($passwd, PASSWORD_DEFAULT, ['cost' => 12]);
+            $db = ConnectionFactory::makeConnection();
+            $stmt = $db->prepare("UPDATE user SET password = ? WHERE id = ?");
+            $stmt->bindParam(1, $hash);
+            $id = $this->id;
+            $stmt->bindParam(2, $id);
+            $stmt->execute();
+            $this->passwd = $hash;
+            $_SESSION['user_connected'] = serialize($this);
+            $html = 'Changement de mot de passe réussi';
+        }
+        return $html;
+    }
 }
