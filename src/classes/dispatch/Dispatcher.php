@@ -2,6 +2,7 @@
 
 namespace iutnc\netvod\dispatch;
 
+use iutnc\netvod\action\ActivateAccountAction;
 use iutnc\netvod\action\AddPreferencesAction;
 
 use iutnc\netvod\action\AccueilAction;
@@ -58,6 +59,10 @@ class Dispatcher
                 break;
             case 'display-serie':
                 $action = new DisplaySerieAction();
+                $html = $action->execute();
+                break;
+            case 'activate-account':
+                $action = new ActivateAccountAction();
                 $html = $action->execute();
                 break;
             default:

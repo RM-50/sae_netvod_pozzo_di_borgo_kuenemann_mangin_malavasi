@@ -13,10 +13,11 @@ class AccueilAction extends Action
         if (isset($_SESSION['user_connected']))
         {
             $user = unserialize($_SESSION['user_connected']);
-            $mail = $user->email;
-            $prefs = $user->pref;
-            $seriesPref = $prefs->series;
-            $html = <<< END
+            if ($user->active === 1) {
+                $mail = $user->email;
+                $prefs = $user->pref;
+                $seriesPref = $prefs->series;
+                $html = <<< END
                     <h1>Bienvenue $mail</h1>
                     <h2>Veuillez choisir une action dans la liste ci dessous</h2>
                     
@@ -28,8 +29,8 @@ class AccueilAction extends Action
                     </div> <br>
                 
             END;
-            if (!sizeof($seriesPref) == 0) {
-                $html .= '<table id="champ">
+                if (!sizeof($seriesPref) == 0) {
+                    $html .= '<table id="champ">
                         <tr>
                         <td>
                             <nav id="deroule">
@@ -54,6 +55,11 @@ class AccueilAction extends Action
                      </table>          
                 
                 END;
+                }
+            }
+            else
+            {
+                $html = "Le compte doit être activé";
             }
 
         }

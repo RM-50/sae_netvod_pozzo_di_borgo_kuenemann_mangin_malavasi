@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace iutnc\netvod\application;
 
 use iutnc\netvod\auth\Auth;
@@ -10,7 +10,7 @@ use iutnc\netvod\preference\Preferences;
 class User
 {
     private string $email, $passwd;
-    private int $role, $id;
+    private int $role, $id, $active = 0;
     private Preferences $pref;
 
     public function __construct(int $id, string $email, string $passwd, int $role)
@@ -31,6 +31,14 @@ class User
             return $this->$attribut;
         else
             throw new InvalidPropertyNameException("La classe user ne possede pas d'attribut : $attribut");
+    }
+
+    public function __set(string $attribut, mixed $valeur) : void
+    {
+        if (property_exists($this, $attribut))
+        {
+            $this->$attribut = $valeur;
+        }
     }
 
     public function modifierEmail(string $email) : string

@@ -38,6 +38,13 @@ class RegisterAction extends Action
             elseif ($passwd === $passwd_confirm)
             {
                 $html = Auth::register($_POST['email'], $passwd);
+                if ($html === 'Inscription réussie')
+                    {
+                        Auth::authenticate($_POST['email'], $passwd);
+                        $token = Auth::creerToken();
+                        $html .= "<br /> Veuillez maintenant activer votre compte <br /><br />";
+                        $html .= "<button onclick=\"window.location.href='?action=activate-account&token=$token'\">Activer Compte</button>";
+                    }
             }
             else
             {
