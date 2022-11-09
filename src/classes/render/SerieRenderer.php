@@ -21,7 +21,7 @@ class SerieRenderer implements Renderer
 
     protected function long()
     {
-        return <<<EOF
+        $html = <<<EOF
             <div>
                 <p>Titre : {$this->serie->titreSerie}</p>
                 <p>Genre : {$this->serie->genre}</p>
@@ -30,9 +30,13 @@ class SerieRenderer implements Renderer
                 <p>Année de sortie : {$this->serie->anneeSortie}</p>
                 <p>Date ajout : {$this->serie->dateAjout}</p>
                 <p>Nombre d'episode : {$this->serie->nbEpisodes}</p>
-                <p>Description : {$this->serie->listeEpisode}</p>
-            </div>
         EOF;
+        foreach ($this->serie->listeEpisode as $value) {
+            $render = new EpisodeRenderer($value);
+            $html .= $render->render(2);
+        }
+        $html .= "</div>";
+        return $html;
     }
 
     public function render(int $selector) : string
