@@ -21,19 +21,21 @@ class SerieRenderer implements Renderer
 
     protected function long(): string
     {
-        return '<table class="table">
-                       <thead class="thead-dark">
-                           <tr>
-                             <th scope="col">Playlist: '.$this->serie->titreSerie.'</th>
-                             <th scope="col">Titre</th>
-                             <th scope="col">Genre</th>
-                              <th scope="col">Artiste | Album ou Auteur</th>
-                              <th scope="col">Annee</th>
-                              <th scope="col">Duree</th>
-                           </tr>
-                       </thead>
-                    <tbody>  
-        ';
+        $html = '<p>
+                            '.$this->serie->titreSerie.',
+                            '.$this->serie->genre.',
+                            ' .$this->serie->publicVise.'
+                            ' .$this->serie->descriptif.'
+                            ' .$this->serie->anneeSortie.'
+                            ' .$this->serie->dateAjout.'
+                            ' .$this->serie->nbEpisodes.'
+                            </p>';
+        foreach ($this->serie->listeEpisode as $value) {
+            $render = new EpisodeRenderer($value);
+            $html .= $render->render(2);
+        }
+
+        return $html;
     }
 
     public function render(int $selector) : string

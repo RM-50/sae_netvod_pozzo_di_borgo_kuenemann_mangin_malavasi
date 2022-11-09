@@ -2,6 +2,7 @@
 
 namespace iutnc\netvod\video;
 
+use Exception;
 use iutnc\netvod\exceptions\InvalidPropertyNameException;
 
 class Serie
@@ -24,13 +25,21 @@ class Serie
     {
         $this->titreSerie = $titre;
         $this->listeEpisode = $listeEps;
+        $this->genre = "";
+        $this->publicVise = "";
+        $this->descriptif = "";
+        $this->anneeSortie = 0;
+        $this->dateAjout = "";
+        $this->nbEpisodes = 0;
     }
 
     /**
-     * @throws InvalidPropertyNameException
+     * @throws Exception
      */
-    public function __get(string $name): mixed {
-        return (isset($this->$name)) ? $this->$name : throw new InvalidPropertyNameException("Proprietée invalide");
+    public function __get(string $name): mixed
+    {
+        if (!property_exists($this, $name)) throw new Exception("$name: invalid property");
+        return $this->$name;
     }
 
 }

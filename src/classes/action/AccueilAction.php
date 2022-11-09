@@ -44,7 +44,7 @@ class AccueilAction extends Action
                                 <li><a href="">$contenu</a></li>
                             </ul>
                         </li>
-                END;
+                        END;
             }
             $html .= <<<END
                                 </ul>
