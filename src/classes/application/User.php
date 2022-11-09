@@ -15,11 +15,11 @@ class User
 
     public function __construct(int $id, string $email, string $passwd, int $role)
     {
-        $this->pref = new Preferences();
         $this->id = $id;
         $this->email = $email;
         $this->passwd = $passwd;
         $this->role = $role;
+        $this->pref = new Preferences($id);
     }
 
     /**
