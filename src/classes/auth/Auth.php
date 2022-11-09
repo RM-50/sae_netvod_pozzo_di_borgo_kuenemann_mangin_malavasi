@@ -61,7 +61,7 @@ class Auth
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':passwd', $hash);
             $stmt->execute();
-            $html = "Inscription réussie !";
+            $html = "Inscription réussie";
         }
         return $html;
     }
@@ -82,7 +82,7 @@ class Auth
         $user = unserialize($_SESSION['user_connected']);
         $db = ConnectionFactory::makeConnection();
         $expiration = date('Y-m-d H:i:s',time() + 60*10);
-        $stmt = $db->prepare("UPDATE user SET activation_token = $token, activation_expires = $expiration WHERE id=$user->id");
+        $stmt = $db->prepare("UPDATE user SET activation_token = '$token', activation_expires = str_to_date('$expiration', '%Y-%m-%d %H:%i:%s') WHERE id = $user->id");
         $stmt->execute();
         return $token;
     }
