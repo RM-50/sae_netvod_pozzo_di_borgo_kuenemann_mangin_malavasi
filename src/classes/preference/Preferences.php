@@ -25,6 +25,7 @@ class Preferences
         $st = $db->prepare($sql);
         $st->bindParam(1, $id);
         $st->execute();
+        $this->series = [];
         while ($values = $st->fetch()) {
             $stmt2 = $db->prepare("SELECT titre, file FROM episode WHERE serie_id = ?");
             $stmt2->bindParam(1, $values['s.id']);

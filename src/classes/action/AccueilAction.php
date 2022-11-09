@@ -27,17 +27,18 @@ class AccueilAction extends Action
                         </ul>
                     </div> <br>
                 <div>
-                     <table id="champ">
+            END;
+            if (!sizeof($seriesPref) == 0) {
+                $html .= '<table id="champ">
                         <tr>
                         <td>
                             <nav id="deroule">
-                                <ul id="serie">
-            END;
-            foreach ($seriesPref as $value) {
-                $renderer = new SerieRenderer($value);
-                $contenu=$renderer->render(2);
-                $titre = $value->titreSerie;
-                $html .= <<<END
+                                <ul id="serie">';
+                foreach ($seriesPref as $value) {
+                    $renderer = new SerieRenderer($value);
+                    $contenu=$renderer->render(2);
+                    $titre = $value->titreSerie;
+                    $html .= <<<END
                         <li class="menu-deroulant">
                             <a href="">$titre</a>
                             <ul class="sous-menu">
@@ -45,8 +46,8 @@ class AccueilAction extends Action
                             </ul>
                         </li>
                         END;
-            }
-            $html .= <<<END
+                }
+                $html .= <<<END
                                 </ul>
                             </nav>
                             </td>
@@ -54,6 +55,7 @@ class AccueilAction extends Action
                      </table>          
                 </div>
                 END;
+            }
 
         }
         else
