@@ -6,8 +6,10 @@ use iutnc\netvod\action\AddPreferencesAction;
 
 use iutnc\netvod\action\AccueilAction;
 use iutnc\netvod\action\DisplayCatalogueAction;
+use iutnc\netvod\action\DisplaySerieAction;
 use iutnc\netvod\action\ListePreferencesAction;
 use iutnc\netvod\action\ModifyEmailAction;
+use iutnc\netvod\action\ModifyPasswordAction;
 use iutnc\netvod\action\RegisterAction;
 use iutnc\netvod\action\SigninAction;
 use iutnc\netvod\action\Signout;
@@ -52,6 +54,10 @@ class Dispatcher
                 break;
             case 'display-catalogue':
                 $action = new DisplayCatalogueAction();
+                $html = $action->execute();
+                break;
+            case 'display-serie':
+                $action = new DisplaySerieAction();
                 $html = $action->execute();
                 break;
             default:
