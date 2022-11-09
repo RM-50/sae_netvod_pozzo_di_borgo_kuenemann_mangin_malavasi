@@ -18,7 +18,7 @@ class Serie
 
     /**
      * @param string $titre titre de la serie
-     * @param array $tabEps liste des episodes de la serie
+     * @param array $listeEps
      */
     public function __construct(string $titre, array $listeEps)
     {

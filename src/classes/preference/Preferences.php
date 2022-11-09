@@ -4,6 +4,8 @@ namespace iutnc\netvod\preference;
 
 use Exception;
 use iutnc\netvod\db\ConnectionFactory;
+use iutnc\netvod\video\Episode;
+use iutnc\netvod\video\Serie;
 
 class Preferences
 {
@@ -14,6 +16,7 @@ class Preferences
      */
     public function __construct()
     {
+        /**
         $db = ConnectionFactory::makeConnection();
         $sql = <<<END
             select nomSerie from preferences
@@ -23,6 +26,9 @@ class Preferences
         while ($values = $st->fetch()) {
             $this->series[] = $values["nom"];
         }
+         */
+        $episode = [new Episode("Le lac", "lake.mp4"), new Episode("Le lac : les mystères de l'eau trouble", "lake.mp4"),];
+        $this->series = [new Serie("Le lac aux mystères",$episode),new Serie("Le lac",$episode)];
     }
 
     /**

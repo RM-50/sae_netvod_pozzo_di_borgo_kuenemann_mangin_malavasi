@@ -30,7 +30,7 @@ nav{
 }
 
 div {
-    display: flex;
+    display: inline-block;
 }
 div a{
     color: black;
@@ -40,8 +40,7 @@ div a{
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #7b3c3c;
-    color: white;
+    color: black;
     font-size: x-large;
 }
 #champ {
@@ -49,57 +48,47 @@ div a{
     border-collapse: collapse;
     width: 100%;
 }
-#champ td, #champ th {
-    border: 1px solid #000000;
-    padding: 8px;
-    background-color: gray;
-}
+
 #champ tr {
     font-size: large;
 }
 #champ td:nth-child(even){background-color: #b6b6b6;}
-#champ tr:hover > td {background-color: #7b3c3c}
+#serie:hover {background-color: #7b3c3c}
 
 :root{
     --hauteur-menu: 60px;
 }
-
-nav {
+#deroule {
     width: 100%;
     font-size: 18px;
     position: sticky;
     top: 0;
+    border-top: 1px solid black;
 }
-
-nav > ul {
+#deroule > #serie {
     display: flex;
     text-align: center;
     box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.3);
     height: var(--hauteur-menu);
 }
-
-nav ul {
+#deroule #serie {
     list-style-type: none;
 }
 
-nav > ul > li {
+#deroule > #serie > li {
     background-color: white;
     position: relative;
     height: 100%;
     flex: 1;
 }
-
-nav > ul > li > a {
+#deroule > #serie > li > a {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-li a {
-    text-decoration: none;
-    color: black;
-}
+
 
 .menu-deroulant > a:after{
     content: '❯';
@@ -107,10 +96,10 @@ li a {
     margin-left: 7px;
     display: inline-block;
 }
-
 .sous-menu {
     margin-top: var(--hauteur-menu);
     width: 100%;
+    margin-left: -40px;
     text-align: left;
     background-color: white;
     border-radius: 2px;
@@ -124,4 +113,36 @@ li a {
     width: 100%;
     align-items: center;
     display: flex;
+}
+#deroule > #serie > li:hover > a{
+    color: #2169EC;
+}
+
+@keyframes rotationFleche {
+    0% {
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(90deg);
+    }
+}
+.menu-deroulant:hover > a:after{
+    animation: rotationFleche 0.2s linear forwards;
+}
+@keyframes apparitionSousMenu {
+    0% {
+        box-shadow: 0px 3px 3px 1px rgba(0,0,0,0);
+        border-top: 3px solid #2169EC;
+    }
+    30% {
+        box-shadow: 0px 3px 3px 1px rgba(0,0,0,0.3);
+    }
+    100% {
+        max-height: 50em;
+        border-top: 3px solid #2169EC;
+        box-shadow: 0px 3px 3px 1px rgba(0,0,0,0.3);
+    }
+}
+.menu-deroulant:hover > .sous-menu {
+    animation: apparitionSousMenu 1s forwards;
 }

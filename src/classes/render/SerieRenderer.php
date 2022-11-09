@@ -19,7 +19,7 @@ class SerieRenderer implements Renderer
         return '<p class="ep">'.$this->serie->titreSerie;
     }
 
-    protected function long()
+    protected function long(): string
     {
         return '<table class="table">
                        <thead class="thead-dark">
