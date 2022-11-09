@@ -66,17 +66,4 @@ class Note
         else
             throw new InvalidPropertyNameException("La classe note ne possede pas d'attribut : $attribut");
     }
-
-    public function modifierAvis():void
-    {
-        $db = ConnectionFactory::makeConnection();
-        $sql = "UPDATE avis SET note = ?, commentaire = ? WHERE id_serie = ? AND id_user = ?";
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(1, $note);
-        $stmt->bindParam(2, $commentaire);
-        $stmt->bindParam(3, $id_serie);
-        $stmt->bindParam(4, $id_user);
-        $stmt->execute();
-
-    }
 }
