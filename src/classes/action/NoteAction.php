@@ -22,13 +22,13 @@ class NoteAction extends Action
             }
             else{
                 $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
-                $sql = "SELECT note FROM `avis` WHERE id_serie = ? AND id_user = ?";
+                $sql = "SELECT note,commentaire FROM avis WHERE id_serie = ? AND id_user = ?";
                 $db = ConnectionFactory::makeConnection();
                 $stmt = $db->prepare($sql);
                 $stmt->bindParam(1, $id);
                 $user = unserialize($_SESSION['user_connected']);
-                $email = $user->email;
-                $stmt->bindParam(2, $email);
+                $userId = $user->id;
+                $stmt->bindParam(2, $userId);
                 $stmt->execute();
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
                 if(!$result)
@@ -50,14 +50,15 @@ class NoteAction extends Action
                         $note = filter_var($_POST['note'], FILTER_SANITIZE_NUMBER_INT);
                         $commentaire = filter_var($_POST['commentaire'], FILTER_SANITIZE_STRING);
                         $db = ConnectionFactory::makeConnection();
-                        $sql = "INSERT INTO `avis` (`id_serie`, `id_user`, `note`, `commentaire`) VALUES (?, ?, ?, ?)";
+                        $sql = "INSERT INTO avis (id_serie, id_user, note, commentaire) VALUES (?, ?, ?, ?)";
                         $stmt = $db->prepare($sql);
                         $stmt->bindParam(1, $id);
                         $user = unserialize($_SESSION['user_connected']);
-                        $email = $user->email;
-                        $stmt->bindParam(2, $email);
+                        $userId = $user->id;
+                        $stmt->bindParam(2, $userId);
                         $stmt->bindParam(3, $note);
                         $stmt->bindParam(4, $commentaire);
+                        $stmt->execute();
                         $html = <<<END
                         <p>Vous avez donné la note de $note/5</p>
                         <p>Commentaire : $commentaire</p>
@@ -66,10 +67,10 @@ class NoteAction extends Action
                     }
                 }
                 else{
-                    $html =<<<END
-                    <p>Votre note pour cette série est de {$result['note']} et votre commentaire est : {$result['commentaire']}</p>
-                    <button onclick="window.location.href='index.php?action='">Retourner à la série</button>
-                    <button onclick="window.location.href='index.php?action=note'">Modifier la note et le commentaire</button>
+                    $html = <<<END
+                    <p xmlns="http://www.w3.org/1999/html">Votre note pour cette série est de {$result['note']} et votre commentaire est : </br> {$result['commentaire']}</p>
+                    <button onclick="window.location.href='index.php">Retourner à la série</button>
+                    <!--<button onclick="window.location.href='index.php?action=note&id=$id'">Modifier la note et le commentaire</button>-->
                     END;
                 }
 
