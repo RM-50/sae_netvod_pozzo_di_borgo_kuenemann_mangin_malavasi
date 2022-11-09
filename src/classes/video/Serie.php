@@ -7,7 +7,6 @@ use iutnc\netvod\exception\InvalidPropertyNameException;
 class Serie
 {
     protected string $titreSerie;
-
     protected string $genre;
     protected string $publicVise;
     protected string $descriptif;
