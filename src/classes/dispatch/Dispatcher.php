@@ -2,8 +2,15 @@
 
 namespace iutnc\netvod\dispatch;
 
+use iutnc\netvod\action\AddPreferencesAction;
+
 use iutnc\netvod\action\AccueilAction;
 use iutnc\netvod\action\NoteAction;
+use iutnc\netvod\action\DisplayCatalogueAction;
+use iutnc\netvod\action\DisplaySerieAction;
+use iutnc\netvod\action\ListePreferencesAction;
+use iutnc\netvod\action\ModifyEmailAction;
+use iutnc\netvod\action\ModifyPasswordAction;
 use iutnc\netvod\action\RegisterAction;
 use iutnc\netvod\action\SigninAction;
 use iutnc\netvod\action\Signout;
@@ -42,6 +49,22 @@ class Dispatcher
                 $action = new Signout();
                 $html = $action->execute();
                 break;
+            case 'modify-email':
+                $action = new ModifyEmailAction();
+                $html = $action->execute();
+                break;
+            case 'modify-passwd':
+                $action = new ModifyPasswordAction();
+                $html = $action->execute();
+                break;
+            case 'display-catalogue':
+                $action = new DisplayCatalogueAction();
+                $html = $action->execute();
+                break;
+            case 'display-serie':
+                $action = new DisplaySerieAction();
+                $html = $action->execute();
+                break;
             default:
                 $action = new AccueilAction();
                 $html = $action->execute();
@@ -55,11 +78,13 @@ class Dispatcher
         {
             $inscription = '';
             $connection = '<li id="element"><a href="?action=signout">Se Deconnecter</a></li>';
+            $catalogue = '<li id="element"><a href="?action=display-catalogue">Notre catalogue</a></li>';
         }
         else
         {
             $inscription = '<li id="element"><a href="?action=register">S\'inscrire</a></li>';
             $connection = '<li id="element"><a href="?action=signin">Se Connecter</a></li>';
+            $catalogue = '';
         }
         echo <<<END
             <!DOCTYPE html>
@@ -75,6 +100,7 @@ class Dispatcher
                             <li id="element"><a href="index.php">Accueil</a></li>
                             $connection
                             $inscription
+                            $catalogue   
                         </ul>
                     </nav>
                     <div class="content">

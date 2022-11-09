@@ -66,7 +66,7 @@ class Auth
         return $html;
     }
 
-    private static function verifyPasswordStrength(string $passwd) : bool
+    public static function verifyPasswordStrength(string $passwd) : bool
     {
         if (strlen($passwd) < 10)
         {

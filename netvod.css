@@ -29,3 +29,121 @@ nav{
 .accueil-action > a{
     size: 32pt;
 }
+
+div {
+    display: inline-block;
+}
+div a{
+    color: black;
+    text-decoration: none ;
+}
+#champ th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    color: black;
+    font-size: x-large;
+}
+#champ {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#champ tr {
+    font-size: large;
+}
+#champ td:nth-child(even){background-color: #b6b6b6;}
+#serie:hover {background-color: #7b3c3c}
+
+:root{
+    --hauteur-menu: 60px;
+}
+#deroule {
+    width: 100%;
+    font-size: 18px;
+    position: sticky;
+    top: 0;
+    border-top: 1px solid black;
+}
+#deroule > #serie {
+    display: flex;
+    text-align: center;
+    box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.3);
+    height: var(--hauteur-menu);
+}
+#deroule #serie {
+    list-style-type: none;
+}
+
+#deroule > #serie > li {
+    background-color: white;
+    position: relative;
+    height: 100%;
+    flex: 1;
+}
+#deroule > #serie > li > a {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+.menu-deroulant > a:after{
+    content: '❯';
+    font-size: 15px;
+    margin-left: 7px;
+    display: inline-block;
+}
+.sous-menu {
+    margin-top: var(--hauteur-menu);
+    width: 100%;
+    margin-left: -40px;
+    text-align: left;
+    background-color: white;
+    border-radius: 2px;
+    overflow: hidden;
+    max-height: 0;
+}
+
+.sous-menu > li > a {
+    height: 50px;
+    padding-left: 20px;
+    width: 100%;
+    align-items: center;
+    display: flex;
+}
+#deroule > #serie > li:hover > a{
+    color: #2169EC;
+}
+
+@keyframes rotationFleche {
+    0% {
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(90deg);
+    }
+}
+.menu-deroulant:hover > a:after{
+    animation: rotationFleche 0.2s linear forwards;
+}
+@keyframes apparitionSousMenu {
+    0% {
+        box-shadow: 0px 3px 3px 1px rgba(0,0,0,0);
+        border-top: 3px solid #2169EC;
+    }
+    30% {
+        box-shadow: 0px 3px 3px 1px rgba(0,0,0,0.3);
+    }
+    100% {
+        max-height: 50em;
+        border-top: 3px solid #2169EC;
+        box-shadow: 0px 3px 3px 1px rgba(0,0,0,0.3);
+    }
+}
+.menu-deroulant:hover > .sous-menu {
+    animation: apparitionSousMenu 1s forwards;
+}
