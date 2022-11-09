@@ -32,6 +32,10 @@ class Serie
         $this->nbEpisodes = 0;
     }
 
+    public static function find(mixed $titre)
+    {
+    }
+
     /**
      * @throws Exception
      */

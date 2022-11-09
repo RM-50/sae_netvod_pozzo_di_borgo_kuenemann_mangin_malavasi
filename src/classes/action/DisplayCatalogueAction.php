@@ -3,12 +3,11 @@
 namespace iutnc\netvod\action;
 
 use iutnc\netvod\db\ConnectionFactory;
-
 use iutnc\netvod\render\SerieRenderer;
+use iutnc\netvod\video\Serie;
 
 class  DisplayCatalogueAction extends Action
 {
-
     public function execute(): string
     {
         $html = '';
@@ -19,18 +18,20 @@ class  DisplayCatalogueAction extends Action
                     <a href= "?action=display-catalogue">catalogue</a>
                     END;
 
-            $sql = "SELECT titre FROM serie";
+            $html .= "  <div><h1> <a> Notre catalogue : </a></h1></div>";
+            $sqlSerie = "SELECT * FROM serie";
+            $sqlLstEps = "SELECT titre, file FROM episode where serieid = ?";
 
             try{
                 $db = ConnectionFactory::makeConnection();
-                $stmt_serie = $db->query($sql);
+                $stmt_serie = $db->query($sqlSerie);
 
                 while ($row_serie = $stmt_serie->fetch(\PDO::FETCH_ASSOC)) {
-                    $serie = Serie::find($_GET['titre']);
+
+                    $serie = new Serie();
                     $renderer = new SerieRenderer($serie);
 
-                    $html .= ' 
-                    <div class="catalogue-action">
+                    $html .= '
                         <ul>
                         <p>
                         '.$content .= $renderer->render(Renderer::short).'  
