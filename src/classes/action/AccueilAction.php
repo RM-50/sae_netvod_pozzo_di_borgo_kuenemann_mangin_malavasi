@@ -9,9 +9,10 @@ class AccueilAction extends Action
 
     public function execute(): string
     {
-        $html = '';
+
         if (isset($_SESSION['user_connected']))
         {
+            $html = '';
             $user = unserialize($_SESSION['user_connected']);
             $mail = $user->email;
             $prefs = $user->pref;

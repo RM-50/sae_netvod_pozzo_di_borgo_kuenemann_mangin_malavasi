@@ -5,6 +5,7 @@ namespace iutnc\netvod\dispatch;
 use iutnc\netvod\action\AddPreferencesAction;
 
 use iutnc\netvod\action\AccueilAction;
+use iutnc\netvod\action\NoteAction;
 use iutnc\netvod\action\DisplayCatalogueAction;
 use iutnc\netvod\action\DisplaySerieAction;
 use iutnc\netvod\action\ListePreferencesAction;
@@ -38,6 +39,10 @@ class Dispatcher
                 break;
             case 'signin':
                 $action = new SigninAction();
+                $html = $action->execute();
+                break;
+            case'note':
+                $action = new NoteAction();
                 $html = $action->execute();
                 break;
             case 'signout':
@@ -93,8 +98,8 @@ class Dispatcher
                     <nav id="menu">
                         <ul>
                             <li id="element"><a href="index.php">Accueil</a></li>
-                            $inscription
                             $connection
+                            $inscription
                             $catalogue   
                         </ul>
                     </nav>
