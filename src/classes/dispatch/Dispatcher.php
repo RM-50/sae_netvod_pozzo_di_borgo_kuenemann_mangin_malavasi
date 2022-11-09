@@ -3,6 +3,7 @@
 namespace iutnc\netvod\dispatch;
 
 use iutnc\netvod\action\AccueilAction;
+use iutnc\netvod\action\ModifyEmailAction;
 use iutnc\netvod\action\RegisterAction;
 use iutnc\netvod\action\SigninAction;
 use iutnc\netvod\action\Signout;
@@ -35,6 +36,10 @@ class Dispatcher
                 break;
             case 'signout':
                 $action = new Signout();
+                $html = $action->execute();
+                break;
+            case 'modify-email':
+                $action = new ModifyEmailAction();
                 $html = $action->execute();
                 break;
             default:

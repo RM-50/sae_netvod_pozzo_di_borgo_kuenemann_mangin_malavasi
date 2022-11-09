@@ -16,11 +16,11 @@ class ModifyEmailAction extends Action
                 $html = <<< END
                         <form id="modify-mail" method="POST" action="?action=modify-email">
                             <label for="email">Entrez votre nouvel email</label>
-                            <input type="text" name="email">
+                            <input type="email" name="email">
                             <br /><br />
                             
                             <label for="confirm-email">Confirmez votre nouvel email</label>
-                            <input type="text" name="confirm_email">
+                            <input type="email" name="confirm-email">
                             <br /><br />
                             
                             <button type="submit">Valider</button>
@@ -37,7 +37,8 @@ class ModifyEmailAction extends Action
                 }
                 else
                 {
-
+                    $user = unserialize($_SESSION['user_connected']);
+                    $html = $user->modifierEmail($email);
                 }
             }
 

@@ -26,7 +26,7 @@ class User
             throw new InvalidePropertyException("La classe user ne possede pas d'attribut : $attribut");
     }
 
-    public function modifierEmail(string $email)
+    public function modifierEmail(string $email) : string
     {
         $db = ConnectionFactory::makeConnection();
         $stmt = $db->prepare('SELECT email FROM user');
@@ -34,7 +34,7 @@ class User
         $email_existant = false;
         while($row = $stmt->fetch(\PDO::FETCH_ASSOC) and !$email_existant)
         {
-            if ($email = $row['email'])
+            if ($email === $row['email'])
             {
                 $email_existant = true;
             }
@@ -46,11 +46,16 @@ class User
 
         if (!$email_existant)
         {
-            $stmt = $db->prepare("UPDATE user SET email = ? AND id = ?");
+            $stmt = $db->prepare("UPDATE user SET email = ? WHERE id = ?");
             $stmt->bindParam(1, $email);
             $stmt->bindParam(2, $this->id);
             $stmt->execute();
-
+            $html = 'Changement d\'adresse email réussi';
         }
+        else
+        {
+            $html = 'Cet adresse email existe déjà';
+        }
+        return $html;
     }
 }
