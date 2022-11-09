@@ -3,7 +3,7 @@
 namespace iutnc\netvod\preference;
 
 use Exception;
-use iutnc\netvod\bd\ConnectionFactory;
+use iutnc\netvod\db\ConnectionFactory;
 
 class Preferences
 {
@@ -52,11 +52,9 @@ class Preferences
     public function delPreference($serie):bool
     {
         if (!isset($this->series[$serie])) {
-            unset($this->series, $serie);
+            unset($this->series[$serie]);
             $db = ConnectionFactory::makeConnection();
-            $sql = <<<END
-            delete from preferences where nomSerie = ?
-            END;
+            $sql = "delete from preferences where nomSerie = ?";
             $st = $db->prepare($sql);
             $st->bindParam(1, $serie);
             $st->execute();
