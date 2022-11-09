@@ -2,11 +2,10 @@
 
 namespace iutnc\netvod\dispatch;
 
-
 use iutnc\netvod\action\AccueilAction;
-use iutnc\netvod\action\NoteAction;
 use iutnc\netvod\action\RegisterAction;
 use iutnc\netvod\action\SigninAction;
+use iutnc\netvod\action\Signout;
 
 class Dispatcher
 {
@@ -38,6 +37,10 @@ class Dispatcher
                 $action = new NoteAction();
                 $html = $action->execute();
                 break;
+            case 'signout':
+                $action = new Signout();
+                $html = $action->execute();
+                break;
             default:
                 $action = new AccueilAction();
                 $html = $action->execute();
@@ -49,10 +52,13 @@ class Dispatcher
     {
         if (isset($_SESSION['user_connected']))
         {
-
+            $inscription = '';
+            $connection = '<li id="element"><a href="?action=signout">Se Deconnecter</a></li>';
         }
         else
         {
+            $inscription = '<li id="element"><a href="?action=register">S\'inscrire</a></li>';
+            $connection = '<li id="element"><a href="?action=signin">Se Connecter</a></li>';
         }
         echo <<<END
             <!DOCTYPE html>
