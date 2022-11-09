@@ -3,6 +3,7 @@
 namespace iutnc\netvod\video;
 
 use Exception;
+use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\exceptions\InvalidPropertyNameException;
 
 class Serie
@@ -34,6 +35,17 @@ class Serie
 
     public static function find(mixed $titre)
     {
+    }
+
+    public static function getIdUser(string $mail):int
+    {
+        $sql = "select id from User where email = ?";
+        $db = ConnectionFactory::makeConnection();
+        $stmt_serie = $db->prepare($sql);
+        $stmt_serie->bindParam(1, $mail);
+        $stmt_serie->execute();
+        $row_serie = $stmt_serie->fetch(\PDO::FETCH_ASSOC);
+        return $row_serie["id"];
     }
 
     /**
