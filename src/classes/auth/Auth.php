@@ -75,4 +75,15 @@ class Auth
         else
             return true;
     }
+
+    public static function creerToken() : string
+    {
+        $token = bin2hex(random_bytes(64));
+        $user = unserialize($_SESSION['user_connected']);
+        $db = ConnectionFactory::makeConnection();
+        $expiration = date('Y-m-d H:i:s',time() + 60*10);
+        $stmt = $db->prepare("UPDATE user SET activation_token = $token, activation_expires = $expiration WHERE id=$user->id");
+        $stmt->execute();
+        return $token;
+    }
 }
