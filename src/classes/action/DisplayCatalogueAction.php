@@ -11,9 +11,14 @@ class  DisplayCatalogueAction extends Action
 
     public function execute(): string
     {
-        $html = '<h1>Notre catalogue</h1>';
+        $html = '';
         if (isset($_SESSION['user_connected']))
         {
+            $html .= <<< END
+                    <h1>Notre catalogue : </h1>
+                    <a href= "?action=display-catalogue">catalogue</a>
+                    END;
+
             $sql = "SELECT titre FROM serie";
 
             try{
