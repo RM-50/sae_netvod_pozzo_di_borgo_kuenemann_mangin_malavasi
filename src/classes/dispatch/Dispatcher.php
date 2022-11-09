@@ -2,7 +2,10 @@
 
 namespace iutnc\netvod\dispatch;
 
+use iutnc\netvod\action\AddPreferencesAction;
+
 use iutnc\netvod\action\AccueilAction;
+use iutnc\netvod\action\ListePreferencesAction;
 use iutnc\netvod\action\ModifyEmailAction;
 use iutnc\netvod\action\RegisterAction;
 use iutnc\netvod\action\SigninAction;

@@ -3,6 +3,7 @@
 namespace iutnc\netvod\video;
 
 
+use Exception;
 use iutnc\netvod\exceptions\InvalidPropertyNameException;
 use iutnc\netvod\exceptions\InvalidPropertyValueException;
 use iutnc\netvod\exceptions\NonEditablePropertyException;
@@ -18,6 +19,8 @@ class Episode
     {
         $this->titre = $titre;
         $this->filename = $filename;
+        $this->resume = "";
+        $this->duree = 0;
     }
 
     /**
@@ -31,10 +34,12 @@ class Episode
     }
 
     /**
-     * @throws InvalidPropertyNameException
+     * @throws Exception
      */
-    public function __get(string $name): mixed {
-        return (isset($this->$name)) ? $this->$name : throw new InvalidPropertyNameException("Proprietée invalide");
+    public function __get(string $name): mixed
+    {
+        if (!property_exists($this, $name)) throw new Exception("$name: invalid property");
+        return $this->$name;
     }
 
     public function __toString() : string {
