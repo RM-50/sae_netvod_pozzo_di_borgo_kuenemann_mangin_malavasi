@@ -13,6 +13,12 @@ use PDOException;
 class DisplaySerieAction extends Action
 {
 
+
+
+    /**
+     * @return string
+     */
+
     public function execute(): string
     {
         $html = '';
