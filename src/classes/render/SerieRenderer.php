@@ -49,8 +49,8 @@ class SerieRenderer implements Renderer
     {
         $id= $_GET['id'];
         $html = <<<EOF
-            <div>
-                <p> Titre : {$this->serie->titreSerie} {$this->serie->genre}  {$this->serie->publicVise} {$this->serie->descriptif} {$this->serie->anneeSortie}
+            <div xmlns="http://www.w3.org/1999/html">
+                <p> Titre : {$this->serie->titreSerie} </br> {$this->serie->getNote($_GET['id'])} </br> <button onclick="window.location.href='index.php?action=display-commentaire&id=$id'">Afficher les commentaires</button> </br> {$this->serie->genre}  {$this->serie->publicVise} {$this->serie->descriptif} {$this->serie->anneeSortie}
                  {$this->serie->dateAjout} {$this->serie->nbEpisodes}
                 </p>
                 <form id="serie" method="post">
