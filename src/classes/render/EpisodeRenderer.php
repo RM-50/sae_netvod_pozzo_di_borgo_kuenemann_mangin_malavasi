@@ -10,10 +10,21 @@ class EpisodeRenderer implements Renderer
     protected string $rendered;
 
 
+
+    /**
+     * @param Episode $eps
+     */
+
     public function __construct(Episode $eps)
     {
         $this->episode = $eps;
     }
+
+
+
+    /**
+     * @return string
+     */
 
     protected function short() : string
     {
@@ -22,6 +33,12 @@ class EpisodeRenderer implements Renderer
         $content .= "<img alt='img' src='./rsrc/minEpisode/$filename'> ";
         return $content;
     }
+
+
+
+    /**
+     * @return string
+     */
 
     protected function long() : string
     {
@@ -32,6 +49,13 @@ class EpisodeRenderer implements Renderer
         $content .= "<video controls width='1000' alt='img' src='./rsrc/episode/{$this->episode->filename}'> ";
         return $content;
     }
+
+
+
+    /**
+     * @param int $selector
+     * @return string
+     */
 
     public function render(int $selector) : string
     {

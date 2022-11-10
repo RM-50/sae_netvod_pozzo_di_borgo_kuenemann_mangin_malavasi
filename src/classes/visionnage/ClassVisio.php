@@ -48,7 +48,8 @@ class ClassVisio
 
 
 
-    /**
+
+/**
      * @param $serie
      * @return bool
      */
