@@ -2,6 +2,7 @@
 
 namespace iutnc\netvod\dispatch;
 
+use iutnc\netvod\action\ActivateAccountAction;
 use iutnc\netvod\action\AddPreferencesAction;
 
 use iutnc\netvod\action\AccueilAction;
@@ -65,6 +66,10 @@ class Dispatcher
                 $action = new DisplaySerieAction();
                 $html = $action->execute();
                 break;
+            case 'activate-account':
+                $action = new ActivateAccountAction();
+                $html = $action->execute();
+                break;
             default:
                 $action = new AccueilAction();
                 $html = $action->execute();
@@ -77,13 +82,13 @@ class Dispatcher
         if (isset($_SESSION['user_connected']))
         {
             $inscription = '';
-            $connection = '<li id="element"><a href="?action=signout">Se Deconnecter</a></li>';
-            $catalogue = '<li id="element"><a href="?action=display-catalogue">Notre catalogue</a></li>';
+            $connection = '<li class="element"><a href="?action=signout">Se Deconnecter</a></li>';
+            $catalogue = '<li class="element"><a href="?action=display-catalogue">Notre catalogue</a></li>';
         }
         else
         {
-            $inscription = '<li id="element"><a href="?action=register">S\'inscrire</a></li>';
-            $connection = '<li id="element"><a href="?action=signin">Se Connecter</a></li>';
+            $inscription = '<li class="element"><a href="?action=register">S\'inscrire</a></li>';
+            $connection = '<li class="element"><a href="?action=signin">Se Connecter</a></li>';
             $catalogue = '';
         }
         echo <<<END
@@ -97,9 +102,10 @@ class Dispatcher
                 <body>
                     <nav id="menu">
                         <ul>
-                            <li id="element"><a href="index.php">Accueil</a></li>
-                            $connection
+                            <li class="element" id="logo">NetVOD</li>
+                            <li class="element"><a href="index.php">Accueil</a></li>
                             $inscription
+                            $connection
                             $catalogue   
                         </ul>
                     </nav>
