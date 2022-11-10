@@ -15,9 +15,6 @@ use iutnc\netvod\video\Serie;
 class ClassVisio
 {
     protected array $visiocours;
-
-
-
     /**
      * @param int $id
      */
