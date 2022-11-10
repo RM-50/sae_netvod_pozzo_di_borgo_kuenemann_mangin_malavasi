@@ -8,6 +8,12 @@ use iutnc\netvod\exceptions\AuthException;
 
 class Auth
 {
+    /**
+     * @param string $email email entre par l'utilisateur
+     * @param string $passwd mot de passe entré par l'utilisateur
+     * @return bool vrai si l'authentification a réussi false sinon
+     * @throws AuthException
+     */
     public static function authenticate(string $email, string $passwd) : bool
     {
         $db = ConnectionFactory::makeConnection();
@@ -20,7 +26,9 @@ class Auth
             throw new AuthException("Auth failed : Invalid credentials");
         else {
             if (password_verify($passwd, $row['password'])) {
+                // Création et serialisation connecté
                 $usr = new User($row['id'], $row['email'], $row['password'], $row['role']);
+                $usr->active = intval($row['active']);
                 $_SESSION['user_connected'] = serialize($usr);
                 return true;
             } else {
@@ -30,6 +38,11 @@ class Auth
     }
 
 
+    /**
+     * @param string $email email entré par l'utilisateur souhaitant s'incrire
+     * @param string $passwd mot de passe entré par l'utilisateur souhaitant s'inscrire
+     * @return string une chaîne indiquant à l'utilisateur si la connection a réussie ou non
+     */
     public static function register(string $email, string $passwd) : string
     {
         $db = ConnectionFactory::makeConnection();
@@ -61,11 +74,15 @@ class Auth
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':passwd', $hash);
             $stmt->execute();
-            $html = "Inscription réussie !";
+            $html = "Inscription réussie";
         }
         return $html;
     }
 
+    /**
+     * @param string $passwd mot de passe a tester
+     * @return bool vrai si le mot de passe fait au moins dix caracteres
+     */
     public static function verifyPasswordStrength(string $passwd) : bool
     {
         if (strlen($passwd) < 10)
@@ -74,5 +91,22 @@ class Auth
         }
         else
             return true;
+    }
+
+    /**
+     * @param string $nom_token nom du token a creer
+     * @return string renvoie le token généré par la méthode bin2hex
+     * @throws \Exception
+     */
+    public static function creerToken(string $nom_token, int $id) : string
+    {
+        $token = bin2hex(random_bytes(64));
+        $db = ConnectionFactory::makeConnection();
+        $expiration = date('Y-m-d H:i:s',time() + 60*10);
+        $colonne_token = $nom_token.'_token';
+        $colonne_expires = $nom_token.'_expires';
+        $stmt = $db->prepare("UPDATE user SET $colonne_token = '$token', $colonne_expires = str_to_date('$expiration', '%Y-%m-%d %H:%i:%s') WHERE id = $id");
+        $stmt->execute();
+        return $token;
     }
 }
