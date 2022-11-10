@@ -135,7 +135,7 @@ class Dispatcher
                 <body>
                     <nav class="menu">
                         <ul>
-                            <li class="element" id="logo"><img src="rsrc/logo.png"></li>
+                            <li class="element"><img src="rsrc/logo.png"></li>
                             <li class="element"><a href="index.php">Accueil</a></li>
                             $inscription
                             $connection
