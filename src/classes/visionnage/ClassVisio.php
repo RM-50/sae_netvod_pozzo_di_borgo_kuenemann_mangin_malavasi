@@ -4,6 +4,7 @@
 
 namespace iutnc\netvod\visionnage;
 
+
 use Exception;
 use iutnc\netvod\application\User;
 use iutnc\netvod\db\ConnectionFactory;
@@ -42,7 +43,6 @@ class ClassVisio
             $this->visiocours[] = new Serie($values["titre"], $liste_episodes);
         }
     }
-
 
 
 

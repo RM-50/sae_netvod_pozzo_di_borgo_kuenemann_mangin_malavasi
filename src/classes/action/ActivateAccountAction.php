@@ -1,9 +1,14 @@
 <?php
 
+
+
 namespace iutnc\netvod\action;
+
 
 use iutnc\netvod\db\ConnectionFactory;
 use PDO;
+
+
 
 class ActivateAccountAction extends Action
 {

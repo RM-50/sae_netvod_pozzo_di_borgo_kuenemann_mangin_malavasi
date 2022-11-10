@@ -1,6 +1,10 @@
 <?php
 
+
+
 namespace iutnc\netvod\action;
+
+
 
 abstract class Action {
 

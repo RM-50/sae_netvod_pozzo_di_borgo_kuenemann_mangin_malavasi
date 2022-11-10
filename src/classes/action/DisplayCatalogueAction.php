@@ -1,6 +1,9 @@
 <?php
 
+
+
 namespace iutnc\netvod\action;
+
 
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\render\Renderer;
@@ -10,6 +13,8 @@ use iutnc\netvod\tri\TriMotCle;
 use iutnc\netvod\video\Episode;
 use iutnc\netvod\video\Serie;
 use PDOException;
+
+
 
 class  DisplayCatalogueAction extends Action
 {
@@ -189,6 +194,7 @@ class  DisplayCatalogueAction extends Action
      * @param int $id
      * @return string
      */
+
     private function getHtml(string $titre, string $html,int $id=-1): string
     {
         $stmt = $this->requestEpisode($id);

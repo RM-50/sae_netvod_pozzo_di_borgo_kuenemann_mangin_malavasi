@@ -1,8 +1,13 @@
 <?php
 
+
+
 namespace iutnc\netvod\render;
 
+
 use iutnc\netvod\video\Episode;
+
+
 
 class EpisodeRenderer implements Renderer
 {
@@ -44,7 +49,6 @@ class EpisodeRenderer implements Renderer
     protected function long() : string
     {
         $id = $_GET['id'];
-        $filename = str_replace("mp4", "png", $this->episode->filename);
         $content = '<p class="ep">'.$this->episode->titre. " | ";
         $content .= " | resume: " . $this->episode->resume;
         $content .= '</p>';

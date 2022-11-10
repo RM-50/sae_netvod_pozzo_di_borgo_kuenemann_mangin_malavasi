@@ -1,9 +1,14 @@
 <?php
 
+
+
 namespace iutnc\netvod\note;
+
 
 use iutnc\netvod\db\ConnectionFactory;
 use PDO;
+
+
 
 class Note
 {
