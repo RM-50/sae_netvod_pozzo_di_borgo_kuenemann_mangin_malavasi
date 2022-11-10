@@ -133,17 +133,6 @@ class DisplaySerieAction extends Action
             $html = "Vous devez vous connecter pour accéder à cette fonctionnalité";
         }
 
-
-
-        /*$id= $_GET['id'];
-        $html .=<<<END
-        </br>
-        <br>
-        <br>
-        <button onclick="window.location.href='index.php?action=note&id=$id'">noter</button>
-        END;
-        */
-
         return $html;
     }
 }

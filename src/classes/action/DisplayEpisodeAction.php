@@ -24,7 +24,6 @@ class DisplayEpisodeAction extends Action
         $renderer = '';
         if (isset($_SESSION['user_connected'])) {
 
-            $html .= "  <div><h1> <a> Notre catalogue : </a></h1></div>";
             $sqlEpisode = "SELECT id, titre, resume, duree, file FROM episode where id = ?";
 
             try {
@@ -37,9 +36,8 @@ class DisplayEpisodeAction extends Action
                     $episode = new Episode($row['id'],$row['titre'], $row['file']);
                     $renderer = new EpisodeRenderer($episode);
                 }
-
                 $html =  $renderer->render(2);
-
+                $id= $_GET['id'];
             } catch (PDOException $exception) {
                 echo $exception->getMessage();
             }

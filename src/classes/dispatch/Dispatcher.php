@@ -17,7 +17,7 @@ use iutnc\netvod\action\ModifyPasswordAction;
 use iutnc\netvod\action\RegisterAction;
 use iutnc\netvod\action\SigninAction;
 use iutnc\netvod\action\Signout;
-use iutnc\netvod\DisplayEpisodeAction;
+use iutnc\netvod\action\DisplayEpisodeAction;
 use iutnc\netvod\exceptions\AuthException;
 
 class Dispatcher
