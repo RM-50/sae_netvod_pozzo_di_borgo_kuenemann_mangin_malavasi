@@ -1,10 +1,12 @@
 <?php
 
+
+
 namespace iutnc\netvod\dispatch;
+
 
 use iutnc\netvod\action\ActivateAccountAction;
 use iutnc\netvod\action\AddPreferencesAction;
-
 use iutnc\netvod\action\AccueilAction;
 use iutnc\netvod\action\CommentaireAction;
 use iutnc\netvod\action\DisplayEpisodeAction;
@@ -19,6 +21,8 @@ use iutnc\netvod\action\RegisterAction;
 use iutnc\netvod\action\SigninAction;
 use iutnc\netvod\action\Signout;
 use iutnc\netvod\exceptions\AuthException;
+
+
 
 class Dispatcher
 {

@@ -4,6 +4,8 @@ namespace iutnc\netvod\video;
 
 use Exception;
 use iutnc\netvod\db\ConnectionFactory;
+use iutnc\netvod\exceptions\InvalidPropertyNameException;
+use iutnc\netvod\note\Note;
 
 class Serie
 {

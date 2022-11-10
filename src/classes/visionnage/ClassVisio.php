@@ -4,6 +4,7 @@
 
 namespace iutnc\netvod\visionnage;
 
+
 use Exception;
 use iutnc\netvod\application\User;
 use iutnc\netvod\db\ConnectionFactory;
