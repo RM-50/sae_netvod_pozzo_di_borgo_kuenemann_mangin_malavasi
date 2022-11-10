@@ -8,6 +8,12 @@ use iutnc\netvod\auth\Auth;
 class SigninAction extends Action
 {
 
+
+
+    /**
+     * @return string
+     */
+
     public function execute(): string
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET')

@@ -7,6 +7,12 @@ use iutnc\netvod\render\SerieRenderer;
 class AccueilAction extends Action
 {
 
+
+
+    /**
+     * @return string
+     */
+
     public function execute(): string
     {
 

@@ -9,6 +9,12 @@ use iutnc\netvod\exceptions\AuthException;
 class ModifyEmailAction extends Action
 {
 
+
+
+    /**
+     * @return string
+     */
+
     public function execute(): string
     {
         if (isset($_SESSION['user_connected']))

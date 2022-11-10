@@ -8,6 +8,12 @@ use PDO;
 class ActivateAccountAction extends Action
 {
 
+
+
+    /**
+     * @return string
+     */
+
     public function execute(): string
     {
         if (isset($_SESSION['user_connected']))

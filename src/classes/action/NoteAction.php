@@ -9,6 +9,12 @@ use iutnc\netvod\note\Note;
 class NoteAction extends Action
 {
 
+
+
+    /**
+     * @return string
+     */
+
     public function execute(): string
     {
         $notation = new Note();

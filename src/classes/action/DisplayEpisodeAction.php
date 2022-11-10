@@ -12,6 +12,12 @@ use PDOException;
 class DisplayEpisodeAction extends Action
 {
 
+
+
+    /**
+     * @return string
+     */
+
     public function execute(): string
     {
         $html = '';

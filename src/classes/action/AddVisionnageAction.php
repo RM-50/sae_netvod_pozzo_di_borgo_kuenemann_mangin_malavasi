@@ -5,6 +5,12 @@ namespace iutnc\netvod\action;
 class AddVisionnageAction extends Action
 {
 
+
+
+    /**
+     * @return string
+     */
+
     public function execute(): string
     {
         if (isset($_SESSION['*user*'])) {
