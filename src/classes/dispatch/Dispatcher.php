@@ -6,6 +6,7 @@ use iutnc\netvod\action\ActivateAccountAction;
 use iutnc\netvod\action\AddPreferencesAction;
 
 use iutnc\netvod\action\AccueilAction;
+use iutnc\netvod\action\CommentaireAction;
 use iutnc\netvod\action\NoteAction;
 use iutnc\netvod\action\DisplayCatalogueAction;
 use iutnc\netvod\action\DisplaySerieAction;
@@ -73,6 +74,10 @@ class Dispatcher
                 break;
             case 'forgot-passwd':
                 $action = new ForgotPasswordAction();
+                $html = $action->execute();
+                break;
+            case 'display-commentaire':
+                $action = new CommentaireAction();
                 $html = $action->execute();
                 break;
             default:

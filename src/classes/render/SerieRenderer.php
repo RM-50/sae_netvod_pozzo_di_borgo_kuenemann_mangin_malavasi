@@ -23,10 +23,12 @@ class SerieRenderer implements Renderer
 
     protected function long()
     {
+        $id= $_GET['id'];
         $html = <<<EOF
             <div>
                 <p>Titre : {$this->serie->titreSerie}</p>
                 <p>Note moyenne : {$this->serie->getNote($_GET['id'])}</p>
+                <button onclick="window.location.href='index.php?action=display-commentaire&id=$id'">Afficher les commentaires</button>
                 <p>Genre : {$this->serie->genre}</p>
                 <p>Description : {$this->serie->publicVise}</p>
                 <p>Description : {$this->serie->descriptif}</p>

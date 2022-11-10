@@ -70,7 +70,6 @@ class Serie
         return $note;
     }
 
-
     /**
      * @throws Exception
      */
