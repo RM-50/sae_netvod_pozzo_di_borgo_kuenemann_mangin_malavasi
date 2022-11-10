@@ -8,9 +8,22 @@ class ConnectionFactory{
     public static $db = null;
     public static $config =[];
 
+
+
+    /**
+     * @param $iniFile
+     * @return void
+     */
+
     public static function setConfig($iniFile): void{
         self::$config = parse_ini_file($iniFile);
     }
+
+
+
+    /**
+     * @return PDO|null
+     */
 
     public static function makeConnection(){
         if(self::$db === null){
