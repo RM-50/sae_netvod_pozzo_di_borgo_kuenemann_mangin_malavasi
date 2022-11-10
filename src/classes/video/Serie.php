@@ -4,28 +4,19 @@ namespace iutnc\netvod\video;
 
 use Exception;
 use iutnc\netvod\db\ConnectionFactory;
-use iutnc\netvod\exceptions\InvalidPropertyNameException;
-use iutnc\netvod\note\Note;
 
 class Serie
 {
-    protected string $titreSerie;
-    protected string $genre;
-    protected string $publicVise;
-    protected string $descriptif;
+    protected string $titreSerie,$genre,$publicVise,$descriptif;
     protected int $anneeSortie;
     protected string $dateAjout;
     protected int $nbEpisodes;
     protected array $listeEpisode;
-    protected Note $note;
-
-
 
     /**
      * @param string $titre titre de la serie
      * @param array $listeEps
      */
-
     public function __construct(string $titre, array $listeEps)
     {
         $this->titreSerie = $titre;
@@ -36,18 +27,18 @@ class Serie
         $this->anneeSortie = 0;
         $this->dateAjout = "";
         $this->nbEpisodes = 0;
-       // $this->note = new Note();
     }
 
-
-
     /**
-     * @param mixed $titre
-     * @return void
+     * @param string $name
+     * @return mixed
+     * @throws Exception
      */
 
-    public static function find(mixed $titre)
+    public function __get(string $name): mixed
     {
+        if (!property_exists($this, $name)) throw new Exception("$name: invalid property");
+        return $this->$name;
     }
 
 
@@ -92,18 +83,6 @@ class Serie
             $note = floatval($row_serie["note"]);
         }
         return $note;
-    }
-
-
-
-    /**
-     * @throws Exception
-     */
-
-    public function __get(string $name): mixed
-    {
-        if (!property_exists($this, $name)) throw new Exception("$name: invalid property");
-        return $this->$name;
     }
 
 }
