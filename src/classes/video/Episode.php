@@ -18,6 +18,7 @@ class Episode
     protected int $id;
 
 
+
     /**
      * @param string $titre
      * @param string $filename
@@ -32,20 +33,26 @@ class Episode
         $this->id = $id;
     }
 
+
+
     /**
      * @throws NonEditablePropertyException
      * @throws InvalidPropertyValueException
      */
+
     public function __set(string $name, mixed $value): void {
         if($name == "titre" or $name == "filename") { throw new NonEditablePropertyException("Propriété non-éditable"); }
         if($name == "duree" and $value < 0) { throw new InvalidPropertyValueException("Valeur non-valide"); }
         $this->$name = $value;
     }
 
+
+
     /**
      * @param string $mail
      * @return int
      */
+
     public static function getIdUser(string $mail):int
     {
         $sql = "select id from User where email = ?";
@@ -57,9 +64,12 @@ class Episode
         return $row_serie["id"];
     }
 
+
+
     /**
      * @throws Exception
      */
+
     public function __get(string $name): mixed
     {
         if (!property_exists($this, $name)) throw new Exception("$name: invalid property");

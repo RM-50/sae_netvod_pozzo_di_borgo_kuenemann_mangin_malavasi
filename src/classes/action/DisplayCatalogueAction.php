@@ -189,6 +189,7 @@ class  DisplayCatalogueAction extends Action
      * @param int $id
      * @return string
      */
+
     private function getHtml(string $titre, string $html,int $id=-1): string
     {
         $stmt = $this->requestEpisode($id);

@@ -45,7 +45,6 @@ class ClassVisio
 
 
 
-
 /**
      * @param $episode
      * @return bool
