@@ -92,7 +92,10 @@ class ClassVisio
 
 
 
-
+    /**
+     * @param int $id
+     * @return bool
+     */
 
     public function isVideoEnCours(int $id):bool
     {
@@ -108,7 +111,6 @@ class ClassVisio
         }
         return false;
     }
-
 
 
 
