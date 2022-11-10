@@ -5,6 +5,7 @@ namespace iutnc\netvod\video;
 use Exception;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\exceptions\InvalidPropertyNameException;
+use iutnc\netvod\note\Note;
 
 class Serie
 {
@@ -16,6 +17,7 @@ class Serie
     protected string $dateAjout;
     protected int $nbEpisodes;
     protected array $listeEpisode;
+    protected Note $note;
 
     /**
      * @param string $titre titre de la serie
@@ -31,6 +33,7 @@ class Serie
         $this->anneeSortie = 0;
         $this->dateAjout = "";
         $this->nbEpisodes = 0;
+        $this->note = new Note();
     }
 
     public static function find(mixed $titre)
@@ -47,6 +50,18 @@ class Serie
         $row_serie = $stmt_serie->fetch(\PDO::FETCH_ASSOC);
         return $row_serie["id"];
     }
+
+    public static function getNote(int $id):float
+    {
+        $sql = "SELECT avg(note) as note FROM avis where id_serie = ?";
+        $db = ConnectionFactory::makeConnection();
+        $stmt_serie = $db->prepare($sql);
+        $stmt_serie->bindParam(1, $id);
+        $stmt_serie->execute();
+        $row_serie = $stmt_serie->fetch(\PDO::FETCH_ASSOC);
+        return $row_serie["note"];
+    }
+
 
     /**
      * @throws Exception
