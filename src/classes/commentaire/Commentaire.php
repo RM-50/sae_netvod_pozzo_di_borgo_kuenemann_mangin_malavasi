@@ -8,6 +8,13 @@ use PDO;
 class Commentaire
 {
 
+
+
+    /**
+     * @param int $id
+     * @return array
+     */
+
     public static function getCommentaire(int $id):array
     {
         $sql = "SELECT commentaire FROM avis where id_serie = ?";
