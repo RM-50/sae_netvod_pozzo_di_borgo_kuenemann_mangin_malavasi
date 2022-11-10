@@ -1,6 +1,9 @@
 <?php
 
+
+
 namespace iutnc\netvod\action;
+
 
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\render\Renderer;
@@ -10,6 +13,8 @@ use iutnc\netvod\tri\TriMotCle;
 use iutnc\netvod\video\Episode;
 use iutnc\netvod\video\Serie;
 use PDOException;
+
+
 
 class  DisplayCatalogueAction extends Action
 {

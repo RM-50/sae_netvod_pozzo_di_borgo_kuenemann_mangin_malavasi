@@ -1,9 +1,14 @@
 <?php
 
+
+
 namespace iutnc\netvod\action;
+
 
 use iutnc\netvod\render\SerieRenderer;
 use iutnc\netvod\video\Serie;
+
+
 
 class AccueilAction extends Action
 {

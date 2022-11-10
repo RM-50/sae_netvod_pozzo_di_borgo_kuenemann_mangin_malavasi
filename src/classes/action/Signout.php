@@ -1,6 +1,10 @@
 <?php
 
+
+
 namespace iutnc\netvod\action;
+
+
 
 class Signout extends Action
 {
