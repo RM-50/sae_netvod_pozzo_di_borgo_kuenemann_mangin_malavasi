@@ -17,15 +17,19 @@ class EpisodeRenderer implements Renderer
 
     protected function short() : string
     {
-        return '<p class="ep">'.$this->episode->titre;
+        $filename = str_replace("mp4", "png", $this->episode->filename);
+        $content =  '<p class="ep">'.$this->episode->titre . '</p>';
+        $content .= "<img alt='img' src='./rsrc/minEpisode/$filename'> ";
+        return $content;
     }
 
     protected function long() : string
     {
-        $content = '<p class="ep">'. $this->episode->filename. " | ";
-        $content .= " | Duree: " . $this->episode->titre;
+        $filename = str_replace("mp4", "png", $this->episode->filename);
+        $content = '<p class="ep">'.$this->episode->titre. " | ";
         $content .= " | resume: " . $this->episode->resume;
         $content .= '</p>';
+        $content .= "<video controls width='1000' alt='img' src='./rsrc/episode/{$this->episode->filename}'> ";
         return $content;
     }
 

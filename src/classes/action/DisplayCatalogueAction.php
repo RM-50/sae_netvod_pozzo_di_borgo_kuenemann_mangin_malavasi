@@ -123,7 +123,7 @@ class  DisplayCatalogueAction extends Action
         }
         $listeEpisode = [];
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            $listeEpisode [] = new Episode($row['titre'], $row['file']);
+            $listeEpisode [] = new Episode($row['id'],$row['titre'], $row['file']);
         }
         $serie = new Serie($row_serie['titre'], $listeEpisode);
         $renderer = new SerieRenderer($serie);

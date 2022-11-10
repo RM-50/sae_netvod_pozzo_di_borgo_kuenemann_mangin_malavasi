@@ -13,6 +13,11 @@ nav{
     text-align: left;
 }
 
+img{
+    width: 60%;
+    height: 30%;
+}
+
 #menu{
     list-style-type: none;
     padding-left: 0;

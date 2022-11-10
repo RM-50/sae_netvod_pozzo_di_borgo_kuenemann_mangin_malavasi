@@ -69,6 +69,7 @@ class Dispatcher
             case 'display-episode':
                 $action = new DisplayEpisodeAction();
                 $html = $action->execute();
+                break;
             default:
                 $action = new AccueilAction();
                 $html = $action->execute();

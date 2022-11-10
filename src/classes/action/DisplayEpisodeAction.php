@@ -17,10 +17,9 @@ class DisplayEpisodeAction extends Action
         $html = '';
         $renderer = '';
         if (isset($_SESSION['user_connected'])) {
-            $user = unserialize($_SESSION['user_connected']);
 
             $html .= "  <div><h1> <a> Notre catalogue : </a></h1></div>";
-            $sqlEpisode = "SELECT titre, resume, duree FROM episode where id = ?";
+            $sqlEpisode = "SELECT id, titre, resume, duree, file FROM episode where id = ?";
 
             try {
                 $db = ConnectionFactory::makeConnection();
@@ -29,11 +28,11 @@ class DisplayEpisodeAction extends Action
                 $stmt_episode->execute();
 
                 while ($row = $stmt_episode->fetch(\PDO::FETCH_ASSOC)) {
-                    $episode = new Episode($row['titre'], $row['file']);
+                    $episode = new Episode($row['id'],$row['titre'], $row['file']);
                     $renderer = new EpisodeRenderer($episode);
                 }
 
-                $html = $renderer->render(2);
+                $html =  $renderer->render(2);
 
             } catch (PDOException $exception) {
                 echo $exception->getMessage();

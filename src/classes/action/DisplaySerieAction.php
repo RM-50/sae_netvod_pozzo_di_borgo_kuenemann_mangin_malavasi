@@ -20,7 +20,7 @@ class DisplaySerieAction extends Action
             if ($user->active === 1) {
                 $html .= "  <div><h1> <a> Notre catalogue : </a></h1></div>";
                 $sqlSerie = "SELECT titre,id FROM serie where id = ?";
-                $sqlLstEps = "SELECT titre, file FROM episode where serie_id = ?";
+                $sqlLstEps = "SELECT id, titre, file FROM episode where serie_id = ?";
 
                 try {
                     $db = ConnectionFactory::makeConnection();
@@ -34,7 +34,7 @@ class DisplaySerieAction extends Action
                     $stmt->execute();
                     $listeEpisode = [];
                     while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-                        $listeEpisode [] = new Episode($row['titre'], $row['file']);
+                        $listeEpisode [] = new Episode($row['id'],$row['titre'], $row['file']);
                     }
                     $serie = new Serie($row_serie['titre'], $listeEpisode);
                     $renderer = new SerieRenderer($serie);

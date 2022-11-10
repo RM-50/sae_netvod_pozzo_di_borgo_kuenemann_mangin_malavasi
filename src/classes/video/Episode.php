@@ -14,13 +14,15 @@ class Episode
     protected string $resume;
     protected string $filename;
     protected int $duree;
+    protected int $id;
 
-    public function __construct(string $titre, string $filename)
+    public function __construct(int $id, string $titre, string $filename)
     {
         $this->titre = $titre;
         $this->filename = $filename;
         $this->resume = "";
         $this->duree = 0;
+        $this->id = $id;
     }
 
     /**

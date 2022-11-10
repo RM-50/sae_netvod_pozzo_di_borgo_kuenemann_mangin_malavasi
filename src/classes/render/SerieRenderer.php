@@ -17,7 +17,8 @@ class SerieRenderer implements Renderer
     protected function short(): string
     {
         $html = <<<EOF
-                    <p> <img src="../../rsrc/minSerie/carSerie.png"> {$this->serie->titreSerie}
+                    <p> 
+                        {$this->serie->titreSerie}
                     </p>
                     EOF;
 
@@ -28,16 +29,18 @@ class SerieRenderer implements Renderer
     {
         $html = <<<EOF
             <div>
-                <p>Titre : {$this->serie->titreSerie} {$this->serie->genre}  {$this->serie->publicVise} {$this->serie->descriptif} {$this->serie->anneeSortie}
+                <p> Titre : {$this->serie->titreSerie} {$this->serie->genre}  {$this->serie->publicVise} {$this->serie->descriptif} {$this->serie->anneeSortie}
                  {$this->serie->dateAjout} {$this->serie->nbEpisodes}
                 </p>
+                <form id="serie" method="post">
                
         EOF;
         foreach ($this->serie->listeEpisode as $value) {
             $render = new EpisodeRenderer($value);
-            $html .= $render->render(2);
+            $current = $render->render(1);
+            $html .= "<button id='serie' style='width: 300px' formaction='index.php?action=display-episode&id={$value->id}'> $current </button> </br>";
         }
-        $html .= "</div>";
+        $html .= " </form> </div>";
         return $html;
     }
 
