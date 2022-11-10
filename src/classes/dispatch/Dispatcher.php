@@ -14,6 +14,7 @@ use iutnc\netvod\action\ModifyPasswordAction;
 use iutnc\netvod\action\RegisterAction;
 use iutnc\netvod\action\SigninAction;
 use iutnc\netvod\action\Signout;
+use iutnc\netvod\DisplayEpisodeAction;
 
 class Dispatcher
 {
@@ -65,6 +66,9 @@ class Dispatcher
                 $action = new ActivateAccountAction();
                 $html = $action->execute();
                 break;
+            case 'display-episode':
+                $action = new DisplayEpisodeAction();
+                $html = $action->execute();
             default:
                 $action = new AccueilAction();
                 $html = $action->execute();
