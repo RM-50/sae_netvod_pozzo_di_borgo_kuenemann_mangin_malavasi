@@ -14,7 +14,7 @@ class  DisplayCatalogueAction extends Action
 {
     public function execute(): string
     {
-        if (isset($_SESSION['user'])){
+        if (isset($_SESSION['user_connected'])){
             $user = unserialize($_SESSION['user_connected']);
             if ($user->active === 1) {
                     $html = <<<END
@@ -102,14 +102,6 @@ class  DisplayCatalogueAction extends Action
                 $stmt_serie = $db->prepare($sqlLstEps);
                 $stmt_serie->bindParam(1, $row_serie);
                 $stmt_serie->execute();
-                try {
-                    $db = ConnectionFactory::makeConnection();
-                    $stmt_serie = $db->prepare($sqlSerie);
-                    $stmt_serie->execute();
-
-                } catch (PDOException $e) {
-                    echo $e->getMessage();
-                }
             } catch (PDOException $e) {
                 echo $e->getMessage();
             }
