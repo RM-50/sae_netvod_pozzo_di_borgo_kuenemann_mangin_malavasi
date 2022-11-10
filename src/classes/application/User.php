@@ -6,12 +6,14 @@ use iutnc\netvod\auth\Auth;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\exceptions\InvalidPropertyNameException;
 use iutnc\netvod\preference\Preferences;
+use iutnc\netvod\visionnage\ClassVisio;
 
 class User
 {
     private string $email, $passwd;
     private int $role, $id, $active = 0;
     private Preferences $pref;
+    private ClassVisio $visio;
 
     public function __construct(int $id, string $email, string $passwd, int $role)
     {
@@ -20,6 +22,7 @@ class User
         $this->passwd = $passwd;
         $this->role = $role;
         $this->pref = new Preferences($id);
+        $this->visio = new ClassVisio($id);
     }
 
     /**
