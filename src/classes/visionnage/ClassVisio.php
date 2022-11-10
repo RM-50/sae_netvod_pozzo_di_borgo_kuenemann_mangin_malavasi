@@ -56,14 +56,16 @@ class ClassVisio
         if (!isset($this->visiocours[$idEpisode])) {
             $this->visiocours[] = $episode;
             $db = ConnectionFactory::makeConnection();
-            $sql = <<<END
-            insert into videoencours (id_serie,id_user) values (?,?)
-            END;
-            $st = $db->prepare($sql);
-            $st->bindParam(1, $idEpisode);
-            $st->bindParam(2, $idUser);
-            $st->execute();
-            return true;
+            if (!$this->isVideoEnCours($idEpisode)) {
+                $sql = <<<END
+                insert into videoencours (id_serie,id_user) values (?,?)
+                END;
+                $st = $db->prepare($sql);
+                $st->bindParam(1, $idEpisode);
+                $st->bindParam(2, $idUser);
+                $st->execute();
+                return true;
+            }
         }
         return false;
     }

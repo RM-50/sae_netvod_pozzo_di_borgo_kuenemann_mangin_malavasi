@@ -26,6 +26,7 @@ class DisplayEpisodeAction extends Action
 
     public function execute(): string
     {
+        $html = '';
         if (isset($_SESSION['user_connected'])) {
             $user = unserialize($_SESSION['user_connected']);
             $enCours = $user->getVisio();
