@@ -10,6 +10,7 @@ body a {
 nav{
     border-bottom: 1px solid black;
     margin-bottom: 100px;
+    text-align: left;
 }
 
 #menu{
@@ -17,13 +18,9 @@ nav{
     padding-left: 0;
 }
 
-#element{
+.element{
     display: inline-block;
     margin-left: 50px;
-}
-
-.content{
-    text-align: center;
 }
 
 .accueil-action > ul{
