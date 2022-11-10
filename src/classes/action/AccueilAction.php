@@ -24,7 +24,7 @@ class AccueilAction extends Action
                 $mail = $user->email;
                 $prefs = $user->getPrefs();
                 $seriesPref = $prefs->series;
-                $visios = $user->visio;
+                $visios = $user->getVisio();
                 $VisionnageEnC = $visios->visiocours;
 
                 $html = <<< END
