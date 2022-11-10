@@ -6,12 +6,14 @@ use iutnc\netvod\auth\Auth;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\exceptions\InvalidPropertyNameException;
 use iutnc\netvod\preference\Preferences;
+use iutnc\netvod\visionnage\ClassVisio;
 
 class User
 {
     private string $email, $passwd;
     private int $role, $id, $active = 0;
     private Preferences $pref;
+    private ClassVisio $visio;
 
     public function __construct(int $id, string $email, string $passwd, int $role)
     {
@@ -20,6 +22,7 @@ class User
         $this->passwd = $passwd;
         $this->role = $role;
         $this->pref = new Preferences($id);
+        $this->visio = new ClassVisio($id);
     }
 
     /**
@@ -43,24 +46,9 @@ class User
 
     public function modifierEmail(string $email) : string
     {
-        $db = ConnectionFactory::makeConnection();
-        $stmt = $db->prepare('SELECT email FROM user');
-        $stmt->execute();
-        $email_existant = false;
-        while($row = $stmt->fetch(\PDO::FETCH_ASSOC) and !$email_existant)
+        if (!self::verifierEmail($email))
         {
-            if ($email === $row['email'])
-            {
-                $email_existant = true;
-            }
-            else
-            {
-                $email_existant = false;
-            }
-        }
-
-        if (!$email_existant)
-        {
+            $db = ConnectionFactory::makeConnection();
             $stmt = $db->prepare("UPDATE user SET email = ? WHERE id = ?");
             $stmt->bindParam(1, $email);
             $id = $this->id;
@@ -97,5 +85,32 @@ class User
             $html = 'Changement de mot de passe réussi';
         }
         return $html;
+    }
+
+    public static function verifierEmail(string $email) : bool
+    {
+        $db = ConnectionFactory::makeConnection();
+        $stmt = $db->prepare('SELECT email FROM user');
+        $stmt->execute();
+        $email_existant = false;
+        while($row = $stmt->fetch(\PDO::FETCH_ASSOC) and !$email_existant)
+        {
+            if ($email === $row['email'])
+            {
+                $email_existant = true;
+            }
+            else
+            {
+                $email_existant = false;
+            }
+        }
+        return $email_existant;
+    }
+
+    public static function getID(string $email) : string
+    {
+        $db = ConnectionFactory::makeConnection();
+        $stmt = $db->prepare("SELECT id from user WHERE email = '$email'");
+        return '';
     }
 }

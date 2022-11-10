@@ -17,6 +17,9 @@ class AccueilAction extends Action
                 $mail = $user->email;
                 $prefs = $user->pref;
                 $seriesPref = $prefs->series;
+                $visios = $user->visio;
+                $VisionnageEnC = $visios->visiocours;
+
                 $html = <<< END
                     <h1>Bienvenue $mail</h1>
                     <h2>Veuillez choisir une action dans la liste ci dessous</h2>
@@ -56,6 +59,35 @@ class AccueilAction extends Action
                 
                 END;
                 }
+
+                if (!sizeof($VisionnageEnC) == 0) {
+                    $html .= '<table id="champ">
+                        <tr>
+                        <td>
+                            <nav id="deroule">
+                                <ul id="serie">';
+                    foreach ($VisionnageEnC as $value) {
+                        $renderer = new SerieRenderer($value);
+                        $titre=$renderer->render(1);
+                        $html .= <<<END
+                        <li class="menu-deroulant">
+                            <a id="amenu" href="">$titre</a>
+                            <ul class="sous-menu">
+                                <li><a id="amenu" href="">Episodes</a></li>
+                            </ul>
+                        </li>
+                        END;
+                    }
+                    $html .= <<<END
+                                </ul>
+                            </nav>
+                            </td>
+                        </tr>
+                     </table>          
+                
+                END;
+                }
+
             }
             else
             {

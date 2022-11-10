@@ -81,13 +81,13 @@ class Dispatcher
         if (isset($_SESSION['user_connected']))
         {
             $inscription = '';
-            $connection = '<li id="element"><a href="?action=signout">Se Deconnecter</a></li>';
-            $catalogue = '<li id="element"><a href="?action=display-catalogue">Notre catalogue</a></li>';
+            $connection = '<li class="element"><a href="?action=signout">Se Deconnecter</a></li>';
+            $catalogue = '<li class="element"><a href="?action=display-catalogue">Notre catalogue</a></li>';
         }
         else
         {
-            $inscription = '<li id="element"><a href="?action=register">S\'inscrire</a></li>';
-            $connection = '<li id="element"><a href="?action=signin">Se Connecter</a></li>';
+            $inscription = '<li class="element"><a href="?action=register">S\'inscrire</a></li>';
+            $connection = '<li class="element"><a href="?action=signin">Se Connecter</a></li>';
             $catalogue = '';
         }
         echo <<<END
@@ -101,7 +101,8 @@ class Dispatcher
                 <body>
                     <nav id="menu">
                         <ul>
-                            <li id="element"><a href="index.php">Accueil</a></li>
+                            <li class="element" id="logo">NetVOD</li>
+                            <li class="element"><a href="index.php">Accueil</a></li>
                             $inscription
                             $connection
                             $catalogue   
