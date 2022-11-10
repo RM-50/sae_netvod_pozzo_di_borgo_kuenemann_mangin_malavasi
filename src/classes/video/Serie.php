@@ -7,11 +7,15 @@ use iutnc\netvod\db\ConnectionFactory;
 
 class Serie
 {
-    protected string $titreSerie,$genre,$publicVise,$descriptif;
-    protected int $anneeSortie;
-    protected string $dateAjout;
-    protected int $nbEpisodes;
-    protected array $listeEpisode;
+    // Attribut en public car impossible d'acceder au variable si elles sont protected
+    public string $titreSerie;
+    public string $genre;
+    public string $descriptif;
+    public int $anneeSortie;
+    public string $dateAjout;
+    public int $nbEpisodes;
+    public array $listeEpisode;
+    public mixed $publicVise;
 
     /**
      * @param string $titre titre de la serie

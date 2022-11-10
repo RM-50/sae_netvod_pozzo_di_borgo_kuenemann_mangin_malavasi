@@ -40,7 +40,9 @@ class AccueilAction extends Action
                 
             END;
                 if (!sizeof($seriesPref) == 0) {
-                    $html .= '<table id="champ">
+                    $html .= '
+                        <h3>Favoris</h3>
+                        <table id="champ">
                         <tr>
                         <td>
                             <nav id="deroule">
@@ -68,7 +70,9 @@ class AccueilAction extends Action
                 }
 
                 if (!sizeof($VisionnageEnC) == 0) {
-                    $html .= '<table id="champ">
+                    $html .= '
+                        <h3>Visionnage en cours</h3>
+                        <table id="champ">
                         <tr>
                         <td>
                             <nav id="deroule">

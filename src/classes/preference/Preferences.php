@@ -11,9 +11,6 @@ use iutnc\netvod\video\Serie;
 class Preferences
 {
     protected array $series;
-
-
-
     /**
      * Constructor
      */

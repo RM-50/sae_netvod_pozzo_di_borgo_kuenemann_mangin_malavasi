@@ -44,9 +44,25 @@ class DisplaySerieAction extends Action
                     while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
                         $listeEpisode [] = new Episode($row['id'],$row['titre'], $row['file']);
                     }
+                    /**
+                    $sqlGenre = "select libelle from genre g, serie2genre s where g.id = s.id_genre and s.id_serie = {$_GET['id']}";
+                    $stmt_serie = $db->prepare($sqlGenre);
+                    $stmt_serie->execute();
+                    $row_genre = $stmt_serie->fetch(\PDO::FETCH_ASSOC);
 
-
+                    $sqlPublic = "select libelle from genre g, serie2genre s where g.id = s.id_genre and s.id_serie = {$_GET['id']}";
+                    $stmt_serie = $db->prepare($sqlPublic);
+                    $stmt_serie->execute();
+                    $row_public = $stmt_serie->fetch(\PDO::FETCH_ASSOC);
+                    */
                     $serie = new Serie($row_serie['titre'], $listeEpisode);
+                    // Attribut en public car impossible d'acceder au variable si elles sont protected
+                    /**
+                    $serie->publicVisee = $row_public["libelle"];
+                    $serie->descriptif = $row_serie["descriptif"];
+                    $serie->genre = $row_genre["libelle"];
+                    $serie->dateAjout = $row_serie["genre"];
+                     * */
                     $renderer = new SerieRenderer($serie);
 
                     $html = $renderer->render(2);
