@@ -7,6 +7,7 @@ use iutnc\netvod\render\Renderer;
 use iutnc\netvod\render\SerieRenderer;
 use iutnc\netvod\video\Episode;
 use iutnc\netvod\video\Serie;
+use iutnc\netvod\note\Note;
 use PDOException;
 
 class DisplaySerieAction extends Action
