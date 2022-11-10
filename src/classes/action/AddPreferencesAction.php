@@ -5,6 +5,12 @@ namespace iutnc\netvod\action;
 class AddPreferencesAction extends Action
 {
 
+
+
+    /**
+     * @return string
+     */
+
     public function execute(): string
     {
         if (isset($_SESSION['*user*'])) {

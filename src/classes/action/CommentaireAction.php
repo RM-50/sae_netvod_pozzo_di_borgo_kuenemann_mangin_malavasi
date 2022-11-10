@@ -6,6 +6,13 @@ use iutnc\netvod\commentaire\Commentaire;
 
 class CommentaireAction
 {
+
+
+
+    /**
+     * @return string
+     */
+
     public function execute(): string
     {
         if (!isset($_SESSION['user_connected'])) {

@@ -10,6 +10,13 @@ use PDO;
 class ForgotPasswordAction extends Action
 {
 
+
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+
     public function execute(): string
     {
         if ($this->http_method === 'GET')
