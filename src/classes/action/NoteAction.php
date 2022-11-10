@@ -35,7 +35,9 @@ class NoteAction extends Action
                     {
                         $html = <<<END
                         <form method="post" action="index.php?action=note&id=$id">
-                            <label for="note" >Note : </label><input type="number" min="1" max="5" name="note"></br>
+                            <label for="note" >Note : </label><input type="number" min="1" max="5" name="note">
+                            <label for="note" > /5 </label>
+                            </br>
                             <label for="commentaire" >Commentaire : </label><br/>
                             <textarea name="commentaire" rows="7" cols="30"></textarea><br/>
                             <button type="submit">Valider</button>
