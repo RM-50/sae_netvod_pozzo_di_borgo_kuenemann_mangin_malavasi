@@ -169,7 +169,7 @@ class  DisplayCatalogueAction extends Action
             $stmt_serie = null;
             try {
 
-                $sqlLstEps = "SELECT titre, file FROM episode where serie_id = ?";
+                $sqlLstEps = "SELECT id, titre, file FROM episode where serie_id = ?";
 
                 $db = ConnectionFactory::makeConnection();
                 $stmt_serie = $db->prepare($sqlLstEps);
