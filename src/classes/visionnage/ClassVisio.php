@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace iutnc\netvod\visionnage;
 
 use Exception;
@@ -15,6 +17,10 @@ class ClassVisio
     protected array $visiocours;
 
 
+
+    /**
+     * @param int $id
+     */
 
     public function __construct(int $id)
     {
@@ -42,9 +48,12 @@ class ClassVisio
 
 
 
+    /**
+     * @param $serie
+     * @return bool
+     */
 
-
-    public function addPreference($serie):bool
+    public function addVideoEnCours($serie):bool
     {
         if (!isset($this->series[$serie])) {
             $this->visiocours[] = $serie;
@@ -62,7 +71,12 @@ class ClassVisio
 
 
 
-    public function delPreference($serie):bool
+    /**
+     * @param $serie
+     * @return bool
+     */
+
+    public function delVideoEnCours($serie):bool
     {
         if (!isset($this->visiocours[$serie])) {
             unset($this->visiocours[$serie]);
@@ -76,6 +90,13 @@ class ClassVisio
         return false;
     }
 
+
+
+    /**
+     * @param string $name
+     * @return mixed
+     * @throws Exception
+     */
 
     public function __get(string $name): mixed
     {
