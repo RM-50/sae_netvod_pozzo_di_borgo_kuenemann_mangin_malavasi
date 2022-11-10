@@ -15,6 +15,13 @@ class Episode
     protected string $filename;
     protected int $duree;
 
+
+
+    /**
+     * @param string $titre
+     * @param string $filename
+     */
+
     public function __construct(string $titre, string $filename)
     {
         $this->titre = $titre;
@@ -23,24 +30,36 @@ class Episode
         $this->duree = 0;
     }
 
+
+
     /**
      * @throws NonEditablePropertyException
      * @throws InvalidPropertyValueException
      */
+
     public function __set(string $name, mixed $value): void {
         if($name == "titre" or $name == "filename") { throw new NonEditablePropertyException("Propriété non-éditable"); }
         if($name == "duree" and $value < 0) { throw new InvalidPropertyValueException("Valeur non-valide"); }
         $this->$name = $value;
     }
 
+
+
     /**
      * @throws Exception
      */
+
     public function __get(string $name): mixed
     {
         if (!property_exists($this, $name)) throw new Exception("$name: invalid property");
         return $this->$name;
     }
+
+
+
+    /**
+     * @return string
+     */
 
     public function __toString() : string {
         return json_encode($this, JSON_PRETTY_PRINT);

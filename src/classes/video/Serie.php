@@ -19,10 +19,13 @@ class Serie
     protected array $listeEpisode;
     protected Note $note;
 
+
+
     /**
      * @param string $titre titre de la serie
      * @param array $listeEps
      */
+
     public function __construct(string $titre, array $listeEps)
     {
         $this->titreSerie = $titre;
@@ -36,9 +39,23 @@ class Serie
        // $this->note = new Note();
     }
 
+
+
+    /**
+     * @param mixed $titre
+     * @return void
+     */
+
     public static function find(mixed $titre)
     {
     }
+
+
+
+    /**
+     * @param string $mail
+     * @return int
+     */
 
     public static function getIdUser(string $mail):int
     {
@@ -50,6 +67,13 @@ class Serie
         $row_serie = $stmt_serie->fetch(\PDO::FETCH_ASSOC);
         return $row_serie["id"];
     }
+
+
+
+    /**
+     * @param int $id
+     * @return float
+     */
 
     public static function getNote(int $id):float
     {
@@ -70,9 +94,12 @@ class Serie
         return $note;
     }
 
+
+
     /**
      * @throws Exception
      */
+
     public function __get(string $name): mixed
     {
         if (!property_exists($this, $name)) throw new Exception("$name: invalid property");

@@ -6,6 +6,14 @@ use iutnc\netvod\db\ConnectionFactory;
 
 class TriMotCle
 {
+
+
+
+    /**
+     * @param string $mot
+     * @return array
+     */
+
     public static function tri(string $mot):array
     {
         $sql = "select titre,descriptif,id from serie";

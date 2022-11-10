@@ -7,6 +7,13 @@ use iutnc\netvod\db\ConnectionFactory;
 class TriCriteres implements Tri
 {
 
+
+
+    /**
+     * @param string $mot
+     * @return array
+     */
+
     public static function tri(string $mot): array
     {
         $sql = "select id from serie order by $mot asc";
