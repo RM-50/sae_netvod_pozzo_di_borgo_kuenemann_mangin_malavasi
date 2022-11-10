@@ -7,6 +7,7 @@ use iutnc\netvod\action\AddPreferencesAction;
 
 use iutnc\netvod\action\AccueilAction;
 use iutnc\netvod\action\CommentaireAction;
+use iutnc\netvod\action\DisplayEpisodeAction;
 use iutnc\netvod\action\NoteAction;
 use iutnc\netvod\action\DisplayCatalogueAction;
 use iutnc\netvod\action\DisplaySerieAction;
@@ -17,7 +18,6 @@ use iutnc\netvod\action\ModifyPasswordAction;
 use iutnc\netvod\action\RegisterAction;
 use iutnc\netvod\action\SigninAction;
 use iutnc\netvod\action\Signout;
-use iutnc\netvod\DisplayEpisodeAction;
 use iutnc\netvod\exceptions\AuthException;
 
 class Dispatcher

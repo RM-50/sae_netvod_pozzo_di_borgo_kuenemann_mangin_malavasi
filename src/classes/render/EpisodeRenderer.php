@@ -32,6 +32,7 @@ class EpisodeRenderer implements Renderer
         $content =  '<p class="ep">'.$this->episode->titre . '</p>';
         $content .= "<img alt='img' src='./rsrc/minEpisode/$filename'> ";
         return $content;
+
     }
 
 
@@ -42,11 +43,12 @@ class EpisodeRenderer implements Renderer
 
     protected function long() : string
     {
-        $filename = str_replace("mp4", "png", $this->episode->filename);
+        $id = $_GET['id'];
         $content = '<p class="ep">'.$this->episode->titre. " | ";
         $content .= " | resume: " . $this->episode->resume;
         $content .= '</p>';
-        $content .= "<video controls width='1000' alt='img' src='./rsrc/episode/{$this->episode->filename}'> ";
+        $content .= "<video controls width='1000' alt='img' src='./rsrc/episode/{$this->episode->filename}'></video>";
+        $content .=  "</br><button onclick=\"window.location.href='index.php?action=note&id=$id'\">noter</button>";
         return $content;
     }
 
