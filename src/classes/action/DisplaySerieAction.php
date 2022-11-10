@@ -52,7 +52,7 @@ class DisplaySerieAction extends Action
                     $html .= "<br>";
                     if (isset($_GET['favoris'])) {
                         if ($_GET['favoris'] == 3) {
-                            if (!$pref->isPref($row_serie["id"])) {
+                            if ($pref->isPref($row_serie["id"])) {
                                 $pref->delPreference($_GET['id']);
                             }
                             $html .= "<br><a href='?action=display-serie&id={$_GET['id']}&favoris=1'>Ajoutez aux favoris</a>";
