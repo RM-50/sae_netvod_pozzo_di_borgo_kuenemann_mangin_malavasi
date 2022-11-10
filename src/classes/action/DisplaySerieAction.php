@@ -26,7 +26,7 @@ class DisplaySerieAction extends Action
             $user = unserialize($_SESSION['user_connected']);
             if ($user->active === 1) {
                 $html .= "  <div><h1> <a> Notre catalogue : </a></h1></div>";
-                $sqlSerie = "SELECT titre,id FROM serie where id = ?";
+                $sqlSerie = "SELECT * FROM serie where id = ?";
                 $sqlLstEps = "SELECT id, titre, file FROM episode where serie_id = ?";
 
                 try {
@@ -90,7 +90,6 @@ class DisplaySerieAction extends Action
                         //Ajout / Suppression des vidéos en cours de lecture
                         if (isset($_GET['EnCours'])) {
                             if ($_GET['EnCours'] == 3) {
-                                $Visionnage="Visionnage=3";
                                 if (!$visio->isVideoEnCours($row_serie["id"])) {
                                     $visio->delVideoEnCours($_GET['id']);
                                 }
@@ -98,7 +97,7 @@ class DisplaySerieAction extends Action
                             }
 
                             else if ($_GET['EnCours'] == 1) {
-                                $Visionnage="Visionnage=1";
+
                                 if (!$visio->isVideoEnCours($row_serie["id"])) {
                                     $mail = $user->email;
                                     $idUser = Serie::getIdUser($mail);
@@ -106,7 +105,7 @@ class DisplaySerieAction extends Action
                                 }
                                 $html .= "<a href='?action=display-serie&id={$_GET['id']}&$favoris&Visionnages=3'>Retirez des Visionnages</a>";
                             } else if ($_GET['EnCours'] == 2) {
-                                $Visionnage="Visionnage=2";
+
                                 $html .= "<a href='?action=display-serie&id={$_GET['id']}&$favoris&Visionnages=3'>Retirez des Visionnages</a>";
                             }
 
@@ -114,12 +113,7 @@ class DisplaySerieAction extends Action
                             $html .= "<a href='?action=display-serie&id={$_GET['id']}&$favoris&Visionnages=1'>Ajoutez aux Visionnages</a>";
                         }
 
-                    }
-
-
-
-
-                    else {
+                    }else {
                         $html = "<h3>Vous ne pouvez pas modifier directement l'id de la serie</h3>";
                     }
 
