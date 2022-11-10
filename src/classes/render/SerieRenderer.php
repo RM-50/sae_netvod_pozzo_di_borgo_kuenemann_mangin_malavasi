@@ -18,7 +18,13 @@ class SerieRenderer implements Renderer
 
     protected function short(): string
     {
-        return $this->serie->titreSerie;
+        $html = <<<EOF
+                    <p> 
+                        {$this->serie->titreSerie}
+                    </p>
+                    EOF;
+
+        return $html;
     }
 
     protected function long()
@@ -26,21 +32,18 @@ class SerieRenderer implements Renderer
         $id= $_GET['id'];
         $html = <<<EOF
             <div>
-                <p>Titre : {$this->serie->titreSerie}</p>
-                <p>Note moyenne : {$this->serie->getNote($_GET['id'])}</p>
-                <button onclick="window.location.href='index.php?action=display-commentaire&id=$id'">Afficher les commentaires</button>
-                <p>Genre : {$this->serie->genre}</p>
-                <p>Description : {$this->serie->publicVise}</p>
-                <p>Description : {$this->serie->descriptif}</p>
-                <p>Année de sortie : {$this->serie->anneeSortie}</p>
-                <p>Date ajout : {$this->serie->dateAjout}</p>
-                <p>Nombre d'episode : {$this->serie->nbEpisodes}</p>
+                <p> Titre : {$this->serie->titreSerie} {$this->serie->genre}  {$this->serie->publicVise} {$this->serie->descriptif} {$this->serie->anneeSortie}
+                 {$this->serie->dateAjout} {$this->serie->nbEpisodes}
+                </p>
+                <form id="serie" method="post">
+               
         EOF;
         foreach ($this->serie->listeEpisode as $value) {
             $render = new EpisodeRenderer($value);
-            $html .= $render->render(2);
+            $current = $render->render(1);
+            $html .= "<button id='serie' style='width: 300px' formaction='index.php?action=display-episode&id={$value->id}'> $current </button> </br>";
         }
-        $html .= "</div>";
+        $html .= " </form> </div>";
         return $html;
     }
 
