@@ -17,7 +17,6 @@ class AccueilAction extends Action
                 $mail = $user->email;
                 $prefs = $user->pref;
                 $seriesPref = $prefs->series;
-
                 $visios = $user->visio;
                 $VisionnageEnC = $visios->visiocours;
 
@@ -61,8 +60,6 @@ class AccueilAction extends Action
                 END;
                 }
 
-
-
                 if (!sizeof($VisionnageEnC) == 0) {
                     $html .= '<table id="champ">
                         <tr>
@@ -90,8 +87,6 @@ class AccueilAction extends Action
                 
                 END;
                 }
-
-
 
             }
             else
