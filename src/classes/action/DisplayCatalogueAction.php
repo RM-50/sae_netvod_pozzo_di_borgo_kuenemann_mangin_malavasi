@@ -5,7 +5,8 @@ namespace iutnc\netvod\action;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\render\Renderer;
 use iutnc\netvod\render\SerieRenderer;
-use iutnc\netvod\tri\RechMotCle;
+use iutnc\netvod\tri\TriCriteres;
+use iutnc\netvod\tri\TriMotCle;
 use iutnc\netvod\video\Episode;
 use iutnc\netvod\video\Serie;
 use PDOException;
@@ -21,13 +22,44 @@ class  DisplayCatalogueAction extends Action
                     <button type="submit">Rechercher !</button>
                 </form>
                 END;
+        $html .= <<<END
+                    <nav id="deroule">
+                        <ul id="serie">
+                            <li class="menu-deroulant">
+                                <a id="amenu" href="">Trier</a>
+                                    <ul class="sous-menu">
+                                        <li><a id="amenu" href="?action=display-catalogue&sort=titre">Titre</a></li>
+                                        <li><a id="amenu" href="?action=display-catalogue&sort=date">Date</a></li>
+                                        <li><a id="amenu" href="?action=display-catalogue&sort=annee">Annee de creation</a></li>
+                                        <li><a id="amenu" href="?action=display-catalogue&sort=descriptif">Descriptif</a></li>
+                                    </ul>
+                            </li>
+                        </ul>
+                    </nav>
+            END;
+
         if ($this->http_method === "POST") {
             if (isset($_POST["cle"])) {
-                $idSeries=RechMotCle::triParMotCle($_POST["cle"]);
+                $idSeries=TriMotCle::tri($_POST["cle"]);
                 $html .= $this->afficherCatalogue($idSeries);
             }
         }else {
-            $html .= $this->afficherCatalogue();
+            if (isset($_GET["sort"])) {
+                $idSeries = -1;
+                if ($_GET["sort"] === "titre") {
+                    $idSeries = TriCriteres::tri("titre");
+                } else if ($_GET["sort"] === "date") {
+                    $idSeries = TriCriteres::tri("date_ajout");
+                } else if ($_GET["sort"] === "annee") {
+                    $idSeries = TriCriteres::tri("annee");
+                } else if ($_GET["sort"] === "descriptif") {
+                    $idSeries = TriCriteres::tri("descriptif");
+
+                }
+                $html .= $this->afficherCatalogue($idSeries);
+            }else {
+                $html .= $this->afficherCatalogue();
+            }
         }
 
         return $html;
@@ -43,23 +75,24 @@ class  DisplayCatalogueAction extends Action
                     $stmt_serie = $this->requestSerie();
                     while ($row_serie = $stmt_serie->fetch(\PDO::FETCH_ASSOC)) {
                         $id = 0;
-                        $html .= $this->getHtml($row_serie, $html,$id);
+                        $titre = $row_serie["titre"];
+                        $html .= $this->getHtml($titre, $html,$id);
                     }
                 }catch (PDOException $e){
                     echo $e->getMessage();
                 }
-
             }
-
         }else {
-            $stmt_serie = $this->requestSerie();
-            while ($row_serie = $stmt_serie->fetch(\PDO::FETCH_ASSOC)) {
-                $id = $row_serie['id'];
-                if (isset($idSeries[$id])) {
-                    $html .= $this->getHtml($row_serie, $html,$id);
-                }
-            }
+            foreach ($idSeries as $id) {
+                $sqlSerie = "SELECT titre FROM serie where id = ?";
 
+                $db = ConnectionFactory::makeConnection();
+                $stmt_serie = $db->prepare($sqlSerie);
+                $stmt_serie->bindParam(1, $id);
+                $stmt_serie->execute();
+                $row = $stmt_serie->fetch(\PDO::FETCH_ASSOC);
+                $html .= $this->getHtml($row["titre"], $html,$id-1);
+            }
             }
         return $html;
         }
@@ -100,36 +133,31 @@ class  DisplayCatalogueAction extends Action
         }
 
     /**
-     * @param int $id
-     * @param mixed $row_serie
+     * @param string $titre
      * @param string $html
+     * @param int $id
      * @return string
      */
-    private function getHtml(mixed $row_serie, string $html,int $id=-1): string
+    private function getHtml(string $titre, string $html,int $id=-1): string
     {
-        if (!$id == -1) {
-            $stmt = $this->requestEpisode($id);
-        }else {
-            $stmt = $this->requestEpisode($row_serie['id']);
-        }
+        $stmt = $this->requestEpisode($id);
         $listeEpisode = [];
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
             $listeEpisode [] = new Episode($row['titre'], $row['file']);
         }
-        $serie = new Serie($row_serie['titre'], $listeEpisode);
+        $serie = new Serie($titre, $listeEpisode);
         $renderer = new SerieRenderer($serie);
 
         $user = unserialize($_SESSION["user_connected"]);
         $pref = $user->pref;
         $favoris = "";
-        if ($pref->isPref($row_serie["id"])) {
+        if ($pref->isPref($id)) {
             $favoris = "&favoris=2";
         }
-        $html = "             
-            <a href='?action=display-serie&id={$row_serie['id']}$favoris'>
+        return "             
+            <a href='?action=display-serie&id={$id}$favoris'>
             {$renderer->render(Renderer::COMPACT)} 
             </a> <br>
             ";
-        return $html;
     }
 }
