@@ -18,20 +18,31 @@ use iutnc\netvod\action\RegisterAction;
 use iutnc\netvod\action\SigninAction;
 use iutnc\netvod\action\Signout;
 use iutnc\netvod\DisplayEpisodeAction;
+use iutnc\netvod\exceptions\AuthException;
 
 class Dispatcher
 {
 
     private ?string $action;
 
+
+
     /**
      * Constructeur prenant en parametre une action a executer
      * @param string|null $action action a executer
      */
+
     public function __construct(?string $action)
     {
         $this->action = $action;
     }
+
+
+
+    /**
+     * @return void
+     * @throws AuthException
+     */
 
     public function run() : void
     {
@@ -91,6 +102,13 @@ class Dispatcher
         }
         $this->renderPage($html);
     }
+
+
+
+    /**
+     * @param string $html
+     * @return void
+     */
 
     private function renderPage(string $html) : void
     {
