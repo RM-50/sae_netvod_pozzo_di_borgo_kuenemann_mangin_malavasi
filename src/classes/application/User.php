@@ -62,7 +62,7 @@ class User
         return $html;
     }
 
-    public function modifierMotDePasse(string $passwd) : string
+    public static function modifierMotDePasse(string $passwd, string $email) : string
     {
         if (!Auth::verifyPasswordStrength($passwd))
         {
@@ -74,11 +74,12 @@ class User
             $db = ConnectionFactory::makeConnection();
             $stmt = $db->prepare("UPDATE user SET password = ? WHERE id = ?");
             $stmt->bindParam(1, $hash);
-            $id = $this->id;
+            $id = self::getID($email);
             $stmt->bindParam(2, $id);
             $stmt->execute();
-            $this->passwd = $hash;
-            $_SESSION['user_connected'] = serialize($this);
+            $usr = new User(intval($id), $email, $hash, 1);
+            $usr->active = 1;
+            $_SESSION['user_connected'] = serialize($usr);
             $html = 'Changement de mot de passe réussi';
         }
         return $html;
@@ -104,10 +105,19 @@ class User
         return $email_existant;
     }
 
-    public static function getID(string $email) : string
+    public static function getID(string $email) : int
     {
         $db = ConnectionFactory::makeConnection();
         $stmt = $db->prepare("SELECT id from user WHERE email = '$email'");
-        return '';
+        $stmt->execute();
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        if (!$row)
+        {
+            return 0;
+        }
+        else
+        {
+            return $row['id'];
+        }
     }
 }

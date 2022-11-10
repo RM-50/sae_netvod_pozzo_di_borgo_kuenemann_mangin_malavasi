@@ -2,6 +2,7 @@
 
 namespace iutnc\netvod\action;
 
+use iutnc\netvod\application\User;
 use iutnc\netvod\auth\Auth;
 use iutnc\netvod\exceptions\AuthException;
 
@@ -40,7 +41,7 @@ class ModifyPasswordAction extends Action
                         if ($passwd !== $confirm_passwd) {
                             $html = 'Les mots de passes sont différents';
                         } else {
-                            $html = $user->modifierMotDePasse($passwd);
+                            $html = User::modifierMotDePasse($passwd, $user->email);
                         }
                     }catch (AuthException $e)
                     {
