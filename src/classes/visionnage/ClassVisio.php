@@ -92,6 +92,26 @@ class ClassVisio
 
 
 
+
+
+    public function isVideoEnCours(int $id):bool
+    {
+        $db = ConnectionFactory::makeConnection();
+        $sql = "select id_serie from videoencours";
+        $st = $db->prepare($sql);
+        $st->execute();
+        $this->visiocours = [];
+        while ($values = $st->fetch()) {
+            if ($values["id_serie"] === $id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
     /**
      * @param string $name
      * @return mixed

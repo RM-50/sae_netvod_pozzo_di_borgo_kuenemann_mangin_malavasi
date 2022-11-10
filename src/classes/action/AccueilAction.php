@@ -16,7 +16,7 @@ class AccueilAction extends Action
             $user = unserialize($_SESSION['user_connected']);
             if ($user->active === 1) {
                 $mail = $user->email;
-                $prefs = $user->pref;
+                $prefs = $user->getPrefs();
                 $seriesPref = $prefs->series;
                 $visios = $user->visio;
                 $VisionnageEnC = $visios->visiocours;
