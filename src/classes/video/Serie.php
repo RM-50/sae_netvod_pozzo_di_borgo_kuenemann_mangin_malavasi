@@ -53,7 +53,7 @@ class Serie
 
     public static function getNote(int $id):float
     {
-        $sql = "SELECT avg(note) as note FROM avis where id_serie = ?";
+        $sql = "SELECT round(avg(note),1) as note FROM avis where id_serie = ?";
         $db = ConnectionFactory::makeConnection();
         $stmt_serie = $db->prepare($sql);
         $stmt_serie->bindParam(1, $id);

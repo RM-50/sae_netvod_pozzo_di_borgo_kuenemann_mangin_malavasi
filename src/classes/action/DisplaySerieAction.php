@@ -53,7 +53,7 @@ class DisplaySerieAction extends Action
 
                     // Ajout/Suppression des favoris
                     if (filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT)
-                        && filter_var($_GET['favoris'],FILTER_SANITIZE_STRING)) {
+                        || filter_var($_GET['favoris'],FILTER_SANITIZE_STRING)) {
                         if (isset($_GET['favoris'])) {
                             if ($_GET['favoris'] == 3) {
                                 if ($pref->isPref($row_serie["id"])) {
