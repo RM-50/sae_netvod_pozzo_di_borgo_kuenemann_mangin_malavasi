@@ -125,7 +125,7 @@ class  DisplayCatalogueAction extends Action
 
                 $db = ConnectionFactory::makeConnection();
                 $stmt_serie = $db->prepare($sqlSerie);
-                $stmt_serie->bindParam(1, $id);
+                $stmt_serie->bindParam(1, $_GET['id']);
                 $stmt_serie->execute();
                 $row = $stmt_serie->fetch(\PDO::FETCH_ASSOC);
                 $html .= $this->getHtml($row["titre"], $html,$id-1);
@@ -169,7 +169,7 @@ class  DisplayCatalogueAction extends Action
             $stmt_serie = null;
             try {
 
-                $sqlLstEps = "SELECT titre, file FROM episode where serie_id = ?";
+                $sqlLstEps = "SELECT id, titre, file FROM episode where serie_id = ?";
 
                 $db = ConnectionFactory::makeConnection();
                 $stmt_serie = $db->prepare($sqlLstEps);
