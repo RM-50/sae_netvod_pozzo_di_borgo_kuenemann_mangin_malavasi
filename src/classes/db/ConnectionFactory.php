@@ -1,8 +1,14 @@
 <?php
 
+
+
 namespace iutnc\netvod\db;
+
 use PDO;
+
 ConnectionFactory::setConfig( './conf/conf.ini' );
+
+
 
 class ConnectionFactory{
     public static $db = null;

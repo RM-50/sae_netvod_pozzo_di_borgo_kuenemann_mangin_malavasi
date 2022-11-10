@@ -9,15 +9,15 @@ use iutnc\netvod\note\Note;
 
 class Serie
 {
-    protected string $titreSerie;
-    protected string $genre;
-    protected string $publicVise;
-    protected string $descriptif;
-    protected int $anneeSortie;
-    protected string $dateAjout;
-    protected int $nbEpisodes;
-    protected array $listeEpisode;
-    protected Note $note;
+    // Attribut en public car impossible d'acceder au variable si elles sont protected
+    public string $titreSerie;
+    public string $genre;
+    public string $descriptif;
+    public int $anneeSortie;
+    public string $dateAjout;
+    public int $nbEpisodes;
+    public array $listeEpisode;
+    public mixed $publicVise;
 
     /**
      * @param string $titre titre de la serie
@@ -33,12 +33,26 @@ class Serie
         $this->anneeSortie = 0;
         $this->dateAjout = "";
         $this->nbEpisodes = 0;
-       // $this->note = new Note();
     }
 
-    public static function find(mixed $titre)
+    /**
+     * @param string $name
+     * @return mixed
+     * @throws Exception
+     */
+
+    public function __get(string $name): mixed
     {
+        if (!property_exists($this, $name)) throw new Exception("$name: invalid property");
+        return $this->$name;
     }
+
+
+
+    /**
+     * @param string $mail
+     * @return int
+     */
 
     public static function getIdUser(string $mail):int
     {
@@ -50,6 +64,25 @@ class Serie
         $row_serie = $stmt_serie->fetch(\PDO::FETCH_ASSOC);
         return $row_serie["id"];
     }
+
+
+    public static function getIdSerie(string $titre):int
+    {
+        $sql = "select id from serie where titre = ?";
+        $db = ConnectionFactory::makeConnection();
+        $stmt_serie = $db->prepare($sql);
+        $stmt_serie->bindParam(1, $titre);
+        $stmt_serie->execute();
+        $row_serie = $stmt_serie->fetch(\PDO::FETCH_ASSOC);
+        echo $row_serie["id"];
+        return 1;
+    }
+
+
+    /**
+     * @param int $id
+     * @return float
+     */
 
     public static function getNote(int $id):float
     {

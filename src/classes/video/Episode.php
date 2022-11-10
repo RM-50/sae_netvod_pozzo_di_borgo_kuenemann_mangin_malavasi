@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace iutnc\netvod\video;
 
 
@@ -8,6 +10,8 @@ use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\exceptions\InvalidPropertyNameException;
 use iutnc\netvod\exceptions\InvalidPropertyValueException;
 use iutnc\netvod\exceptions\NonEditablePropertyException;
+
+
 
 class Episode
  {

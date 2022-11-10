@@ -1,8 +1,14 @@
 <?php
 
+
+
 namespace iutnc\netvod\action;
 
+
 use iutnc\netvod\render\SerieRenderer;
+use iutnc\netvod\video\Serie;
+
+
 
 class AccueilAction extends Action
 {
@@ -50,11 +56,12 @@ class AccueilAction extends Action
                 foreach ($seriesPref as $value) {
                     $renderer = new SerieRenderer($value);
                     $titre=$renderer->render(1);
+                    $id = Serie::getIdSerie($titre);
                     $html .= <<<END
                         <li class="menu-deroulant">
                             <a id="amenu" href="">$titre</a>
                             <ul class="sous-menu">
-                                <li><a id="amenu" href="">Episodes</a></li>
+                                <li><a id="amenu" href="index.php?action=display-episode&id={$id}">Episodes</a></li>
                             </ul>
                         </li>
                         END;

@@ -1,10 +1,15 @@
 <?php
 
+
+
 namespace iutnc\netvod\action;
+
 
 use iutnc\netvod\auth\Auth;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\exceptions\AuthException;
+
+
 
 class ModifyEmailAction extends Action
 {

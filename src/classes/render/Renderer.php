@@ -1,6 +1,10 @@
 <?php
 
+
+
 namespace iutnc\netvod\render;
+
+
 
 interface Renderer
 {
