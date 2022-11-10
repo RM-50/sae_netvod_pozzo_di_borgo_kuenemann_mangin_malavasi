@@ -112,7 +112,7 @@ class Dispatcher
                 <body>
                     <nav class="menu">
                         <ul>
-                            <li class="element" id="logo">NetVOD</li>
+                            <li class="element" id="logo"><a href="https://fontmeme.com/fr/police-netflix/"><img src="https://fontmeme.com/permalink/221110/b8cc66f435374d07e0ca135dca86fa43.png" alt="police-netflix" border="0"></a></li>
                             <li class="element"><a href="index.php">Accueil</a></li>
                             $inscription
                             $connection
