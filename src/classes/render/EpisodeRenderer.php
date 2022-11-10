@@ -6,7 +6,7 @@ namespace iutnc\netvod\render;
 
 
 use iutnc\netvod\video\Episode;
-use iutnc\netvod\video\Serie;
+
 
 
 class EpisodeRenderer implements Renderer
@@ -48,14 +48,12 @@ class EpisodeRenderer implements Renderer
 
     protected function long() : string
     {
-        $id = $_GET['id'];
-        $id = Serie::getIdSeries($id);
         $filename = str_replace("mp4", "png", $this->episode->filename);
         $content = '<p class="ep">'.$this->episode->titre. " | ";
         $content .= " | resume: " . $this->episode->resume;
         $content .= '</p>';
         $content .= "<video controls width='1000' alt='img' src='./rsrc/episode/{$this->episode->filename}'></video>";
-        $content .=  "</br><button onclick=\"window.location.href='index.php?action=note&id=$id';\">noter</button>";
+        $content .=  "</br><button onclick=\"window.location.href='index.php?action=note&id={$_GET['id']};'\">noter</button>";
         return $content;
     }
 
