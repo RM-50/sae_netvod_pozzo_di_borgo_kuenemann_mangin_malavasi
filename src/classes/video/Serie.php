@@ -69,6 +69,18 @@ class Serie
     }
 
 
+    public static function getIdSerie(string $titre):int
+    {
+        $sql = "select id from serie where titre = ?";
+        $db = ConnectionFactory::makeConnection();
+        $stmt_serie = $db->prepare($sql);
+        $stmt_serie->bindParam(1, $titre);
+        $stmt_serie->execute();
+        $row_serie = $stmt_serie->fetch(\PDO::FETCH_ASSOC);
+        echo $row_serie["id"];
+        return 1;
+    }
+
 
     /**
      * @param int $id
