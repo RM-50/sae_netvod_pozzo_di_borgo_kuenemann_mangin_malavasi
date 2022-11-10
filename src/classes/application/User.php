@@ -84,7 +84,7 @@ class User
 
     public function getVisio(): ClassVisio
     {
-        return new CLassVisio(this->id);
+        return new CLassVisio($this->id);
     }
 
 
