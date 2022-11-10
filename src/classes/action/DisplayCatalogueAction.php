@@ -13,6 +13,13 @@ use PDOException;
 
 class  DisplayCatalogueAction extends Action
 {
+
+
+
+    /**
+     * @return string
+     */
+
     public function execute(): string
     {
         if (isset($_SESSION['user_connected'])) {
@@ -90,6 +97,13 @@ class  DisplayCatalogueAction extends Action
         return $html;
     }
 
+
+
+    /**
+     * @param array $idSeries
+     * @return string
+     */
+
     public function afficherCatalogue(array $idSeries=[]):string
     {
         $html = "<div><h1> <a> Notre catalogue : </a></h1></div> <br>";
@@ -120,7 +134,13 @@ class  DisplayCatalogueAction extends Action
         return $html;
         }
 
-        public function requestSerie():\PDOStatement
+
+
+    /**
+     * @return \PDOStatement
+     */
+
+    public function requestSerie():\PDOStatement
         {
             $stmt_serie = null;
             try {
@@ -137,7 +157,14 @@ class  DisplayCatalogueAction extends Action
             return $stmt_serie;
         }
 
-        public function requestEpisode(int $row_serie):\PDOStatement
+
+
+    /**
+     * @param int $row_serie
+     * @return \PDOStatement
+     */
+
+    public function requestEpisode(int $row_serie):\PDOStatement
         {
             $stmt_serie = null;
             try {
@@ -154,12 +181,15 @@ class  DisplayCatalogueAction extends Action
             return $stmt_serie;
         }
 
+
+
     /**
      * @param string $titre
      * @param string $html
      * @param int $id
      * @return string
      */
+
     private function getHtml(string $titre, string $html,int $id=-1): string
     {
         $stmt = $this->requestEpisode($id);

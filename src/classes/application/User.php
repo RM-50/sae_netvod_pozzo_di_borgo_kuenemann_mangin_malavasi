@@ -16,6 +16,15 @@ class User
     private Preferences $pref;
     private ClassVisio $visio;
 
+
+
+    /**
+     * @param int $id
+     * @param string $email
+     * @param string $passwd
+     * @param int $role
+     */
+
     public function __construct(int $id, string $email, string $passwd, int $role)
     {
         $this->id = $id;
@@ -26,9 +35,12 @@ class User
         $this->visio = new ClassVisio($id);
     }
 
+
+
     /**
      * @throws InvalidPropertyNameException
      */
+
     public function __get(string $attribut) : mixed
     {
         if (property_exists($this, $attribut))
@@ -36,6 +48,14 @@ class User
         else
             throw new InvalidPropertyNameException("La classe user ne possede pas d'attribut : $attribut");
     }
+
+
+
+    /**
+     * @param string $attribut
+     * @param mixed $valeur
+     * @return void
+     */
 
     public function __set(string $attribut, mixed $valeur) : void
     {
@@ -45,10 +65,23 @@ class User
         }
     }
 
+
+
+    /**
+     * @return Preferences
+     */
+
     public function getPrefs(): Preferences
     {
         return new Preferences($this->id);
     }
+
+
+
+    /**
+     * @param string $email
+     * @return string
+     */
 
     public function modifierEmail(string $email) : string
     {
@@ -70,6 +103,14 @@ class User
         }
         return $html;
     }
+
+
+
+    /**
+     * @param string $passwd
+     * @param string $email
+     * @return string
+     */
 
     public static function modifierMotDePasse(string $passwd, string $email) : string
     {
@@ -94,6 +135,13 @@ class User
         return $html;
     }
 
+
+
+    /**
+     * @param string $email
+     * @return bool
+     */
+
     public static function verifierEmail(string $email) : bool
     {
         $db = ConnectionFactory::makeConnection();
@@ -113,6 +161,13 @@ class User
         }
         return $email_existant;
     }
+
+
+
+    /**
+     * @param string $email
+     * @return int
+     */
 
     public static function getID(string $email) : int
     {
