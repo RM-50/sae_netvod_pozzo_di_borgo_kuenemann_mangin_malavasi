@@ -11,10 +11,22 @@ class SerieRenderer implements Renderer
 {
     protected Serie $serie;
 
+
+
+    /**
+     * @param Serie $serie
+     */
+
     public function __construct(Serie $serie)
     {
         $this->serie = $serie;
     }
+
+
+
+    /**
+     * @return string
+     */
 
     protected function short(): string
     {
@@ -26,6 +38,12 @@ class SerieRenderer implements Renderer
 
         return $html;
     }
+
+
+
+    /**
+     * @return string
+     */
 
     protected function long()
     {
@@ -46,6 +64,13 @@ class SerieRenderer implements Renderer
         $html .= " </form> </div>";
         return $html;
     }
+
+
+
+    /**
+     * @param int $selector
+     * @return string
+     */
 
     public function render(int $selector) : string
     {
