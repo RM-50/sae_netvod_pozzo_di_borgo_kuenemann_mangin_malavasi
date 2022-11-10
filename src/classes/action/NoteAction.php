@@ -59,7 +59,7 @@ class NoteAction extends Action
                     $id= $_GET['id'];
                     $html = <<<END
                     <p xmlns="http://www.w3.org/1999/html">Votre note pour cette série est de {$notation->note} et votre commentaire est : </br> {$notation->commentaire}</p>
-                    <button onclick="window.location.href='index.php?action=display-serie&id=$id">Retourner à la série</button>
+                    <button onclick="window.location.href='index.php?action=display-serie&id=$id'">Retourner à la série</button>
                     END;
                 }
 
