@@ -103,13 +103,4 @@ class Serie
         return $note;
     }
 
-    /**
-     * @throws Exception
-     */
-    public function __get(string $name): mixed
-    {
-        if (!property_exists($this, $name)) throw new Exception("$name: invalid property");
-        return $this->$name;
-    }
-
 }
