@@ -1,12 +1,17 @@
 <?php
 
+
+
 namespace iutnc\netvod\preference;
+
 
 use Exception;
 use iutnc\netvod\application\User;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\video\Episode;
 use iutnc\netvod\video\Serie;
+
+
 
 class Preferences
 {

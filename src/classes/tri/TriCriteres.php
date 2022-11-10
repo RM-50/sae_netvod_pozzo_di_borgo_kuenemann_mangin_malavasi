@@ -1,8 +1,13 @@
 <?php
 
+
+
 namespace iutnc\netvod\tri;
 
+
 use iutnc\netvod\db\ConnectionFactory;
+
+
 
 class TriCriteres implements Tri
 {

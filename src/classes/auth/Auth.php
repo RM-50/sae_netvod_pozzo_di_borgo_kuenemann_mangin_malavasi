@@ -1,10 +1,15 @@
 <?php
 
+
+
 namespace iutnc\netvod\auth;
+
 
 use iutnc\netvod\application\User;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\exceptions\AuthException;
+
+
 
 class Auth
 {

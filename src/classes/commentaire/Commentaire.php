@@ -1,9 +1,14 @@
 <?php
 
+
+
 namespace iutnc\netvod\commentaire;
+
 
 use iutnc\netvod\db\ConnectionFactory;
 use PDO;
+
+
 
 class Commentaire
 {

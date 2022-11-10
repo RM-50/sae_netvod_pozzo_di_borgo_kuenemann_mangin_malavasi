@@ -1,9 +1,14 @@
 <?php
 
+
+
 namespace iutnc\netvod\video;
+
 
 use Exception;
 use iutnc\netvod\db\ConnectionFactory;
+
+
 
 class Serie
 {

@@ -1,6 +1,11 @@
 <?php
+
+
+
 declare(strict_types=1);
+
 namespace iutnc\netvod\application;
+
 
 use iutnc\netvod\auth\Auth;
 use iutnc\netvod\db\ConnectionFactory;
@@ -8,6 +13,8 @@ use iutnc\netvod\exceptions\InvalidPropertyNameException;
 use iutnc\netvod\preference\Preferences;
 use iutnc\netvod\video\Serie;
 use iutnc\netvod\visionnage\ClassVisio;
+
+
 
 class User
 {
