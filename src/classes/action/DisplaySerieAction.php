@@ -36,6 +36,8 @@ class DisplaySerieAction extends Action
                     while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
                         $listeEpisode [] = new Episode($row['titre'], $row['file']);
                     }
+
+
                     $serie = new Serie($row_serie['titre'], $listeEpisode);
                     $renderer = new SerieRenderer($serie);
 
@@ -64,7 +66,13 @@ class DisplaySerieAction extends Action
                     } else {
                         $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=1'>Ajoutez aux favoris</a>";
                     }
-                } catch (PDOException $e) {
+                }
+
+
+
+
+
+                catch (PDOException $e) {
                     echo $e->getMessage();
                 }
             }else
