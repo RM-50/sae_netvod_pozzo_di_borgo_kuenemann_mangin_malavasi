@@ -5,6 +5,7 @@
 namespace iutnc\netvod\action;
 
 
+use iutnc\netvod\application\User;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\render\Renderer;
 use iutnc\netvod\render\SerieRenderer;
@@ -93,7 +94,7 @@ class DisplaySerieAction extends Action
                             } else if ($_GET['favoris'] == 1) {
                                 if (!$pref->isPref($row_serie["id"])) {
                                     $mail = $user->email;
-                                    $idUser = Serie::getIdUser($mail);
+                                    $idUser = User::getId($mail);
                                     $pref->addPreference($idUser, $_GET['id'], $serie);
                                 }
                                 $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=3'>Retirez des favoris</a>";

@@ -49,23 +49,6 @@ class Serie
 
 
 
-    /**
-     * @param string $mail
-     * @return int
-     */
-
-    public static function getIdUser(string $mail):int
-    {
-        $sql = "select id from User where email = ?";
-        $db = ConnectionFactory::makeConnection();
-        $stmt_serie = $db->prepare($sql);
-        $stmt_serie->bindParam(1, $mail);
-        $stmt_serie->execute();
-        $row_serie = $stmt_serie->fetch(\PDO::FETCH_ASSOC);
-        return $row_serie["id"];
-    }
-
-
     public static function getIdSerie(string $titre):int
     {
         $sql = "select id from serie where titre = ?";
