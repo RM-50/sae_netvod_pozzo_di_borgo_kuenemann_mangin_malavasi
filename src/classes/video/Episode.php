@@ -4,6 +4,7 @@ namespace iutnc\netvod\video;
 
 
 use Exception;
+use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\exceptions\InvalidPropertyNameException;
 use iutnc\netvod\exceptions\InvalidPropertyValueException;
 use iutnc\netvod\exceptions\NonEditablePropertyException;
@@ -15,6 +16,7 @@ class Episode
     protected string $filename;
     protected int $duree;
     protected int $id;
+
 
 
     /**
@@ -31,19 +33,43 @@ class Episode
         $this->id = $id;
     }
 
+
+
     /**
      * @throws NonEditablePropertyException
      * @throws InvalidPropertyValueException
      */
+
     public function __set(string $name, mixed $value): void {
         if($name == "titre" or $name == "filename") { throw new NonEditablePropertyException("Propriété non-éditable"); }
         if($name == "duree" and $value < 0) { throw new InvalidPropertyValueException("Valeur non-valide"); }
         $this->$name = $value;
     }
 
+
+
+    /**
+     * @param string $mail
+     * @return int
+     */
+
+    public static function getIdUser(string $mail):int
+    {
+        $sql = "select id from User where email = ?";
+        $db = ConnectionFactory::makeConnection();
+        $stmt_serie = $db->prepare($sql);
+        $stmt_serie->bindParam(1, $mail);
+        $stmt_serie->execute();
+        $row_serie = $stmt_serie->fetch(\PDO::FETCH_ASSOC);
+        return $row_serie["id"];
+    }
+
+
+
     /**
      * @throws Exception
      */
+
     public function __get(string $name): mixed
     {
         if (!property_exists($this, $name)) throw new Exception("$name: invalid property");
