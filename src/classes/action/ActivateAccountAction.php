@@ -14,10 +14,11 @@ class ActivateAccountAction extends Action
         {
             if (isset($_GET['token']))
             {
+                $token = filter_var($_GET['token'], FILTER_SANITIZE_STRING);
                 $user = unserialize($_SESSION['user_connected']);
                 $db = ConnectionFactory::makeConnection();
                 $date = date('Y-m-d H:i:s', time());
-                $stmt = $db->prepare("SELECT * FROM user WHERE activation_token = '{$_GET['token']}'
+                $stmt = $db->prepare("SELECT * FROM user WHERE activation_token = '$token'
                                             AND activation_expires > str_to_date('$date', '%Y-%m-%d %H:%i:%s')
                                             AND id = '$user->id'");
                 $stmt->execute();
@@ -25,12 +26,12 @@ class ActivateAccountAction extends Action
                 if (!$row)
                 {
                     $html = "Le token a expiré, veuillez réessayer : <br /><br />";
-                    $html .= "<button onclick=\"window.location.href='?action=activate-account&token={$_GET['token']}'\">Activer Compte</button>";
+                    $html .= "<button onclick=\"window.location.href='?action=activate-account&token=$token'\">Activer Compte</button>";
                 }
                 else
                 {
-                    $stmt = $db->prepare("update user set active = 1, activation_token=null
-                                        where activation_token = '{$_GET['token']}'");
+                    $stmt = $db->prepare("update user set active = 1, activation_token=null, activation_expires=null
+                                        where activation_token = '$token'");
                     $stmt->execute();
                     $user->active = 1;
                     $_SESSION['user_connected'] = serialize($user);

@@ -24,6 +24,7 @@ class DisplaySerieAction extends Action
                 $sqlLstEps = "SELECT titre, file FROM episode where serie_id = ?";
 
                 try {
+
                     $db = ConnectionFactory::makeConnection();
                     $stmt_serie = $db->prepare($sqlSerie);
                     $stmt_serie->bindParam(1, $_GET['id']);
@@ -49,6 +50,8 @@ class DisplaySerieAction extends Action
                     $pref = $user->pref;
                     $visio = $user->visio;
                     $html .= "<br>";
+
+
                     if (isset($_GET['favoris'])) {
                         if ($_GET['favoris'] == 3) {
                             if (!$pref->isPref($row_serie["id"])) {
@@ -65,18 +68,10 @@ class DisplaySerieAction extends Action
                         } else if ($_GET['favoris'] == 2) {
                             $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=3'>Retirez des favoris</a>";
                         }
-                    } else {
-                        $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=1'>Ajoutez aux favoris</a>";
                     }
 
 
-
-                    $html .= "<br>";
-                    $html .= "<br>";
-
-
-
-                    if (isset($_GET['EnCours'])) {
+                    else if (isset($_GET['EnCours'])) {
                         if ($_GET['EnCours'] == 3) {
                             if (!$visio->isVisio($row_serie["id"])) {
                                 $visio->delVisio($_GET['id']);
@@ -92,9 +87,17 @@ class DisplaySerieAction extends Action
                         } else if ($_GET['EnCours'] == 2) {
                             $html .= "<a href='?action=display-serie&id={$_GET['id']}&Visionnages=3'>Retirez des Visionnages</a>";
                         }
-                    } else {
+
+                    }
+
+
+                    else {
+                        $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=1'>Ajoutez aux favoris</a>";
+                        $html .= "<br>";
+                        $html .= "<br>";
                         $html .= "<a href='?action=display-serie&id={$_GET['id']}&Visionnages=1'>Ajoutez aux Visionnages</a>";
                     }
+
                 }
 
 
