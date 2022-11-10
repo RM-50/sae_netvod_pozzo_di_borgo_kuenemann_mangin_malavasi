@@ -1,6 +1,9 @@
 <?php
 
+
+
 namespace iutnc\netvod\action;
+
 
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\render\EpisodeRenderer;
@@ -8,6 +11,8 @@ use iutnc\netvod\render\SerieRenderer;
 use iutnc\netvod\video\Episode;
 use iutnc\netvod\video\Serie;
 use PDOException;
+
+
 
 class DisplayEpisodeAction extends Action
 {
