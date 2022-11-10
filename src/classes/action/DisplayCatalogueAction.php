@@ -15,10 +15,10 @@ class  DisplayCatalogueAction extends Action
 {
     public function execute(): string
     {
-        if (isset($_SESSION['user_connected'])){
+        if (isset($_SESSION['user_connected'])) {
             $user = unserialize($_SESSION['user_connected']);
             if ($user->active === 1) {
-                    $html = <<<END
+                $html = <<<END
                         <form id='rechercheMotCle' method='POST' action='?action=display-catalogue'>
                             <label for="cle">Mot clé de recherche :</label>
                             <input type="text" name="cle">
@@ -27,25 +27,23 @@ class  DisplayCatalogueAction extends Action
                         END;
                 if ($this->http_method === "POST") {
                     if (isset($_POST["cle"])) {
-                        $idSeries = RechMotCle::triParMotCle($_POST["cle"]);
+                        $idSeries = TriMotCle::tri($_POST["cle"]);
                         $html .= $this->afficherCatalogue($idSeries);
                     }
                 } else {
                     $html .= $this->afficherCatalogue();
                 }
-            }
-            else
-            {
+            } else {
                 $html = "Le compte doit être activé pour utiliser cette fonctionnalité";
             }
-        $html = <<<END
+            $html = <<<END
                 <form id='rechercheMotCle' method='POST' action='?action=display-catalogue'>
                     <label for="cle">Mot clé de recherche :</label>
                     <input type="text" name="cle">
                     <button type="submit">Rechercher !</button>
                 </form>
                 END;
-        $html .= <<<END
+            $html .= <<<END
                     <nav id="deroule">
                         <ul id="serie">
                             <li class="menu-deroulant">
@@ -61,27 +59,28 @@ class  DisplayCatalogueAction extends Action
                     </nav>
             END;
 
-        if ($this->http_method === "POST") {
-            if (isset($_POST["cle"])) {
-                $idSeries=TriMotCle::tri($_POST["cle"]);
-                $html .= $this->afficherCatalogue($idSeries);
-            }
-        }else {
-            if (isset($_GET["sort"])) {
-                $idSeries = -1;
-                if ($_GET["sort"] === "titre") {
-                    $idSeries = TriCriteres::tri("titre");
-                } else if ($_GET["sort"] === "date") {
-                    $idSeries = TriCriteres::tri("date_ajout");
-                } else if ($_GET["sort"] === "annee") {
-                    $idSeries = TriCriteres::tri("annee");
-                } else if ($_GET["sort"] === "descriptif") {
-                    $idSeries = TriCriteres::tri("descriptif");
-
+            if ($this->http_method === "POST") {
+                if (isset($_POST["cle"])) {
+                    $idSeries = TriMotCle::tri($_POST["cle"]);
+                    $html .= $this->afficherCatalogue($idSeries);
                 }
-                $html .= $this->afficherCatalogue($idSeries);
-            }else {
-                $html .= $this->afficherCatalogue();
+            } else {
+                if (isset($_GET["sort"])) {
+                    $idSeries = -1;
+                    if ($_GET["sort"] === "titre") {
+                        $idSeries = TriCriteres::tri("titre");
+                    } else if ($_GET["sort"] === "date") {
+                        $idSeries = TriCriteres::tri("date_ajout");
+                    } else if ($_GET["sort"] === "annee") {
+                        $idSeries = TriCriteres::tri("annee");
+                    } else if ($_GET["sort"] === "descriptif") {
+                        $idSeries = TriCriteres::tri("descriptif");
+
+                    }
+                    $html .= $this->afficherCatalogue($idSeries);
+                } else {
+                    $html .= $this->afficherCatalogue();
+                }
             }
         }
         else
@@ -106,8 +105,7 @@ class  DisplayCatalogueAction extends Action
                     echo $e->getMessage();
                 }
 
-            }
-        }else {
+            } else {
             foreach ($idSeries as $id) {
                 $sqlSerie = "SELECT titre FROM serie where id = ?";
 
@@ -178,17 +176,6 @@ class  DisplayCatalogueAction extends Action
         if ($pref->isPref($id)) {
             $favoris = "&favoris=2";
         }
-        $user = unserialize($_SESSION["user_connected"]);
-        $pref = $user->pref;
-        $favoris = "";
-        if ($pref->isPref($id) {
-            $favoris = "&favoris=2";
-        }
-        $html .= "              
-        <a href='?action=display-serie&id={$row_serie['id']}$favoris'>
-            {$renderer->render(Renderer::COMPACT)} 
-        </a>     
-                      ";
         return "             
             <a href='?action=display-serie&id={$id}$favoris'>
             {$renderer->render(Renderer::COMPACT)} 

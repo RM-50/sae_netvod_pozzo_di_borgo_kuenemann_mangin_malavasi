@@ -100,7 +100,7 @@ class Dispatcher
                     <link rel="stylesheet" href="netvod.css">  
                 </head>
                 <body>
-                    <nav id="menu">
+                    <nav class="menu">
                         <ul>
                             <li class="element" id="logo">NetVOD</li>
                             <li class="element"><a href="index.php">Accueil</a></li>

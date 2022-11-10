@@ -8,15 +8,8 @@ body a {
     /*background-image:url(image/image.png);*/
 }
 
-nav{
-    border-bottom: 1px solid black;
-    margin-bottom: 100px;
-    text-align: left;
-}
+.menu {
 
-#menu{
-    list-style-type: none;
-    padding-left: 0;
 }
 
 .element{
@@ -32,9 +25,7 @@ nav{
     size: 32pt;
 }
 
-div {
-    display: inline-block;
-}
+
 
 #amenu{
     color: black;
