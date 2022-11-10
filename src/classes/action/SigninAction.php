@@ -23,6 +23,7 @@ class SigninAction extends Action
                             <br /><br />
                             
                             <button type="submit">Se connecter</button>
+                            <button type="button" onclick="window.location.href='?action=forgot-passwd'">Mot de passe oublié</button>
                         </form>
                         END;
         }

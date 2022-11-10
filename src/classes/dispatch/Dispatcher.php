@@ -9,6 +9,7 @@ use iutnc\netvod\action\AccueilAction;
 use iutnc\netvod\action\NoteAction;
 use iutnc\netvod\action\DisplayCatalogueAction;
 use iutnc\netvod\action\DisplaySerieAction;
+use iutnc\netvod\action\ForgotPasswordAction;
 use iutnc\netvod\action\ListePreferencesAction;
 use iutnc\netvod\action\ModifyEmailAction;
 use iutnc\netvod\action\ModifyPasswordAction;
@@ -68,6 +69,10 @@ class Dispatcher
                 break;
             case 'activate-account':
                 $action = new ActivateAccountAction();
+                $html = $action->execute();
+                break;
+            case 'forgot-passwd':
+                $action = new ForgotPasswordAction();
                 $html = $action->execute();
                 break;
             default:

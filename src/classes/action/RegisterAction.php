@@ -25,7 +25,6 @@ class RegisterAction extends Action
                             <br /><br />
                             
                             <button type="submit">S'inscire</button>
-                            <button type="button" onclick="window.location.href='?action=forgot-password'">Mot de passe oublié</button>
                         </form>
                         END;
         }
