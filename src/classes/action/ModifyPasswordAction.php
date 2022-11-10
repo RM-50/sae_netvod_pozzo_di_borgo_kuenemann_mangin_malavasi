@@ -2,6 +2,9 @@
 
 namespace iutnc\netvod\action;
 
+use iutnc\netvod\auth\Auth;
+use iutnc\netvod\exceptions\AuthException;
+
 class ModifyPasswordAction extends Action
 {
 
@@ -13,6 +16,10 @@ class ModifyPasswordAction extends Action
                 if ($this->http_method === 'GET') {
                     $html = <<< END
                         <form id="modify-passwd" method="POST" action="?action=modify-passwd">
+                            <label for="old-passwd">Entrez votre ancien mot de passe</label>
+                            <input type="password" name="old-passwd">
+                            <br /><br />
+                            
                             <label for="passwd">Entrez votre nouveau mot de passe</label>
                             <input type="password" name="passwd">
                             <br /><br />
@@ -25,12 +32,19 @@ class ModifyPasswordAction extends Action
                         </form> 
                         END;
                 } elseif ($this->http_method === 'POST') {
-                    $passwd = filter_var($_POST['passwd'], FILTER_SANITIZE_STRING);
-                    $confirm_passwd = filter_var($_POST['confirm-passwd'], FILTER_SANITIZE_STRING);
-                    if ($passwd !== $confirm_passwd) {
-                        $html = 'Les mots de passes sont différents';
-                    } else {
-                        $html = $user->modifierMotDePasse($passwd);
+                    $old_passwd = filter_var($_POST['old-passwd'], FILTER_SANITIZE_STRING);
+                    try{
+                        Auth::authenticate($user->email, $old_passwd);
+                        $passwd = filter_var($_POST['passwd'], FILTER_SANITIZE_STRING);
+                        $confirm_passwd = filter_var($_POST['confirm-passwd'], FILTER_SANITIZE_STRING);
+                        if ($passwd !== $confirm_passwd) {
+                            $html = 'Les mots de passes sont différents';
+                        } else {
+                            $html = $user->modifierMotDePasse($passwd);
+                        }
+                    }catch (AuthException $e)
+                    {
+                        $html = $e->getMessage();
                     }
                 }
             }
