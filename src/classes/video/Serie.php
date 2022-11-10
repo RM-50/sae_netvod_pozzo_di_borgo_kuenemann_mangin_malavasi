@@ -33,7 +33,7 @@ class Serie
         $this->anneeSortie = 0;
         $this->dateAjout = "";
         $this->nbEpisodes = 0;
-        $this->note = new Note();
+       // $this->note = new Note();
     }
 
     public static function find(mixed $titre)
@@ -59,7 +59,15 @@ class Serie
         $stmt_serie->bindParam(1, $id);
         $stmt_serie->execute();
         $row_serie = $stmt_serie->fetch(\PDO::FETCH_ASSOC);
-        return $row_serie["note"];
+        if (!$row_serie)
+        {
+            $note = 0;
+        }
+        else
+        {
+            $note = floatval($row_serie["note"]);
+        }
+        return $note;
     }
 
 
