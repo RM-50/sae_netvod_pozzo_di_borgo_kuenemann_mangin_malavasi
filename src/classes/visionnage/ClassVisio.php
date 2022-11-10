@@ -40,7 +40,7 @@ class ClassVisio
             $liste_episodes = [];
             while ($row = $stmt2->fetch(\PDO::FETCH_ASSOC))
             {
-                $liste_episodes[] = new Episode($row['titre'], $row['file']);
+                $liste_episodes[] = new Episode($row['id'],$row['titre'], $row['file']);
             }
             $this->visiocours[] = new Serie($values["titre"], $liste_episodes);
         }
