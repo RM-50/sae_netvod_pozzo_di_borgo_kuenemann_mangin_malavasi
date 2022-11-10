@@ -97,7 +97,7 @@ class  DisplayCatalogueAction extends Action
                 try{
                     $stmt_serie = $this->requestSerie();
                     while ($row_serie = $stmt_serie->fetch(\PDO::FETCH_ASSOC)) {
-                        $id = 0;
+                        $id = $row_serie["id"];
                         $titre = $row_serie["titre"];
                         $html .= $this->getHtml($titre, $html,$id);
                     }

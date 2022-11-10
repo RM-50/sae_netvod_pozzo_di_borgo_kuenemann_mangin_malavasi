@@ -44,6 +44,17 @@ class User
         }
     }
 
+    public function getPrefs():array
+    {
+        $db = ConnectionFactory::makeConnection();
+        $stmt = $db->prepare("select id_serie from preferences");
+        $stmt->bindParam(1, $email);
+        $id = $this->id;
+        $stmt->bindParam(2, $id);
+        $stmt->execute();
+        $this->email = $email;
+    }
+
     public function modifierEmail(string $email) : string
     {
         if (!self::verifierEmail($email))

@@ -5,11 +5,15 @@ body {
 
 body a {
     text-decoration: underline;
-    /*background-image:url(image/image.png);*/
 }
 
-.menu {
-
+#menu {
+    border-bottom: 1px solid black;
+    margin-bottom: 100px;
+    text-align: left;
+    border-bottom: black 1px;
+    list-style-type: none;
+    padding-left: 0;
 }
 
 .element{
@@ -25,7 +29,9 @@ body a {
     size: 32pt;
 }
 
-
+div {
+    display: inline-block;
+}
 
 #amenu{
     color: black;

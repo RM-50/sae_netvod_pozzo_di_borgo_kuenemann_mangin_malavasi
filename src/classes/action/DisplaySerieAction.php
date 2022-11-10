@@ -49,8 +49,6 @@ class DisplaySerieAction extends Action
                     $pref = $user->pref;
                     $visio = $user->visio;
                     $html .= "<br>";
-
-
                     if (isset($_GET['favoris'])) {
                         if ($_GET['favoris'] == 3) {
                             if (!$pref->isPref($row_serie["id"])) {
