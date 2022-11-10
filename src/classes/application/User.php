@@ -78,6 +78,10 @@ class User
 
 
 
+    /**
+     * @return ClassVisio
+     */
+
     public function getVisio(): ClassVisio
     {
         return new CLassVisio(this->id);
