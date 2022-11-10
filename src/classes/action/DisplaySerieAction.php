@@ -46,6 +46,7 @@ class DisplaySerieAction extends Action
 
                     $user = unserialize($_SESSION["user_connected"]);
                     $pref = $user->pref;
+                    $visio = $user->visio;
                     $html .= "<br>";
                     if (isset($_GET['favoris'])) {
                         if ($_GET['favoris'] == 3) {
@@ -66,6 +67,38 @@ class DisplaySerieAction extends Action
                     } else {
                         $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=1'>Ajoutez aux favoris</a>";
                     }
+
+
+
+                    $html .= "<br>";
+                    $html .= "<br>";
+
+
+
+
+                    if (isset($_GET['EnCours'])) {
+                        if ($_GET['EnCours'] == 3) {
+                            if (!$visio->isVisio($row_serie["id"])) {
+                                $visio->delVisio($_GET['id']);
+                            }
+                            $html .= "<br><a href='?action=display-serie&id={$_GET['id']}&VIsionnage=1'>Ajoutez aux Visionnages</a>";
+                        } else if ($_GET['EnCours'] == 1) {
+                            if (!$visio->isVisio($row_serie["id"])) {
+                                $mail = $user->email;
+                                $idUser = Serie::getIdUser($mail);
+                                $visio->addVisio($idUser, $_GET['id'], $serie);
+                            }
+                            $html .= "<a href='?action=display-serie&id={$_GET['id']}&Visionnages=3'>Retirez des Visionnages</a>";
+                        } else if ($_GET['EnCours'] == 2) {
+                            $html .= "<a href='?action=display-serie&id={$_GET['id']}&Visionnages=3'>Retirez des Visionnages</a>";
+                        }
+                    } else {
+                        $html .= "<a href='?action=display-serie&id={$_GET['id']}&Visionnages=1'>Ajoutez aux Visionnages</a>";
+                    }
+                }
+
+
+
                 }
 
 
