@@ -25,6 +25,7 @@ class RegisterAction extends Action
                             <br /><br />
                             
                             <button type="submit">S'inscire</button>
+                            <button type="button" onclick="window.location.href='?action=forgot-password'">Mot de passe oublié</button>
                         </form>
                         END;
         }
@@ -41,7 +42,8 @@ class RegisterAction extends Action
                 if ($html === 'Inscription réussie')
                     {
                         Auth::authenticate($_POST['email'], $passwd);
-                        $token = Auth::creerToken();
+                        $user = unserialize($_SESSION['user_connected']);
+                        $token = Auth::creerToken('activation', $user->id);
                         $html .= "<br /> Veuillez maintenant activer votre compte <br /><br />";
                         $html .= "<button onclick=\"window.location.href='?action=activate-account&token=$token'\">Activer Compte</button>";
                     }

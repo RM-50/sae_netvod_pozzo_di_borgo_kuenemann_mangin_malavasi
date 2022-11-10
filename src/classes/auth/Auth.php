@@ -98,15 +98,14 @@ class Auth
      * @return string renvoie le token généré par la méthode bin2hex
      * @throws \Exception
      */
-    public static function creerToken(string $nom_token) : string
+    public static function creerToken(string $nom_token, int $id) : string
     {
         $token = bin2hex(random_bytes(64));
-        $user = unserialize($_SESSION['user_connected']);
         $db = ConnectionFactory::makeConnection();
         $expiration = date('Y-m-d H:i:s',time() + 60*10);
         $colonne_token = $nom_token.'_token';
         $colonne_expires = $nom_token.'_expires';
-        $stmt = $db->prepare("UPDATE user SET $colonne_token = '$token', $colonne_expires = str_to_date('$expiration', '%Y-%m-%d %H:%i:%s') WHERE id = $user->id");
+        $stmt = $db->prepare("UPDATE user SET $colonne_token = '$token', $colonne_expires = str_to_date('$expiration', '%Y-%m-%d %H:%i:%s') WHERE id = $id");
         $stmt->execute();
         return $token;
     }

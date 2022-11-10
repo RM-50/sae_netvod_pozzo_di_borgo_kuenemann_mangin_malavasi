@@ -82,8 +82,8 @@ class Dispatcher
         }
         else
         {
-            $inscription = '<li id="element"><a href="?action=register">S\'inscrire</a></li>';
-            $connection = '<li id="element"><a href="?action=signin">Se Connecter</a></li>';
+            $inscription = '<li class="element"><a href="?action=register">S\'inscrire</a></li>';
+            $connection = '<li class="element"><a href="?action=signin">Se Connecter</a></li>';
             $catalogue = '';
         }
         echo <<<END

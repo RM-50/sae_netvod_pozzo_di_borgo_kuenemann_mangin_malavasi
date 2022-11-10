@@ -43,24 +43,9 @@ class User
 
     public function modifierEmail(string $email) : string
     {
-        $db = ConnectionFactory::makeConnection();
-        $stmt = $db->prepare('SELECT email FROM user');
-        $stmt->execute();
-        $email_existant = false;
-        while($row = $stmt->fetch(\PDO::FETCH_ASSOC) and !$email_existant)
+        if (!self::verifierEmail($email))
         {
-            if ($email === $row['email'])
-            {
-                $email_existant = true;
-            }
-            else
-            {
-                $email_existant = false;
-            }
-        }
-
-        if (!$email_existant)
-        {
+            $db = ConnectionFactory::makeConnection();
             $stmt = $db->prepare("UPDATE user SET email = ? WHERE id = ?");
             $stmt->bindParam(1, $email);
             $id = $this->id;
@@ -97,5 +82,32 @@ class User
             $html = 'Changement de mot de passe réussi';
         }
         return $html;
+    }
+
+    public static function verifierEmail(string $email) : bool
+    {
+        $db = ConnectionFactory::makeConnection();
+        $stmt = $db->prepare('SELECT email FROM user');
+        $stmt->execute();
+        $email_existant = false;
+        while($row = $stmt->fetch(\PDO::FETCH_ASSOC) and !$email_existant)
+        {
+            if ($email === $row['email'])
+            {
+                $email_existant = true;
+            }
+            else
+            {
+                $email_existant = false;
+            }
+        }
+        return $email_existant;
+    }
+
+    public static function getID(string $email) : string
+    {
+        $db = ConnectionFactory::makeConnection();
+        $stmt = $db->prepare("SELECT id from user WHERE email = '$email'");
+        return '';
     }
 }
