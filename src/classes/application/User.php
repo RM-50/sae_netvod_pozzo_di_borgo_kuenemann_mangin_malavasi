@@ -6,6 +6,7 @@ use iutnc\netvod\auth\Auth;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\exceptions\InvalidPropertyNameException;
 use iutnc\netvod\preference\Preferences;
+use iutnc\netvod\video\Serie;
 use iutnc\netvod\visionnage\ClassVisio;
 
 class User
@@ -44,15 +45,9 @@ class User
         }
     }
 
-    public function getPrefs():array
+    public function getPrefs(): Preferences
     {
-        $db = ConnectionFactory::makeConnection();
-        $stmt = $db->prepare("select id_serie from preferences");
-        $stmt->bindParam(1, $email);
-        $id = $this->id;
-        $stmt->bindParam(2, $id);
-        $stmt->execute();
-        $this->email = $email;
+        return new Preferences($this->id);
     }
 
     public function modifierEmail(string $email) : string
