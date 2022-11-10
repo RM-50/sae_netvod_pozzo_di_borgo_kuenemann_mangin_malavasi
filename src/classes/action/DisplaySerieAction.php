@@ -81,54 +81,23 @@ class DisplaySerieAction extends Action
                         || filter_var($_GET['favoris'],FILTER_SANITIZE_STRING)) {
                         if (isset($_GET['favoris'])) {
                             if ($_GET['favoris'] == 3) {
-                                $favoris = "favoris=3";
                                 if ($pref->isPref($row_serie["id"])) {
                                     $pref->delPreference($_GET['id']);
                                 }
-                                $html .= "<br><a href='?action=display-serie&id={$_GET['id']}&favoris=1&$Visionnage'>Ajoutez aux favoris</a>";
+                                $html .= "<br><a href='?action=display-serie&id={$_GET['id']}&favoris=1'>Ajoutez aux favoris</a>";
                             } else if ($_GET['favoris'] == 1) {
-                                $favoris="favoris=1";
                                 if (!$pref->isPref($row_serie["id"])) {
                                     $mail = $user->email;
                                     $idUser = Serie::getIdUser($mail);
                                     $pref->addPreference($idUser, $_GET['id'], $serie);
                                 }
-                                $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=3&$Visionnage'>Retirez des favoris</a>";
+                                $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=3'>Retirez des favoris</a>";
                             } else if ($_GET['favoris'] == 2) {
-                                $favoris="favoris=2";
-                                $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=3&$Visionnage'>Retirez des favoris</a>";
+                                $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=3'>Retirez des favoris</a>";
                             }
                         }else {
-                            $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=1&$Visionnage'>Ajoutez aux favoris</a>";
+                            $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=1'>Ajoutez aux favoris</a>";
                         }
-                        $html .= "<br>";
-                        $html .= "<br>";
-                        //Ajout / Suppression des vidéos en cours de lecture
-                        if (isset($_GET['EnCours'])) {
-                            if ($_GET['EnCours'] == 3) {
-                                if (!$visio->isVideoEnCours($row_serie["id"])) {
-                                    $visio->delVideoEnCours($_GET['id']);
-                                }
-                                $html .= "<br><a href='?action=display-serie&id={$_GET['id']}&$favoris&VIsionnage=1'>Ajoutez aux Visionnages</a>";
-                            }
-
-                            else if ($_GET['EnCours'] == 1) {
-
-                                if (!$visio->isVideoEnCours($row_serie["id"])) {
-                                    $mail = $user->email;
-                                    $idUser = Serie::getIdUser($mail);
-                                    $visio->addVideoEnCours($idUser, $_GET['id'], $serie);
-                                }
-                                $html .= "<a href='?action=display-serie&id={$_GET['id']}&$favoris&Visionnages=3'>Retirez des Visionnages</a>";
-                            } else if ($_GET['EnCours'] == 2) {
-
-                                $html .= "<a href='?action=display-serie&id={$_GET['id']}&$favoris&Visionnages=3'>Retirez des Visionnages</a>";
-                            }
-
-                        }else {
-                            $html .= "<a href='?action=display-serie&id={$_GET['id']}&$favoris&Visionnages=1'>Ajoutez aux Visionnages</a>";
-                        }
-
                     }else {
                         $html = "<h3>Vous ne pouvez pas modifier directement l'id de la serie</h3>";
                     }
