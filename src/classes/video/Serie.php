@@ -4,18 +4,20 @@ namespace iutnc\netvod\video;
 
 use Exception;
 use iutnc\netvod\db\ConnectionFactory;
+use iutnc\netvod\exceptions\InvalidPropertyNameException;
+use iutnc\netvod\note\Note;
 
 class Serie
 {
-    // Attribut en public car impossible d'acceder au variable si elles sont protected
-    public string $titreSerie;
-    public string $genre;
-    public string $descriptif;
-    public int $anneeSortie;
-    public string $dateAjout;
-    public int $nbEpisodes;
-    public array $listeEpisode;
-    public mixed $publicVise;
+    protected string $titreSerie;
+    protected string $genre;
+    protected string $publicVise;
+    protected string $descriptif;
+    protected int $anneeSortie;
+    protected string $dateAjout;
+    protected int $nbEpisodes;
+    protected array $listeEpisode;
+    protected Note $note;
 
     /**
      * @param string $titre titre de la serie
@@ -31,26 +33,12 @@ class Serie
         $this->anneeSortie = 0;
         $this->dateAjout = "";
         $this->nbEpisodes = 0;
+       // $this->note = new Note();
     }
 
-    /**
-     * @param string $name
-     * @return mixed
-     * @throws Exception
-     */
-
-    public function __get(string $name): mixed
+    public static function find(mixed $titre)
     {
-        if (!property_exists($this, $name)) throw new Exception("$name: invalid property");
-        return $this->$name;
     }
-
-
-
-    /**
-     * @param string $mail
-     * @return int
-     */
 
     public static function getIdUser(string $mail):int
     {
@@ -62,13 +50,6 @@ class Serie
         $row_serie = $stmt_serie->fetch(\PDO::FETCH_ASSOC);
         return $row_serie["id"];
     }
-
-
-
-    /**
-     * @param int $id
-     * @return float
-     */
 
     public static function getNote(int $id):float
     {
@@ -87,6 +68,15 @@ class Serie
             $note = floatval($row_serie["note"]);
         }
         return $note;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function __get(string $name): mixed
+    {
+        if (!property_exists($this, $name)) throw new Exception("$name: invalid property");
+        return $this->$name;
     }
 
 }
