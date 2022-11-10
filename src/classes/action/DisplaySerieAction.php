@@ -75,7 +75,6 @@ class DisplaySerieAction extends Action
 
 
 
-
                     if (isset($_GET['EnCours'])) {
                         if ($_GET['EnCours'] == 3) {
                             if (!$visio->isVisio($row_serie["id"])) {
@@ -96,12 +95,6 @@ class DisplaySerieAction extends Action
                         $html .= "<a href='?action=display-serie&id={$_GET['id']}&Visionnages=1'>Ajoutez aux Visionnages</a>";
                     }
                 }
-
-
-
-                }
-
-
 
 
 
