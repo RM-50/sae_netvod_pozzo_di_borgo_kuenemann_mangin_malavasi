@@ -5,6 +5,7 @@
 namespace iutnc\netvod\action;
 
 
+use iutnc\netvod\application\User;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\render\EpisodeRenderer;
 use iutnc\netvod\render\SerieRenderer;
@@ -25,25 +26,23 @@ class DisplayEpisodeAction extends Action
 
     public function execute(): string
     {
-        $html = '';
-        $renderer = '';
         if (isset($_SESSION['user_connected'])) {
             $user = unserialize($_SESSION['user_connected']);
             $enCours = $user->getVisio();
-            $html .= "  <div><h1> <a> Notre catalogue : </a></h1></div>";
-            $sqlEpisode = "SELECT id, titre, resume, duree, file FROM episode where id = ?";
+            $sqlEpisode = "SELECT * FROM episode where id = ?";
 
             try {
                 $db = ConnectionFactory::makeConnection();
                 $stmt_episode = $db->prepare($sqlEpisode);
-                $stmt_episode->bindParam(1, $_GET['id']);
+                $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+                $stmt_episode->bindParam(1, $id);
                 $stmt_episode->execute();
                 $row = $stmt_episode->fetch(\PDO::FETCH_ASSOC);
 
                 $episode = new Episode($row['id'],$row['titre'], $row['file']);
                 $renderer = new EpisodeRenderer($episode);
 
-                $enCours->addVideoEnCours($episode,Episode::getIdUser($user->email),$row["id"]);
+                $enCours->addVideoEnCours($episode,User::getId($user->email),$row["id"]);
 
                 $html =  $renderer->render(2);
 
