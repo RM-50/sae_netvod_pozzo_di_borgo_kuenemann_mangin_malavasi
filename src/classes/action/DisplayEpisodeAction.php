@@ -23,7 +23,9 @@ class DisplayEpisodeAction extends Action
         $html = '';
         $renderer = '';
         if (isset($_SESSION['user_connected'])) {
-
+            $user = unserialize($_SESSION['user_connected']);
+            $enCours = $user->getVisio();
+            $html .= "  <div><h1> <a> Notre catalogue : </a></h1></div>";
             $sqlEpisode = "SELECT id, titre, resume, duree, file FROM episode where id = ?";
 
             try {
@@ -31,13 +33,15 @@ class DisplayEpisodeAction extends Action
                 $stmt_episode = $db->prepare($sqlEpisode);
                 $stmt_episode->bindParam(1, $_GET['id']);
                 $stmt_episode->execute();
+                $row = $stmt_episode->fetch(\PDO::FETCH_ASSOC);
 
-                while ($row = $stmt_episode->fetch(\PDO::FETCH_ASSOC)) {
-                    $episode = new Episode($row['id'],$row['titre'], $row['file']);
-                    $renderer = new EpisodeRenderer($episode);
-                }
+                $episode = new Episode($row['id'],$row['titre'], $row['file']);
+                $renderer = new EpisodeRenderer($episode);
+
+                $enCours->addVideoEnCours($episode,Episode::getIdUser($user->email),$row["id"]);
+
                 $html =  $renderer->render(2);
-                $id= $_GET['id'];
+
             } catch (PDOException $exception) {
                 echo $exception->getMessage();
             }

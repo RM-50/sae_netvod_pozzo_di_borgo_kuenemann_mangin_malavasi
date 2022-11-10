@@ -47,20 +47,21 @@ class ClassVisio
 
 
 /**
-     * @param $serie
+     * @param $episode
      * @return bool
      */
 
-    public function addVideoEnCours($serie):bool
+    public function addVideoEnCours(Episode $episode,int $idUser,int $idEpisode):bool
     {
-        if (!isset($this->series[$serie])) {
-            $this->visiocours[] = $serie;
+        if (!isset($this->visiocours[$idEpisode])) {
+            $this->visiocours[] = $episode;
             $db = ConnectionFactory::makeConnection();
             $sql = <<<END
-            insert into videoencours (nomSerie) values (?)
+            insert into videoencours (id_serie,id_user) values (?,?)
             END;
             $st = $db->prepare($sql);
-            $st->bindParam(1, $serie);
+            $st->bindParam(1, $idEpisode);
+            $st->bindParam(2, $idUser);
             $st->execute();
             return true;
         }
