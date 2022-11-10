@@ -12,9 +12,12 @@ class Preferences
 {
     protected array $series;
 
+
+
     /**
      * Constructor
      */
+
     public function __construct(int $id)
     {
         $db = ConnectionFactory::makeConnection();
@@ -39,12 +42,15 @@ class Preferences
         }
     }
 
+
+
     /**
      * @param int $idUser
      * @param int $idSerie
      * @param Serie $serie
      * @return bool
      */
+
     public function addPreference(int $idUser,int $idSerie,Serie $serie):bool
     {
         if (!isset($this->series[$idSerie])) {
@@ -62,10 +68,13 @@ class Preferences
         return false;
     }
 
+
+
     /**
      * @param int $id
      * @return bool
      */
+
     public function delPreference(int $id):bool
     {
         if (!isset($this->series[$id])) {
@@ -79,6 +88,13 @@ class Preferences
         }
         return false;
     }
+
+
+
+    /**
+     * @param int $id
+     * @return bool
+     */
 
     public function isPref(int $id):bool
     {
@@ -95,9 +111,12 @@ class Preferences
         return false;
     }
 
+
+
     /**
      * @throws Exception
      */
+
     public function __get(string $name): mixed
     {
         if (!property_exists($this, $name)) throw new Exception("$name: invalid property");

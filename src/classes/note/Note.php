@@ -11,6 +11,12 @@ class Note
     private int $note, $id_serie, $id_user;
     private string $commentaire;
 
+
+
+    /**
+     *
+     */
+
     public function __construct()
     {
         if (isset($_GET['id'])) {
@@ -39,6 +45,16 @@ class Note
         }
     }
 
+
+
+    /**
+     * @param string $commentaire
+     * @param int $note
+     * @param int $id_serie
+     * @param int $id_user
+     * @return void
+     */
+
     public static function insertionCommentaire(string $commentaire, int $note, int $id_serie, int $id_user)
     {
         $db = ConnectionFactory::makeConnection();
@@ -52,6 +68,12 @@ class Note
 
     }
 
+
+
+    /**
+     * @return bool
+     */
+
     public function avisVide():bool
     {
         if ($this->note == 0 && $this->commentaire == null)
@@ -63,6 +85,13 @@ class Note
             return false;
         }
     }
+
+
+
+    /**
+     * @param string $attribut
+     * @return mixed
+     */
 
     public function __get(string $attribut) : mixed
     {
