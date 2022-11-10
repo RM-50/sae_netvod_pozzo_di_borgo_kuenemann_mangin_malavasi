@@ -4,6 +4,8 @@ namespace iutnc\netvod\render;
 
 use iutnc\netvod\video\Episode;
 use iutnc\netvod\video\Serie;
+use iutnc\netvod\note\Note;
+use iutnc\netvod\action\DisplaySerieActionAction;
 
 class SerieRenderer implements Renderer
 {
@@ -24,6 +26,7 @@ class SerieRenderer implements Renderer
         $html = <<<EOF
             <div>
                 <p>Titre : {$this->serie->titreSerie}</p>
+                <p>Note moyenne : {$this->serie->getNote($_GET['id'])}</p>
                 <p>Genre : {$this->serie->genre}</p>
                 <p>Description : {$this->serie->publicVise}</p>
                 <p>Description : {$this->serie->descriptif}</p>
