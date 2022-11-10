@@ -79,6 +79,17 @@ class Serie
     }
 
 
+    public static function getIdSeries(string $id):int
+    {
+        $sql = "SELECT id_serie FROM episode WHERE id = ?";
+        $db = ConnectionFactory::makeConnection();
+        $stmt_serie = $db->prepare($sql);
+        $stmt_serie->bindParam(1, $id);
+        $stmt_serie->execute();
+        $row_serie = $stmt_serie->fetch(\PDO::FETCH_ASSOC);
+        return $row_serie["id_serie"];
+    }
+
     /**
      * @param int $id
      * @return float

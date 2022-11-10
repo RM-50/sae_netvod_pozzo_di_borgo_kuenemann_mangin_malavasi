@@ -23,13 +23,16 @@ class CommentaireAction
         if (!isset($_SESSION['user_connected'])) {
             $html = " Vous n'êtes pas connecté";
 
-        } else {
+        }
+        else
+        {
             $user = unserialize($_SESSION['user_connected']);
             if ($user->active === 1)
             {
                 if (!isset($_GET['id'])) {
-                    $html = "Vous n'avez pas sélectionné de série";
-                } else
+                    $html = "Vous n'avez pas sélectionné de série'";
+                }
+                else
                 {
                     $id = $_GET['id'];
                     $commentaires = Commentaire::GetCommentaire($id);
@@ -41,7 +44,8 @@ class CommentaireAction
                     }
                     $html .=  "<button onclick=\"window.location.href='index.php?action=display-serie&id=$id'\">Retourner à la série</button>";
                 }
-            } else
+            }
+            else
             {
                 $html = "Le compte doit être activé pour pouvoir commenter";
             }
