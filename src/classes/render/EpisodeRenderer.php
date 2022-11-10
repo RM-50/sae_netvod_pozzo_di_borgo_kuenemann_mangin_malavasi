@@ -22,9 +22,9 @@ class EpisodeRenderer implements Renderer
 
     protected function long() : string
     {
-        $content = '<p class="ep">'.$this->episode->titre. " | ";
-        $content .= " | Duree: " .$this->episode->duree;
-        $content .= " | resume: " .$this->episode->resume;
+        $content = '<p class="ep">'. $this->episode->filename. " | ";
+        $content .= " | Duree: " . $this->episode->titre;
+        $content .= " | resume: " . $this->episode->resume;
         $content .= '</p>';
         return $content;
     }

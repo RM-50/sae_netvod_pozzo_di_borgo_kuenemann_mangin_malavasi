@@ -16,7 +16,12 @@ class SerieRenderer implements Renderer
 
     protected function short(): string
     {
-        return $this->serie->titreSerie;
+        $html = <<<EOF
+                    <p> <img src="../../rsrc/minSerie/carSerie.png"> {$this->serie->titreSerie}
+                    </p>
+                    EOF;
+
+        return $html;
     }
 
     protected function long()
