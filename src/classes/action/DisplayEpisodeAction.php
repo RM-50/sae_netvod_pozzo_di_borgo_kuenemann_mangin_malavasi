@@ -43,7 +43,7 @@ class DisplayEpisodeAction extends Action
                 $episode = new Episode($row['id'],$row['titre'], $row['file']);
                 $renderer = new EpisodeRenderer($episode);
 
-                $enCours->addVideoEnCours($episode,User::getId($user->email),$row["id"]);
+                $enCours->addVideoEnCours($episode,User::getId($user->email),$row["serie_id"]);
 
                 $html =  $renderer->render(2);
 
