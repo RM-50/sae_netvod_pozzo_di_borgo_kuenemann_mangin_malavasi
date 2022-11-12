@@ -111,7 +111,7 @@ class  DisplayCatalogueAction extends Action
 
     public function afficherCatalogue(array $idSeries=[]):string
     {
-        $html = "<div><h1> <a> Notre catalogue : </a></h1></div> <br>";
+        $html = "<div><h1> Notre catalogue : </h1></div> <br>";
         if ($idSeries == []) {
                 try{
                     $stmt_serie = $this->requestSerie();

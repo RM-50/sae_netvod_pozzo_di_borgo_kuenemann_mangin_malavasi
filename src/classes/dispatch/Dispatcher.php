@@ -138,8 +138,8 @@ class Dispatcher
                 </head>
                 <body>
                     <nav class="menu">
-                        <ul>
-                            <li class="element"><img src="rsrc/logo.png"></li>
+                        <div><img src="rsrc/logo.png"></div>
+                        <ul class="navList">
                             <li class="element"><a href="index.php">Accueil</a></li>
                             $inscription
                             $connection

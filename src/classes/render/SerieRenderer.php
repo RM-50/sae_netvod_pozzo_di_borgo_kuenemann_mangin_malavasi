@@ -58,13 +58,13 @@ class SerieRenderer implements Renderer
                 <p> Titre : {$this->serie->titreSerie} </br> {$this->serie->getNote($_GET['id'])} </br> <button onclick="window.location.href='index.php?action=display-commentaire&id=$id'">Afficher les commentaires</button> </br> {$this->serie->genre}  {$this->serie->publicVise} {$this->serie->descriptif} {$this->serie->anneeSortie}
                  {$this->serie->dateAjout} {$this->serie->nbEpisodes}
                 </p>
-                <form id="serie" method="post">
+                <form id="serieF" method="post">
                
         EOF;
         foreach ($this->serie->listeEpisode as $value) {
             $render = new EpisodeRenderer($value);
             $current = $render->render(1);
-            $html .= "<button id='serie' style='width: 300px' formaction='index.php?action=display-episode&id={$value->id}'> $current </button> </br>";
+            $html .= "<button class='serie'' formaction='index.php?action=display-episode&id={$value->id}'> $current </button> </br>";
         }
         $html .= " </form> </div>";
         return $html;
