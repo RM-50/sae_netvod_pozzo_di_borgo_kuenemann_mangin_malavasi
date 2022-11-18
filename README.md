@@ -168,6 +168,8 @@ then you can select or enter a mark between 1 and 5.<br>
 To write a comment, click in the text box, then write your comment.<br>
 Finally, you can submit your mark and your comment.<br><br>
 
+![Accueil_Deconnecte](https://github.com/RM-50/sae_netvod_pozzo_di_borgo_kuenemann_mangin_malavasi/blob/main/Images/imageSer1.jpg?raw=true)<br><br><br>
+
 
 Continue Watching :
 
