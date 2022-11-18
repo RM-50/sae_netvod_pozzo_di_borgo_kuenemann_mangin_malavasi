@@ -41,10 +41,10 @@ If you don’t remind your password you can click on the “forgot password” b
 - Then you can connect to your account with your new password
 
 
+![Accueil_Deconnecte](https://github.com/RM-50/sae_netvod_pozzo_di_borgo_kuenemann_mangin_malavasi/blob/main/Images/imagedebut3.jpg?raw=true)<br><br><br>
+![Accueil_Deconnecte](https://github.com/RM-50/sae_netvod_pozzo_di_borgo_kuenemann_mangin_malavasi/blob/main/Images/imagedebut4.jpg?raw=true)<br><br><br>
 
 
-
-<br><br><br><br>
 
 ## ***Presentation of the home page***<br><br><br><br>
 
