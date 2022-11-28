@@ -40,11 +40,7 @@ If you don’t remind your password you can click on the “forgot password” b
 - Click on the submit button “submit”
 - Then you can connect to your account with your new password
 
-
-![Accueil_Deconnecte](https://github.com/RM-50/sae_netvod_pozzo_di_borgo_kuenemann_mangin_malavasi/blob/main/Images/imagedebut3.jpg?raw=true)<br><br><br>
-![Accueil_Deconnecte](https://github.com/RM-50/sae_netvod_pozzo_di_borgo_kuenemann_mangin_malavasi/blob/main/Images/imagedebut4.jpg?raw=true)<br><br><br>
-
-
+<br><br><br>
 
 
 ## ***Presentation of the home page***<br><br><br><br>
@@ -60,7 +56,7 @@ If you don’t remind your password you can click on the “forgot password” b
 2) The message "welcome" appears in the middle of the page. <br><br>
 
 
-![Accueil_Deconnecte](https://github.com/RM-50/sae_netvod_pozzo_di_borgo_kuenemann_mangin_malavasi/blob/main/Images/Accueil_Deconnecte.png?raw=true)<br><br><br>
+<br><br><br>
 
 
 #### The second page is when you are connected:<br><br>
@@ -78,7 +74,7 @@ If you don’t remind your password you can click on the “forgot password” b
 4) there is a message appears in the middle of the page.<br><br>
 
 
-![Accueil_Connecte](https://github.com/RM-50/sae_netvod_pozzo_di_borgo_kuenemann_mangin_malavasi/blob/main/Images/Accueil_Connecte.png?raw=true)<br><br><br>
+<br><br><br>
 
 
 #### How to change your email:<br><br>
@@ -87,7 +83,7 @@ To change your email, click on the corresponding link. Once the new page is open
 To return to the home page, press the “home” button at the top of the page.<br><br>
 
 
-![New_Email](https://github.com/RM-50/sae_netvod_pozzo_di_borgo_kuenemann_mangin_malavasi/blob/main/Images/New_Email.png?raw=true)<br><br><br>
+<br><br><br>
 
 
 #### How to change your password:<br><br>
@@ -96,7 +92,7 @@ To change your password, click on the corresponding link. Once the new page is o
 To return to the home page, press the “home” button at the top of the page.
 
 
-![New_MDP](https://github.com/RM-50/sae_netvod_pozzo_di_borgo_kuenemann_mangin_malavasi/blob/main/Images/New_MDP.png?raw=true)<br><br><br>
+<br><br><br>
 
 
 
@@ -120,8 +116,7 @@ To return to the home page, press the “home” button at the top of the page.
 - Back to your home page to enjoy your favorites<br><br>
 
 
-![Accueil_Deconnecte](https://github.com/RM-50/sae_netvod_pozzo_di_borgo_kuenemann_mangin_malavasi/blob/main/Images/imageSer1.jpg?raw=true)<br><br><br>
-![Accueil_Deconnecte](https://github.com/RM-50/sae_netvod_pozzo_di_borgo_kuenemann_mangin_malavasi/blob/main/Images/imageSer2.jpg?raw=true)<br><br><br>
+<br><br><br>
 
 
 #### Viewing in progress :<br>
@@ -136,8 +131,8 @@ To return to the home page, press the “home” button at the top of the page.
 #### Sorting :<br>
 
 
-![Accueil_Deconnecte](https://github.com/RM-50/sae_netvod_pozzo_di_borgo_kuenemann_mangin_malavasi/blob/main/Images/imageSer3.jpg?raw=true)<br><br><br>
-![Accueil_Deconnecte](https://github.com/RM-50/sae_netvod_pozzo_di_borgo_kuenemann_mangin_malavasi/blob/main/Images/imageSer4.jpg?raw=true)<br><br><br>
+<br><br><br>
+
 
 
 #### On the page "our catalogue" :<br><br>
@@ -155,8 +150,7 @@ To return to the home page, press the “home” button at the top of the page.
 
 
 
-![Accueil_Deconnecte](https://github.com/RM-50/sae_netvod_pozzo_di_borgo_kuenemann_mangin_malavasi/blob/main/Images/imageSer5.jpg?raw=true)<br><br><br>
-![Accueil_Deconnecte](https://github.com/RM-50/sae_netvod_pozzo_di_borgo_kuenemann_mangin_malavasi/blob/main/Images/imageSer6.jpg?raw=true)<br><br><br>
+<br><br><br>
 
 
 
@@ -168,7 +162,7 @@ then you can select or enter a mark between 1 and 5.<br>
 To write a comment, click in the text box, then write your comment.<br>
 Finally, you can submit your mark and your comment.<br><br>
 
-![Accueil_Deconnecte](https://github.com/RM-50/sae_netvod_pozzo_di_borgo_kuenemann_mangin_malavasi/blob/main/Images/Notes.png?raw=true)<br><br><br>
+<br><br><br>
 
 
 Continue Watching :
