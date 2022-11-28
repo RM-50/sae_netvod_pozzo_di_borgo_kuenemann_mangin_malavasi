@@ -5,6 +5,7 @@
 namespace iutnc\netvod\auth;
 
 
+use Exception;
 use iutnc\netvod\application\User;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\exceptions\AuthException;
@@ -112,7 +113,7 @@ class Auth
     /**
      * @param string $nom_token nom du token a creer
      * @return string renvoie le token généré par la méthode bin2hex
-     * @throws \Exception
+     * @throws Exception
      */
 
     public static function creerToken(string $nom_token, int $id) : string

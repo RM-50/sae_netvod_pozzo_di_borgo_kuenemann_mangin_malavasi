@@ -6,6 +6,7 @@ namespace iutnc\netvod\note;
 
 
 use iutnc\netvod\db\ConnectionFactory;
+use iutnc\netvod\exceptions\InvalidPropertyNameException;
 use PDO;
 
 
@@ -21,7 +22,6 @@ class Note
     /**
      *
      */
-
     public function __construct()
     {
         if (isset($_GET['id'])) {
@@ -59,8 +59,7 @@ class Note
      * @param int $id_user
      * @return void
      */
-
-    public static function insertionCommentaire(string $commentaire, int $note, int $id_serie, int $id_user)
+    public static function insertionCommentaire(string $commentaire, int $note, int $id_serie, int $id_user): void
     {
         $db = ConnectionFactory::makeConnection();
         $sql = "INSERT INTO avis (id_serie, id_user, note, commentaire) VALUES (?, ?, ?, ?)";
@@ -85,19 +84,15 @@ class Note
         {
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
-
 
 
     /**
      * @param string $attribut
      * @return mixed
+     * @throws InvalidPropertyNameException
      */
-
     public function __get(string $attribut) : mixed
     {
         if (property_exists($this, $attribut))

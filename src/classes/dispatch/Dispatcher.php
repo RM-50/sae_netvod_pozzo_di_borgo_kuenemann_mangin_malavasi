@@ -6,7 +6,6 @@ namespace iutnc\netvod\dispatch;
 
 
 use iutnc\netvod\action\ActivateAccountAction;
-use iutnc\netvod\action\AddPreferencesAction;
 use iutnc\netvod\action\AccueilAction;
 use iutnc\netvod\action\CommentaireAction;
 use iutnc\netvod\action\DisplayEpisodeAction;
@@ -14,7 +13,6 @@ use iutnc\netvod\action\NoteAction;
 use iutnc\netvod\action\DisplayCatalogueAction;
 use iutnc\netvod\action\DisplaySerieAction;
 use iutnc\netvod\action\ForgotPasswordAction;
-use iutnc\netvod\action\ListePreferencesAction;
 use iutnc\netvod\action\ModifyEmailAction;
 use iutnc\netvod\action\ModifyPasswordAction;
 use iutnc\netvod\action\RegisterAction;
@@ -54,56 +52,47 @@ class Dispatcher
         {
             case 'register':
                 $action = new RegisterAction();
-                $html = $action->execute();
                 break;
             case 'signin':
                 $action = new SigninAction();
-                $html = $action->execute();
                 break;
             case'note':
                 $action = new NoteAction();
-                $html = $action->execute();
                 break;
             case 'signout':
                 $action = new Signout();
-                $html = $action->execute();
                 break;
             case 'modify-email':
                 $action = new ModifyEmailAction();
-                $html = $action->execute();
                 break;
             case 'modify-passwd':
                 $action = new ModifyPasswordAction();
-                $html = $action->execute();
                 break;
             case 'display-catalogue':
                 $action = new DisplayCatalogueAction();
-                $html = $action->execute();
                 break;
             case 'display-serie':
                 $action = new DisplaySerieAction();
-                $html = $action->execute();
                 break;
             case 'activate-account':
                 $action = new ActivateAccountAction();
-                $html = $action->execute();
                 break;
             case 'display-episode':
                 $action = new DisplayEpisodeAction();
-                $html = $action->execute();
                 break;
             case 'forgot-passwd':
                 $action = new ForgotPasswordAction();
-                $html = $action->execute();
                 break;
             case 'display-commentaire':
                 $action = new CommentaireAction();
-                $html = $action->execute();
+                break;
+            case 'profile':
+                $action = new ProfileAction();
                 break;
             default:
                 $action = new AccueilAction();
-                $html = $action->execute();
         }
+        $html = $action->execute();
         $this->renderPage($html);
     }
 
@@ -134,22 +123,26 @@ class Dispatcher
                 <head>
                     <title>NetVOD</title>
                     <meta charset="UTF-8"> 
-                    <link rel="stylesheet" href="netvod.css">  
+                    <link rel="stylesheet" href="netvod.css"> 
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"/>
                 </head>
+                <header>
+                    <div class="menuPrincipal">
+                        <nav class="menu">
+                                <div> <a href="index.php"> <img src="rsrc/logo.png" alt="NETVOD"> </a> </div>
+                                <ul class="navList">
+                                    <li class="element"><a href="index.php">Accueil</a></li>
+                                    $inscription
+                                    $connection
+                                    $catalogue   
+                                </ul>
+                        </nav>
+                    </div>
+                </header>
                 <body>
-                    <nav class="menu">
-                        <div><img src="rsrc/logo.png"></div>
-                        <ul class="navList">
-                            <li class="element"><a href="index.php">Accueil</a></li>
-                            $inscription
-                            $connection
-                            $catalogue   
-                        </ul>
-                    </nav>
                     <div class="content">
                         $html
                     </div>
-                    
                 </body>
             
             </html>

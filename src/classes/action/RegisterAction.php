@@ -24,21 +24,33 @@ class RegisterAction extends Action
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET'){
             $html = <<<END
-                        <form id="creer_user" method="POST" action="?action=register">
-                            <label for="email">Email</label>
-                            <input type="email" name="email">
-                            <br /><br />
-                            
-                            <label for="passwd">Mot de passe</label>
-                            <input type="password" name="passwd">
-                            <br /><br />
-                           
-                            <label for="passwd_confirm">Confirmer mot de passe</label>
-                            <input type="password" name="passwd_confirm">
-                            <br /><br />
-                            
-                            <button type="submit">S'inscire</button>
-                        </form>
+                        <div class="form-group">
+                            <div class="title">
+                                <label for="register">S'inscrire</label>
+                            </div>
+                            <form id="creer_user" method="POST" action="?action=register">
+                                <div class="form-item">
+                                    <span class="form-item-icon material-symbols-rounded">email</span>
+                                    <input type="email" name="email" placeholder="Entrez un email">
+                                </div>
+                                <br>
+                                <div class="double-form-item">
+                                    <div class="double-form-sous-item">
+                                        <span class="form-item-icon material-symbols-rounded">lock</span>
+                                        <input type="password" name="passwd" placeholder="Entrez un mot de passe">
+                                    </div>
+                                    <div class="double-form-sous-item">
+                                        <span class="form-item-icon material-symbols-rounded">lock</span>
+                                        <input type="password" name="passwd_confirm" placeholder="Confirmez votre mot de passe">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-item-other">
+                                    <label for="signin"> <a href="SigninAction.php">Vous avez déjà un compte ?</a></label>
+                                    <button type="submit">S'inscire</button>
+                                </div>
+                            </form>
+                        </div>
                         END;
         }
         elseif ($_SERVER['REQUEST_METHOD'] === 'POST'){

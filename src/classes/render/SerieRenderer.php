@@ -35,27 +35,48 @@ class SerieRenderer implements Renderer
 
     protected function short(): string
     {
-        $html = <<<EOF
-                    <p> 
-                        {$this->serie->titreSerie}
-                    </p>
-                    EOF;
-
-        return $html;
+        return "<p>{$this->serie->titreSerie}</p>";
     }
 
 
+    protected function shortWithImage():string
+    {
+        $content = "<div class='serieRenderer'>";
+        $content .= "<h2>{$this->serie->titreSerie}</h2>";
+        foreach ($this->serie->listeEpisode as $value) {
+            $render = new EpisodeRenderer($value);
+            $current = $render->render(3);
+            $content .= "<a href='index.php?action=display-episode&id={$value->id}'>{$current}</a>";
+        }
+        return $content."</div>";
+    }
+
+    protected function shortWithImageForCatalogue(): string
+    {
+        $content = "<div class='serieRender'><p>{$this->serie->titreSerie}</p>";
+        for ($i = 0; $i < 1; $i++) {
+            $render = new EpisodeRenderer($this->serie->listeEpisode[$i]);
+            $current = $render->render(4);
+            $content .= "$current";
+        }
+        return $content."</div>";
+    }
 
     /**
      * @return string
      */
-
-    protected function long()
+    protected function long(): string
     {
         $id= $_GET['id'];
+        $note = $this->serie->getNote($_GET['id']);
+        $strNote = $note ? 0 : "Serie non notée";
+        if ($note != 0) {
+            $strNote = "La serie est notée à " . $strNote;
+        }
         $html = <<<EOF
-            <div xmlns="http://www.w3.org/1999/html">
-                <p> Titre : {$this->serie->titreSerie} </br> {$this->serie->getNote($_GET['id'])} </br> <button onclick="window.location.href='index.php?action=display-commentaire&id=$id'">Afficher les commentaires</button> </br> {$this->serie->genre}  {$this->serie->publicVise} {$this->serie->descriptif} {$this->serie->anneeSortie}
+            <div>
+                <h2>{$this->serie->titreSerie}</h2>
+                <p> $strNote </p> </br> <button onclick="window.location.href='index.php?action=display-commentaire&id=$id'">Afficher les commentaires</button> </br> <p> {$this->serie->genre}  {$this->serie->publicVise} {$this->serie->descriptif} {$this->serie->anneeSortie}
                  {$this->serie->dateAjout} {$this->serie->nbEpisodes}
                 </p>
                 <form id="serieF" method="post">
@@ -63,7 +84,7 @@ class SerieRenderer implements Renderer
         EOF;
         foreach ($this->serie->listeEpisode as $value) {
             $render = new EpisodeRenderer($value);
-            $current = $render->render(1);
+            $current = $render->render(2);
             $html .= "<button class='serie'' formaction='index.php?action=display-episode&id={$value->id}'> $current </button> </br>";
         }
         $html .= " </form> </div>";
@@ -79,6 +100,12 @@ class SerieRenderer implements Renderer
 
     public function render(int $selector) : string
     {
-        return $this->rendered = ($selector == Renderer::LONG) ? $this->long(): $this->short();
+        return match ($selector) {
+            self::COMPACT => $this->short(),
+            self::LONG => $this->long(),
+            self::COMPACTWITHIMG => $this->shortWithImage(),
+            self::COMPACTWITHIMGFORCATALOGUE, => $this->shortWithImageForCatalogue(),
+            default => "Erreur de rendu",
+        };
     }
 }

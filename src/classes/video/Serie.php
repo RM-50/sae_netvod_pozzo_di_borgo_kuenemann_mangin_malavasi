@@ -9,15 +9,14 @@ use iutnc\netvod\note\Note;
 
 class Serie
 {
-    // Attribut en public car impossible d'acceder au variable si elles sont protected
-    public string $titreSerie;
-    public string $genre;
-    public string $descriptif;
-    public int $anneeSortie;
-    public string $dateAjout;
-    public int $nbEpisodes;
-    public array $listeEpisode;
-    public mixed $publicVise;
+    protected string $titreSerie;
+    protected string $genre;
+    protected string $descriptif;
+    protected int $anneeSortie;
+    protected string $dateAjout;
+    protected int $nbEpisodes;
+    protected array $listeEpisode;
+    protected mixed $publicVise;
 
     /**
      * @param string $titre titre de la serie
@@ -48,17 +47,23 @@ class Serie
     }
 
 
-
+    /**
+     * @throws Exception
+     */
     public static function getIdSerie(string $titre):int
     {
-        $sql = "select id from serie where titre = ?";
+        $titreR = str_replace("<p>","",$titre);
+        $titreR = str_replace("</p>","",$titreR);
+        $sql = "select id from serie where titre like ?";
         $db = ConnectionFactory::makeConnection();
         $stmt_serie = $db->prepare($sql);
-        $stmt_serie->bindParam(1, $titre);
+        $stmt_serie->bindParam(1, $titreR);
         $stmt_serie->execute();
         $row_serie = $stmt_serie->fetch(\PDO::FETCH_ASSOC);
-        echo $row_serie["id"];
-        return 1;
+        if ($row_serie === false) {
+            throw new Exception("Serie $titreR not found");
+        }
+        return $row_serie["id"];
     }
 
 
@@ -66,7 +71,6 @@ class Serie
      * @param int $id
      * @return float
      */
-
     public static function getNote(int $id):float
     {
         $sql = "SELECT round(avg(note),1) as note FROM avis where id_serie = ?";

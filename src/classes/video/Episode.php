@@ -22,12 +22,11 @@ class Episode
     protected int $id;
 
 
-
     /**
+     * @param int $id
      * @param string $titre
      * @param string $filename
      */
-
     public function __construct(int $id, string $titre, string $filename)
     {
         $this->titre = $titre;
@@ -37,6 +36,25 @@ class Episode
         $this->id = $id;
     }
 
+    public static function getEpisode(int $id):mixed
+    {
+        $db = ConnectionFactory::makeConnection();
+        $sqlEpisode = "SELECT * FROM episode where id = ?";
+        $stmt_episode = $db->prepare($sqlEpisode);
+        $stmt_episode->bindParam(1, $id);
+        $stmt_episode->execute();
+        return $stmt_episode->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public static function getSerieEpisode(int $id):string
+    {
+        $db = ConnectionFactory::makeConnection();
+        $sqlEpisode = "SELECT titre FROM serie where id = ?";
+        $stmt_episode = $db->prepare($sqlEpisode);
+        $stmt_episode->bindParam(1, $id);
+        $stmt_episode->execute();
+        return $stmt_episode->fetch(\PDO::FETCH_ASSOC)['titre'];
+    }
 
 
     /**

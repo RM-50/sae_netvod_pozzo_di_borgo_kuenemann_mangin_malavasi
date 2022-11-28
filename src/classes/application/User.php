@@ -12,7 +12,7 @@ use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\exceptions\InvalidPropertyNameException;
 use iutnc\netvod\preference\Preferences;
 use iutnc\netvod\video\Serie;
-use iutnc\netvod\visionnage\ClassVisio;
+use iutnc\netvod\visionnage\VisioEnCours;
 
 
 
@@ -20,10 +20,6 @@ class User
 {
     private string $email, $passwd;
     private int $role, $id, $active = 0;
-    private Preferences $pref;
-    private ClassVisio $visio;
-
-
 
     /**
      * @param int $id
@@ -31,15 +27,12 @@ class User
      * @param string $passwd
      * @param int $role
      */
-
     public function __construct(int $id, string $email, string $passwd, int $role)
     {
         $this->id = $id;
         $this->email = $email;
         $this->passwd = $passwd;
         $this->role = $role;
-        $this->pref = new Preferences($id);
-        $this->visio = new ClassVisio($id);
     }
 
 
@@ -86,12 +79,12 @@ class User
 
 
     /**
-     * @return ClassVisio
+     * @return VisioEnCours
      */
 
-    public function getVisio(): ClassVisio
+    public function getVisio(): VisioEnCours
     {
-        return new CLassVisio($this->id);
+        return new VisioEnCours($this->id);
     }
 
 

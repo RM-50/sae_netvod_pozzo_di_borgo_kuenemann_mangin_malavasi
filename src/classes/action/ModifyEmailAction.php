@@ -28,21 +28,33 @@ class ModifyEmailAction extends Action
             if ($user->active === 1) {
                 if ($this->http_method === 'GET') {
                     $html = <<< END
-                        <form id="modify-mail" method="POST" action="?action=modify-email">
-                            <label for="email">Entrez votre nouvel email</label>
-                            <input type="email" name="email">
-                            <br /><br />
-                            
-                            <label for="confirm-email">Confirmez votre nouvel email</label>
-                            <input type="email" name="confirm-email">
-                            <br /><br />
-                            
-                            <label for="passwd">Entrez votre mot de passe</label>
-                            <input type="password" name="passwd">
-                            <br /><br />
-                            
-                            <button type="submit">Valider</button>
-                        </form> 
+                        <div class="form-group">
+                            <div class="title">
+                                <label for="modify-mail">Modifier mon email</label>
+                            </div>
+                            <form id="modify-mail" method="POST" action="?action=modify-email">
+                                <div class="double-form-item">
+                                    <div class="double-form-sous-item">
+                                        <span class="form-item-icon material-symbols-rounded">email</span>
+                                        <input type="email" name="email" placeholder="Nouvel email">
+                                    </div>
+                                    <br />
+                                    <div class="double-form-sous-item">
+                                        <span class="form-item-icon material-symbols-rounded">email</span>   
+                                        <input type="email" name="confirm-email" placeholder="Confirmez email">
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-item">
+                                    <span class="form-item-icon material-symbols-rounded">lock</span>
+                                    <input type="password" name="passwd" placeholder="Entrez votre mot de passe">
+                                </div>
+                                <br />
+                                <div class="form-item-other">
+                                    <button type="submit">Valider</button>
+                                </div>
+                            </form>
+                        </div>
                         END;
                 } elseif ($this->http_method === 'POST') {
                     $passwd = filter_var($_POST['passwd'], FILTER_SANITIZE_STRING);

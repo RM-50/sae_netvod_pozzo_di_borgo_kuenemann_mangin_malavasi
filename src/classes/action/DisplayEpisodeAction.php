@@ -11,6 +11,7 @@ use iutnc\netvod\render\EpisodeRenderer;
 use iutnc\netvod\render\SerieRenderer;
 use iutnc\netvod\video\Episode;
 use iutnc\netvod\video\Serie;
+use iutnc\netvod\visionnage\VisioEnCours;
 use PDOException;
 
 
@@ -18,35 +19,24 @@ use PDOException;
 class DisplayEpisodeAction extends Action
 {
 
-
-
     /**
      * @return string
      */
-
     public function execute(): string
     {
         $html = '';
         if (isset($_SESSION['user_connected'])) {
             $user = unserialize($_SESSION['user_connected']);
-            $enCours = $user->getVisio();
-            $sqlEpisode = "SELECT * FROM episode where id = ?";
-
             try {
-                $db = ConnectionFactory::makeConnection();
-                $stmt_episode = $db->prepare($sqlEpisode);
                 $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
-                $stmt_episode->bindParam(1, $id);
-                $stmt_episode->execute();
-                $row = $stmt_episode->fetch(\PDO::FETCH_ASSOC);
+
+                $row = Episode::getEpisode($id);
 
                 $episode = new Episode($row['id'],$row['titre'], $row['file']);
                 $renderer = new EpisodeRenderer($episode);
+                $html =  $renderer->render(1);
 
-                $enCours->addVideoEnCours($episode,User::getId($user->email),$row["serie_id"]);
-
-                $html =  $renderer->render(2);
-
+                VisioEnCours::addVideoEnCours(User::getId($user->email),$row['id']);
             } catch (PDOException $exception) {
                 echo $exception->getMessage();
             }

@@ -21,17 +21,19 @@ class TriMotCle
 
     public static function tri(string $mot):array
     {
+        if ($mot === '' || $mot === " ") return [];
         $sql = "select titre,descriptif,id from serie";
         $db = ConnectionFactory::makeConnection();
         $stmt_serie = $db->prepare($sql);
         $stmt_serie->execute();
         $serieWithMot = [];
-        $i = 0;
+        $mot = strtolower($mot);
         while ($value = $stmt_serie->fetch(\PDO::FETCH_ASSOC)) {
-            if (str_contains($value["titre"], $mot) || str_contains($value["descriptif"], $mot)) {
-                $serieWithMot[$i] = $value["id"];
+            $titre = strtolower($value['titre']);
+            $descriptif = strtolower($value['descriptif']);
+            if (str_contains($titre, $mot) || str_contains($descriptif, $mot)) {
+                $serieWithMot[] = $value["id"];
             }
-            $i++;
         }
         return $serieWithMot;
     }

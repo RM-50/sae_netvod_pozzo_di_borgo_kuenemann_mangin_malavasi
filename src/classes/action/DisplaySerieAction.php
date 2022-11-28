@@ -7,6 +7,7 @@ namespace iutnc\netvod\action;
 
 use iutnc\netvod\application\User;
 use iutnc\netvod\db\ConnectionFactory;
+use iutnc\netvod\preference\Preferences;
 use iutnc\netvod\render\Renderer;
 use iutnc\netvod\render\SerieRenderer;
 use iutnc\netvod\video\Episode;
@@ -71,38 +72,25 @@ class DisplaySerieAction extends Action
                      * */
                     $renderer = new SerieRenderer($serie);
 
-                    $html = $renderer->render(2);
-
-
-                    $user = unserialize($_SESSION["user_connected"]);
-                    $pref = $user->pref;
-                    $visio = $user->visio;
+                    $html = $renderer->render(3);
                     $html .= "<br>";
-
-                    $favoris = "";
-                    $Visionnage="";
-
                     // Ajout/Suppression des favoris
                     if (filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT)
                         || filter_var($_GET['favoris'],FILTER_SANITIZE_STRING)) {
                         if (isset($_GET['favoris'])) {
-                            if ($_GET['favoris'] == 3) {
-                                if ($pref->isPref($row_serie["id"])) {
-                                    $pref->delPreference($_GET['id']);
-                                }
-                                $html .= "<br><a href='?action=display-serie&id={$_GET['id']}&favoris=1'>Ajoutez aux favoris</a>";
-                            } else if ($_GET['favoris'] == 1) {
-                                if (!$pref->isPref($row_serie["id"])) {
-                                    $mail = $user->email;
-                                    $idUser = User::getId($mail);
-                                    $pref->addPreference($idUser, $_GET['id'], $serie);
-                                }
-                                $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=3'>Retirez des favoris</a>";
-                            } else if ($_GET['favoris'] == 2) {
-                                $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=3'>Retirez des favoris</a>";
+                            if ($_GET['favoris'] === "true") {
+                                Preferences::addPreference(User::getID($user->email), $_GET['id']);
+                                $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=false'>Retirez des favoris</a>";
+                            } else if ($_GET['favoris'] === "false") {
+                                Preferences::delPreference($_GET['id']);
+                                $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=false'>Ajoutez aux favoris</a>";
                             }
                         }else {
-                            $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=1'>Ajoutez aux favoris</a>";
+                            if (Preferences::isPref($_GET['id'])) {
+                                $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=false'>Retirez des favoris</a>";
+                            }else {
+                                $html .= "<a href='?action=display-serie&id={$_GET['id']}&favoris=true'>Ajoutez aux favoris</a>";
+                            }
                         }
                     }else {
                         $html = "<h3>Vous ne pouvez pas modifier directement l'id de la serie</h3>";

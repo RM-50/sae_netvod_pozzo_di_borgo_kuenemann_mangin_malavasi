@@ -9,6 +9,6 @@ require_once 'vendor/autoload.php';
 
 session_start();
 
-$action = isset($_GET['action']) ? $_GET['action'] : null;
+$action = $_GET['action'] ?? null;
 $dispatcher = new Dispatcher($action);
 $dispatcher->run();
