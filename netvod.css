@@ -97,11 +97,18 @@ body {
     padding: 1.2rem;
 }
 
+.content .form-item span:hover {
+    font-size: xx-large;
+    top: 0.5rem;
+    left: 1.3rem;
+}
+
 .content .form-item span {
     position: absolute;
     top:0.87rem;
     left: 1.5rem;
     cursor: default;
+    transition: all 0.1s ease-in-out;
 }
 
 .content .form-item-other {
@@ -137,6 +144,20 @@ body {
     position: relative;
 }
 
+.content .double-form-sous-item input:hover {
+    background-color: white;
+}
+
+.content .double-form-sous-item input:focus {
+    background-color: white;
+}
+
+.content .double-form-item span:hover {
+    font-size: xx-large;
+    top: 0.5rem;
+    left: 1.3rem;
+}
+
 .content .double-form-sous-item input {
     width: 98%;
     padding: 1rem 1rem 1rem calc(1rem * 3.6);
@@ -153,6 +174,8 @@ body {
     position: absolute;
     top: 0.87rem;
     left: 1.5rem;
+    cursor: default;
+    transition: all 0.1s ease-in-out;
 }
 
 .serieRender {

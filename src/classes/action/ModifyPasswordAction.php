@@ -33,7 +33,7 @@ class ModifyPasswordAction extends Action
                                     <span class="form-item-icon material-symbols-rounded">email</span>
                                     <input type="password" name="passwd" placeholder="Entrez votre adresse mail">
                                 </div>
-                                <br />
+                                <br/>
                                 <div class="double-form-item">
                                     <div class="double-form-sous-item">
                                         <span class="form-item-icon material-symbols-rounded">lock</span>
