@@ -36,7 +36,11 @@ class Episode
         $this->id = $id;
     }
 
-    public static function getEpisode(int $id):mixed
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public static function getAllAttributesEpisode(int $id):mixed
     {
         $db = ConnectionFactory::makeConnection();
         $sqlEpisode = "SELECT * FROM episode where id = ?";
@@ -46,6 +50,24 @@ class Episode
         return $stmt_episode->fetch(\PDO::FETCH_ASSOC);
     }
 
+    public static function getEpisodeByIdSeries(int $id):array
+    {
+        $db = ConnectionFactory::makeConnection();
+        $sqlEpisode = "SELECT * FROM episode where idSerie = ?";
+        $stmt_episode = $db->prepare($sqlEpisode);
+        $stmt_episode->bindParam(1, $id);
+        $stmt_episode->execute();
+        $episodes = [];
+        while ($row = $stmt_episode->fetch(\PDO::FETCH_ASSOC)) {
+            $episodes[] = new Episode($row['id'], $row['titre'], $row['filename']);
+        }
+        return $episodes;
+    }
+
+    /**
+     * @param int $id
+     * @return string
+     */
     public static function getSerieEpisode(int $id):string
     {
         $db = ConnectionFactory::makeConnection();
@@ -56,31 +78,33 @@ class Episode
         return $stmt_episode->fetch(\PDO::FETCH_ASSOC)['titre'];
     }
 
-
     /**
-     * @throws NonEditablePropertyException
+     * @param string $name
+     * @param mixed $value
+     * @return void
      * @throws InvalidPropertyValueException
+     * @throws NonEditablePropertyException
      */
-
     public function __set(string $name, mixed $value): void {
         if($name == "titre" or $name == "filename") { throw new NonEditablePropertyException("Propriété non-éditable"); }
         if($name == "duree" and $value < 0) { throw new InvalidPropertyValueException("Valeur non-valide"); }
         $this->$name = $value;
     }
 
-
-
-
     /**
-     * @throws Exception
+     * @param string $name
+     * @return mixed
+     * @throws InvalidPropertyNameException|Exception
      */
-
     public function __get(string $name): mixed
     {
         if (!property_exists($this, $name)) throw new Exception("$name: invalid property");
         return $this->$name;
     }
 
+    /**
+     * @return string
+     */
     public function __toString() : string {
         return json_encode($this, JSON_PRETTY_PRINT);
     }

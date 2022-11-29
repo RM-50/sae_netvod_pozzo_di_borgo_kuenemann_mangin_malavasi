@@ -30,8 +30,8 @@ class ConnectionFactory{
     /**
      * @return PDO|null
      */
-
-    public static function makeConnection(){
+    public static function makeConnection(): ?PDO
+    {
         if(self::$db === null){
             $dsn = self::$config['driver'].
                 ':host='.self::$config['host'].

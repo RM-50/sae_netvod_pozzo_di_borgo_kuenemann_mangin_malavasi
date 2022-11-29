@@ -115,7 +115,6 @@ class Auth
      * @return string renvoie le token généré par la méthode bin2hex
      * @throws Exception
      */
-
     public static function creerToken(string $nom_token, int $id) : string
     {
         $token = bin2hex(random_bytes(64));

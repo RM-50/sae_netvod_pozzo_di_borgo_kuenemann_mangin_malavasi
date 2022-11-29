@@ -30,7 +30,7 @@ class DisplayEpisodeAction extends Action
             try {
                 $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
 
-                $row = Episode::getEpisode($id);
+                $row = Episode::getAllAttributesEpisode($id);
 
                 $episode = new Episode($row['id'],$row['titre'], $row['file']);
                 $renderer = new EpisodeRenderer($episode);

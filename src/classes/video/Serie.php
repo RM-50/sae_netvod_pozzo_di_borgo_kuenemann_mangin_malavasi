@@ -46,8 +46,41 @@ class Serie
         return $this->$name;
     }
 
+    /**
+     * @param int $id
+     * @return string
+     */
+    public static function getTitre(int $id): string
+    {
+        $sql = "SELECT titre FROM serie WHERE id = ?";
+        $db = ConnectionFactory::makeConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(1, $id);
+        $stmt->execute();
+        $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $row['titre'];
+    }
 
     /**
+     * @return array
+     */
+    public static function getAllIdSerie(): array
+    {
+        $sql = "SELECT id FROM serie";
+        $db = ConnectionFactory::makeConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $listeId = [];
+        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+            $listeId [] = $row['id'];
+        }
+        return $listeId;
+    }
+
+
+    /**
+     * @param string $titre
+     * @return int
      * @throws Exception
      */
     public static function getIdSerie(string $titre):int
