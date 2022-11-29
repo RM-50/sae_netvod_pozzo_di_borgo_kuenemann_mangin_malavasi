@@ -3,7 +3,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300&display=swap');
 
 body {
-    text-align: center;
     font-family: 'Poppins', sans-serif;
     background-image: url("./rsrc/background.jpg");
     background-color: #171717aa;
@@ -14,6 +13,8 @@ body {
     min-height: 10rem;
     color: black;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .serie{
@@ -45,9 +46,10 @@ body {
 .content{
     display: flex;
     width: 60%;
+    margin-top: 10em;
     background-color: rgba(106, 106, 106, 0.5);
     border-radius: 10px;
-    margin: 10rem auto;
+    animation: ease 0.5s fadeIn;
 }
 
 .content #welcome {
@@ -57,13 +59,21 @@ body {
     color: white;
 }
 
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
 .content .form-group {
     width: 100%;
     display: flex;
     flex-direction: column;
     padding: 4rem 4rem 4rem 4rem;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .content .form-item {
@@ -82,6 +92,16 @@ body {
     text-align: left;
     color: black;
     transition: background-color 0.5s;
+    animation: ease 0.5s growUp;
+}
+
+@keyframes growUp {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .content .form-item input:focus {
@@ -109,6 +129,16 @@ body {
     left: 1.5rem;
     cursor: default;
     transition: all 0.1s ease-in-out;
+    animation: ease 0.5s slideIn;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(20em);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
 
 .content .form-item-other {
@@ -168,6 +198,7 @@ body {
     text-align: left;
     color: black;
     transition: background-color 0.5s;
+    animation: ease 0.5s growUp;
 }
 
 .content .double-form-item span {
@@ -176,6 +207,7 @@ body {
     left: 1.5rem;
     cursor: default;
     transition: all 0.1s ease-in-out;
+    animation: ease 0.5s slideIn;
 }
 
 .serieRender {

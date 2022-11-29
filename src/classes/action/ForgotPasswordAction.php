@@ -5,6 +5,7 @@
 namespace iutnc\netvod\action;
 
 
+use Exception;
 use iutnc\netvod\application\User;
 use iutnc\netvod\auth\Auth;
 use iutnc\netvod\db\ConnectionFactory;
@@ -19,7 +20,7 @@ class ForgotPasswordAction extends Action
 
     /**
      * @return string
-     * @throws \Exception
+     * @throws Exception
      */
 
     public function execute(): string
@@ -29,13 +30,20 @@ class ForgotPasswordAction extends Action
             if (!isset($_GET['token']))
             {
                 $html = <<<END
-                    <form id="renew-password" method="POST" action="?action=forgot-passwd">
-                            <label for="email">Entrez votre email</label>
-                            <input type="email" name="email">
-                            <br /><br />
-                            
-                            <button type="submit">Valider</button>
-                    </form>
+                    <div class="form-group">
+                        <form id="renew-password" method="POST" action="?action=forgot-passwd">
+                            <div class="title">
+                                <label for="renew-password">Réinitialiser mon mot de passe</label>
+                            </div>
+                            <div class="form-item">
+                                <span class="form-item-icon material-symbols-rounded">email</span>
+                                <input type="email" name="email" placeholder="Entrez votre email">
+                            </div>
+                            <div class="form-item-other">        
+                                <button type="submit">Valider</button>
+                            </div>
+                        </form>
+                    </div>
                     END;
             }
             else
@@ -49,17 +57,26 @@ class ForgotPasswordAction extends Action
                     $email = null;
                 }
                 $html = <<< END
-                        <form id="renew-passwd" method="POST" action="?action=forgot-passwd&token=$token&mail=$email">
-                            <label for="passwd">Entrez votre nouveau mot de passe</label>
-                            <input type="password" name="passwd">
-                            <br /><br />
-                            
-                            <label for="confirm-passwd">Confirmez votre nouveau mot de passe</label>
-                            <input type="password" name="confirm-passwd">
-                            <br /><br />
-                            
-                            <button type="submit">Valider</button>
-                        </form> 
+                        <div class="form-group">
+                            <form id="renew-passwd" method="POST" action="?action=forgot-passwd&token=$token&mail=$email">
+                                <div class="title">
+                                    <label for="renew-passwd">Réinitialiser mon mot de passe</label>
+                                </div>
+                                <div class="double-form-item">
+                                    <div class="double-form-sous-item">
+                                        <span class="form-item-icon material-symbols-rounded">lock</span>
+                                        <input type="password" name="passwd" placeholder="Nouveau mot de passe">
+                                    </div>
+                                    <div class="double-form-sous-item">
+                                        <span class="form-item-icon material-symbols-rounded">lock</span>
+                                        <input type="password" name="confirm-passwd" placeholder="Confirmez mot de passe">
+                                    </div>
+                                </div>
+                                <div class="form-item-other">
+                                    <button type="submit">Valider</button> 
+                                </div>                                    
+                            </form>
+                        </div>
                         END;
 
             }
@@ -74,8 +91,9 @@ class ForgotPasswordAction extends Action
                 {
                     $id = User::getID($email);
                     $token = Auth::creerToken('renew', $id);
-                    $html = "Cliquer sur ce lien pour changer de mot de passe <br /><br />";
-                    $html .= "<button onclick=\"window.location.href='?action=forgot-passwd&token=$token&mail=$email'\">Changer de mot de passe !</button>";
+                    $html = <<<END
+                            <meta http-equiv="refresh" content="0.1; URL=index.php?action=forgot-passwd&token=$token&mail=$email">
+                         END;
                 }
                 else
                 {
@@ -108,7 +126,7 @@ class ForgotPasswordAction extends Action
                             $user = new User($id, $email, $passwd, 1);
                             $user->active = 1;
                             $_SESSION['user_connected'] = serialize($user);
-                            $html = "Changement effectué !";
+                            $html = "<div class='form-group'><div class='title'>Changement effectué !</div></div>";
                         }
                     }
                 }

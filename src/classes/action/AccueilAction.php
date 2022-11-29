@@ -44,6 +44,7 @@ class AccueilAction extends Action
                     <div class="accueil-action-item">
                         {$this->doVisionnageEnCours($user)}
                     </div>
+                </div>
                 END;
             }
             else
@@ -53,7 +54,11 @@ class AccueilAction extends Action
         }
         else
         {
-            $html = "<h1 id='welcome'>Bienvenue !</h1>";
+            $html = <<<END
+                    <div class="accueil-action-group">
+                        <h1 id='welcome'>Bienvenue !</h1>
+                    </div>
+                  END;
         }
         return $html;
     }

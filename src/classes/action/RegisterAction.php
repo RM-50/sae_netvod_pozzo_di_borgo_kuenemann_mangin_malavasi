@@ -5,6 +5,7 @@
 namespace iutnc\netvod\action;
 
 
+use Exception;
 use iutnc\netvod\auth\Auth;
 use iutnc\netvod\exceptions\AuthException;
 
@@ -14,10 +15,10 @@ class RegisterAction extends Action
 {
 
 
-
     /**
      * @return string
      * @throws AuthException
+     * @throws Exception
      */
 
     public function execute(): string
@@ -46,7 +47,7 @@ class RegisterAction extends Action
                                 </div>
                                 <br>
                                 <div class="form-item-other">
-                                    <label for="signin"> <a href="SigninAction.php">Vous avez déjà un compte ?</a></label>
+                                    <label for="signin"> <a href="index.php?action=signin">Vous avez déjà un compte ?</a></label>
                                     <button type="submit">S'inscire</button>
                                 </div>
                             </form>
@@ -68,8 +69,16 @@ class RegisterAction extends Action
                         Auth::authenticate($_POST['email'], $passwd);
                         $user = unserialize($_SESSION['user_connected']);
                         $token = Auth::creerToken('activation', $user->id);
-                        $html .= "<br /> Veuillez maintenant activer votre compte <br /><br />";
-                        $html .= "<button onclick=\"window.location.href='?action=activate-account&token=$token'\">Activer Compte</button>";
+                        $html .= <<<END
+                        <div class="form-group">
+                            <div class="title">
+                                <label for="register">S'Veuillez maintenant activer votre compte</label>
+                            </div>
+                            <div class="form-item">
+                                <button onclick="window.location.href='?action=activate-account&token=$token';">Activer Compte</button>
+                            </div>
+                        </div>                        
+                        END;
                     }
             }
             else
