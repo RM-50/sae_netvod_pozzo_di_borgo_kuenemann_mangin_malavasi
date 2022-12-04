@@ -5,11 +5,8 @@
 namespace iutnc\netvod\render;
 
 
-use iutnc\netvod\video\Episode;
-use iutnc\netvod\video\Serie;
-use iutnc\netvod\note\Note;
 use iutnc\netvod\action\DisplaySerieActionAction;
-
+use iutnc\netvod\activeRecord\Serie;
 
 
 class SerieRenderer implements Renderer

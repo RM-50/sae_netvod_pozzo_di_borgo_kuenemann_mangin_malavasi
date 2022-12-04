@@ -6,12 +6,11 @@ namespace iutnc\netvod\action;
 
 
 use Exception;
+use iutnc\netvod\activeRecord\Episode;
+use iutnc\netvod\activeRecord\Serie;
 use iutnc\netvod\application\User;
 use iutnc\netvod\preference\Preferences;
-use iutnc\netvod\render\EpisodeRenderer;
 use iutnc\netvod\render\SerieRenderer;
-use iutnc\netvod\video\Episode;
-use iutnc\netvod\video\Serie;
 use iutnc\netvod\visionnage\VisioEnCours;
 
 

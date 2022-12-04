@@ -11,9 +11,7 @@ use iutnc\netvod\auth\Auth;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\exceptions\InvalidPropertyNameException;
 use iutnc\netvod\preference\Preferences;
-use iutnc\netvod\video\Serie;
 use iutnc\netvod\visionnage\VisioEnCours;
-
 
 
 class User

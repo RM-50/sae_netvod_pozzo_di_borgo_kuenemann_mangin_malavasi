@@ -1,6 +1,6 @@
 <?php
 
-namespace iutnc\netvod\video;
+namespace iutnc\netvod\activeRecord;
 
 use Exception;
 use iutnc\netvod\db\ConnectionFactory;
@@ -183,6 +183,8 @@ class Serie
         $stmt_serie->bindParam(5, $this->dateAjout);
         // Execution de la requête
         $stmt_serie->execute();
+        // Mise à jour de l'id de l'objet
+        $this->id = $db->lastInsertId();
     }
 
     private function update() : void

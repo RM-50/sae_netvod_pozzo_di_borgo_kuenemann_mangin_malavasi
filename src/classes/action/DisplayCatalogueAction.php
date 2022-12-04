@@ -5,16 +5,12 @@
 namespace iutnc\netvod\action;
 
 
+use iutnc\netvod\activeRecord\Episode;
+use iutnc\netvod\activeRecord\Serie;
 use iutnc\netvod\db\ConnectionFactory;
-use iutnc\netvod\preference\Preferences;
 use iutnc\netvod\render\Renderer;
 use iutnc\netvod\render\SerieRenderer;
-use iutnc\netvod\tri\TriCriteres;
-use iutnc\netvod\tri\TriMotCle;
-use iutnc\netvod\video\Episode;
-use iutnc\netvod\video\Serie;
 use PDOException;
-
 
 
 class  DisplayCatalogueAction extends Action

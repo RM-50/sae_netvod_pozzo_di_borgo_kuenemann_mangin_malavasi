@@ -5,16 +5,13 @@
 namespace iutnc\netvod\action;
 
 
+use iutnc\netvod\activeRecord\Episode;
+use iutnc\netvod\activeRecord\Serie;
 use iutnc\netvod\application\User;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\preference\Preferences;
-use iutnc\netvod\render\Renderer;
 use iutnc\netvod\render\SerieRenderer;
-use iutnc\netvod\video\Episode;
-use iutnc\netvod\video\Serie;
-use iutnc\netvod\note\Note;
 use PDOException;
-
 
 
 class DisplaySerieAction extends Action

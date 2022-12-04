@@ -5,8 +5,7 @@
 namespace iutnc\netvod\render;
 
 
-use iutnc\netvod\video\Episode;
-
+use iutnc\netvod\activeRecord\Episode;
 
 
 class EpisodeRenderer implements Renderer
