@@ -6,10 +6,9 @@ namespace iutnc\netvod\auth;
 
 
 use Exception;
-use iutnc\netvod\application\User;
+use iutnc\netvod\activeRecord\User;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\exceptions\AuthException;
-
 
 
 class Auth

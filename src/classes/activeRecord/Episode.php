@@ -7,17 +7,18 @@ namespace iutnc\netvod\activeRecord;
 
 use Exception;
 use iutnc\netvod\db\ConnectionFactory;
+use iutnc\netvod\exceptions\InvalidPropertyNameException;
 
 
 class Episode
  {
-    protected int $numero;
-    protected string $titre;
-    protected string $resume;
-    protected int $duree;
-    protected string $file;
-    protected int $serie_id;
-    protected int $id;
+    private int $numero;
+    private string $titre;
+    private string $resume;
+    private int $duree;
+    private string $file;
+    private int $serie_id;
+    private int $id;
 
 
     /**
@@ -140,7 +141,7 @@ class Episode
         // Exécution de la requête
         $stmt_episode->execute();
         // Récupération de l'id de l'épisode
-        $this->id = $db->lastInsertId();
+        $this->id = (int)$db->lastInsertId();
     }
 
     /**
@@ -198,7 +199,7 @@ class Episode
             id INT AUTO_INCREMENT PRIMARY KEY,
             numero INT NOT NULL,
             titre VARCHAR(40) NOT NULL,
-            resume TEXT NULL,
+            resume TEXT,
             file VARCHAR(40) NOT NULL,
             duree INT NOT NULL,
             serie_id INT NOT NULL,
@@ -234,6 +235,26 @@ class Episode
     {
         if (!property_exists($this, $name)) throw new Exception("$name: invalid property");
         return $this->$name;
+    }
+
+
+    /**
+     * Setter magique de la classe Episode
+     * @param string $attribut
+     * @param mixed $valeur
+     * @return void
+     * @throws InvalidPropertyNameException si la propriété n'existe pas
+     */
+    public function __set(string $attribut, mixed $valeur) : void
+    {
+        if (property_exists($this, $attribut))
+        {
+            $this->$attribut = $valeur;
+        }
+        else
+        {
+            throw new InvalidPropertyNameException("$attribut: invalid property");
+        }
     }
 
     public function __toString() : string {

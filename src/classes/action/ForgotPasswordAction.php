@@ -5,11 +5,10 @@
 namespace iutnc\netvod\action;
 
 
-use iutnc\netvod\application\User;
+use iutnc\netvod\activeRecord\User;
 use iutnc\netvod\auth\Auth;
 use iutnc\netvod\db\ConnectionFactory;
 use PDO;
-
 
 
 class ForgotPasswordAction extends Action

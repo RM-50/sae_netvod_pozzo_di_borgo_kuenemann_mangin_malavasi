@@ -7,7 +7,7 @@ namespace iutnc\netvod\action;
 
 use iutnc\netvod\activeRecord\Episode;
 use iutnc\netvod\activeRecord\Serie;
-use iutnc\netvod\application\User;
+use iutnc\netvod\activeRecord\User;
 use iutnc\netvod\db\ConnectionFactory;
 use iutnc\netvod\preference\Preferences;
 use iutnc\netvod\render\SerieRenderer;

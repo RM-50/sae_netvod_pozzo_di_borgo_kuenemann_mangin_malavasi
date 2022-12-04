@@ -49,6 +49,24 @@ class Serie
         return $this->$name;
     }
 
+    /**
+     * Setter magique des attributs d'une série
+     * @param string $attribut
+     * @param mixed $valeur
+     * @return void
+     * @throws InvalidPropertyNameException si l'attribut n'existe pas
+     */
+    public function __set(string $attribut, mixed $valeur) : void
+    {
+        if (property_exists($this, $attribut))
+        {
+            $this->$attribut = $valeur;
+        }
+        else
+        {
+            throw new InvalidPropertyNameException("La classe Serie ne possede pas d'attribut : $attribut");
+        }
+    }
 
     /**
      * Méthode findByTitre permettant de trouver la liste des series dont le titre est le titre passé en paramètre
@@ -184,7 +202,7 @@ class Serie
         // Execution de la requête
         $stmt_serie->execute();
         // Mise à jour de l'id de l'objet
-        $this->id = $db->lastInsertId();
+        $this->id = (int)$db->lastInsertId();
     }
 
     private function update() : void

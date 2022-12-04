@@ -6,7 +6,7 @@ namespace iutnc\netvod\action;
 
 
 use iutnc\netvod\activeRecord\Episode;
-use iutnc\netvod\application\User;
+use iutnc\netvod\activeRecord\User;
 use iutnc\netvod\render\EpisodeRenderer;
 use iutnc\netvod\visionnage\VisioEnCours;
 use PDOException;
