@@ -7,9 +7,9 @@ namespace iutnc\netvod\action;
 
 use Exception;
 use iutnc\netvod\activeRecord\Episode;
+use iutnc\netvod\activeRecord\Preferences;
 use iutnc\netvod\activeRecord\Serie;
 use iutnc\netvod\activeRecord\User;
-use iutnc\netvod\preference\Preferences;
 use iutnc\netvod\render\SerieRenderer;
 use iutnc\netvod\visionnage\VisioEnCours;
 
