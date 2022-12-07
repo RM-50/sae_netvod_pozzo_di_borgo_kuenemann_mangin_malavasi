@@ -1,8 +1,6 @@
 <?php
 
-namespace iutnc\netvod\dispatch;
-
-use iutnc\netvod\action\Action;
+namespace iutnc\netvod\action;
 
 class ProfileAction extends Action
 {
