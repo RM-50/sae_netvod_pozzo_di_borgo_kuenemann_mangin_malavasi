@@ -294,7 +294,7 @@ class Preferences
      */
     public function __get(string $name): mixed
     {
-        if (!property_exists($this, $name)) throw new Exception("$name: invalid property");
+        if (!property_exists($this, $name)) throw new InvalidPropertyNameException("$name: invalid property");
         return $this->$name;
     }
 
