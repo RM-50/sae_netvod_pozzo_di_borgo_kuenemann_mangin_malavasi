@@ -11,28 +11,35 @@ class DisplayTriAction
     public static function execute(string $http_method): string
     {
         $html = <<<END
-                        <form id='rechercheMotCle' method='POST' action='?action=display-catalogue'>
-                            <label for="cle">Mot clé de recherche :</label>
-                            <input type="text" name="cle">
-                            <button type="submit">Rechercher !</button>
-                        </form>
+                        <div class="tri-action-group">
+                            <div class="form-group-catalogue">      
+                                <form id='rechercheMotCle' method='POST' action='?action=display-catalogue'>
+                                    <div class="form-item-search-catalogue">
+                                        <button type="submit"><span class="form-item-icon material-symbols-rounded">search</span><label id="item-search">Search</label></button>
+                                        <input type="text" name="motCle" placeholder="Rechercher un mot clé">
+                                    </div>
+                                </form>
+                            </div>
                         END;
 
         $html .= <<<END
-                    <nav id="deroule">
-                        <ul id="serie">
-                            <li class="menu-deroulant">
-                                <a id="amenu" href="">Trier</a>
+                    <div class="group-trier">
+                        <nav id="deroule">
+                            <ul id="serie">
+                                <li class="menu-deroulant">
+                                    <a id="amenu" href="">Trier</a>
                                     <ul class="sous-menu">
                                         <li><a id="amenu" href="?action=display-catalogue&sort=titre">Titre</a></li>
                                         <li><a id="amenu" href="?action=display-catalogue&sort=date">Date</a></li>
                                         <li><a id="amenu" href="?action=display-catalogue&sort=annee">Annee de creation</a></li>
                                         <li><a id="amenu" href="?action=display-catalogue&sort=descriptif">Descriptif</a></li>
                                     </ul>
-                            </li>
-                        </ul>
-                    </nav>
-            END;
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                 </div>
+                 END;
         $idSeries = [];
         if ($http_method === "POST") {
             if (isset($_POST["cle"])) {

@@ -111,31 +111,28 @@ class AccueilAction extends Action
         if (VisioEnCours::getVideoEnCoursLength($idUser) != 0) {
             $html = '
                         <h2>Visionnage en cours</h2>
-                        <table id="champ">
-                        <tr>
-                        <td>
-                            <nav id="deroule">
-                                <ul id="serie">';
+                            <div class="accueil-action-group-liste">';
             foreach (VisioEnCours::getVideoEnCours($idUser) as $episode) {
                 $titreSerie = Episode::getSerieEpisode($episode->id);
                 $id = $episode->id;
                 $html .= <<<END
-                        <li class="menu-deroulant">
-                            <a id="amenu" href="">$titreSerie</a>
-                            <ul class="sous-menu">
-                                <li><a id="amenu" href="index.php?action=display-episode&id=$id">Episodes $id</a></li>
-                            </ul>
-                        </li>
+                        <div class="accueil-action-item-list">
+                            <nav id="deroule">
+                                <ul id="serie">
+                                    <li class="menu-deroulant">
+                                        <a id="amenu" href="">$titreSerie</a>
+                                        <ul class="sous-menu">
+                                            <li><a id="amenu" href="index.php?action=display-episode&id=$id">Episodes $id</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
                         END;
             }
             $html .= <<<END
-                                </ul>
-                            </nav>
-                            </td>
-                        </tr>
-                     </table>          
-                </div>
-                END;
+                    </div>
+                    END;
         }
         return $html;
     }

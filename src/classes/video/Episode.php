@@ -53,13 +53,13 @@ class Episode
     public static function getEpisodeByIdSeries(int $id):array
     {
         $db = ConnectionFactory::makeConnection();
-        $sqlEpisode = "SELECT * FROM episode where idSerie = ?";
+        $sqlEpisode = "SELECT * FROM episode where serie_id = ?";
         $stmt_episode = $db->prepare($sqlEpisode);
         $stmt_episode->bindParam(1, $id);
         $stmt_episode->execute();
         $episodes = [];
         while ($row = $stmt_episode->fetch(\PDO::FETCH_ASSOC)) {
-            $episodes[] = new Episode($row['id'], $row['titre'], $row['filename']);
+            $episodes[] = new Episode($row['id'], $row['titre'], $row['file']);
         }
         return $episodes;
     }

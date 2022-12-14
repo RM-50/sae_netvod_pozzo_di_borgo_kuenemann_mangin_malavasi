@@ -41,7 +41,7 @@ class SigninAction extends Action
                                 </div>
                                 <br>
                                 <div class="form-item-other">
-                                    <button type="submit">Se connecter</button>
+                                    <button type="submit" id="item-button-connection">Se connecter</button>
                                     <label for="forgotpasswd">Vous avez oublié votre mot de passe ?</label>
                                     <label><a href='?action=forgot-passwd'">Mot de passe oublié</a></label>
                                 </div>

@@ -69,20 +69,28 @@ body {
 }
 
 
-.content .form-group {
+.content .form-group , .tri-action-group {
+    text-align: center;
     width: 100%;
     display: flex;
     flex-direction: column;
     padding: 4rem 4rem 4rem 4rem;
 }
 
-.content .form-item {
+.content .tri-action-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+.content .form-item , .form-item-search-catalogue {
     width: 100%;
     display: flex;
     position: relative;
 }
 
-.content .form-item input {
+.content .form-item input , .form-item-search-catalogue input {
     width: 100%;
     padding: 1rem 1rem 1rem calc(1rem * 3.6);
     border-radius: 50px;
@@ -95,6 +103,10 @@ body {
     animation: ease 0.5s growUp;
 }
 
+.content .form-item-search-catalogue input ,.content .form-item-search-catalogue span , .form-item-search-catalogue #item-search{
+    animation: none;
+}
+
 @keyframes growUp {
     0% {
         transform: scale(0);
@@ -104,37 +116,44 @@ body {
     }
 }
 
-.content .form-item input:focus {
+.content .form-item input:focus , .form-item-search-catalogue input:focus {
     background-color: white;
 }
 
-.content .form-item input:hover {
+.content .form-item input:hover ,.form-item-search-catalogue input:hover {
     background-color: white;
 }
 
-.content .form-item-other button:hover {
+.content .form-item-other button:hover , .form-item-other-search-catalogue button:hover {
     background-color: white;
     padding: 1.2rem;
 }
 
-.content .form-item span:hover {
+.content .form-item span:hover , .form-item-search-catalogue span:hover {
     font-size: xx-large;
     top: 0.5rem;
     left: 1.3rem;
 }
 
-.content .form-item span {
+.content .form-item span , .form-item-search-catalogue span , #item-search {
     position: absolute;
-    top:0.87rem;
+    top: 0.87rem;
     left: 1.5rem;
     cursor: default;
     transition: all 0.1s ease-in-out;
     animation: ease 0.5s slideIn;
 }
 
+.form-item-search-catalogue #item-search {
+    top: 2.4rem;
+    left: 1.1rem;
+    font-size: x-small;
+    transition: all 0.1s ease-in-out;
+}
+
 @keyframes slideIn {
     0% {
-        transform: translateX(20em);
+        transform: translateX(10em);
     }
     100% {
         transform: translateX(0);
@@ -151,7 +170,7 @@ body {
     color: white;
 }
 
-.content .form-item-other button {
+.content .form-item-other button, .form-item-other-search-catalogue button {
     margin-top: 20px;
     background: black;
     width: 100%;
@@ -366,32 +385,61 @@ div {
 #champ td:nth-child(even){background-color: #b6b6b6;}
 #serie:hover {background-color: #7b3c3c}
 
-:root{
-    --hauteur-menu: 60px;
+.group-trier #deroule {
+    --hauteur-menu: 41px;
 }
-#deroule {
-    margin-top: 20px;
+
+.accueil-action-group-liste {
+    display: inline-flex;
+    flex-direction: row;
     width: 100%;
-    font-size: 18px;
-    position: relative;
 }
-#deroule > #serie {
+
+.accueil-action-group-liste .accueil-action-item-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#deroule {
+    border-radius: 50px;
+    position: relative;
+    --hauteur-menu: 60px;
+    width: 70%;
+}
+#deroule > #serie , .group-trier #deroule > #serie {
+    cursor: pointer;
     display: flex;
     text-align: center;
     box-shadow: 0 1px 2px 1px rgba(0,0,0,0.3);
-    height: var(--hauteur-menu);
-}
-#deroule #serie {
+    height: 60px;
+    width: 100%;
+    margin-left: 10px;
     list-style-type: none;
+    border-radius: 10px;
 }
 
-#deroule > #serie > li {
+.group-trier #deroule > #serie {
+    height: 50px;
+}
+
+#deroule > #serie > li, .group-trier #deroule > #serie > li {
     background-color: white;
+    border-radius: 3px;
     position: relative;
     height: 100%;
     flex: 1;
 }
+
+.group-trier #deroule > #serie > li {
+    border-radius: 10px;
+    height: 50px;
+}
 #deroule > #serie > li > a {
+    display: block;
+    font-size: calc(var(--hauteur-menu) * 0.3);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -399,19 +447,24 @@ div {
 }
 
 
-.sous-menu {
+.sous-menu , .group-trier .sous-menu{
     margin-top: var(--hauteur-menu);
+    border-radius: 3px;
     width: 100%;
     padding-left: inherit;
     text-align: left;
     background-color: white;
-    border-radius: 3px;
     overflow: hidden;
     max-height: 0;
 }
+
+.group-trier .sous-menu {
+    border-radius: 0 0 10px 10px;
+}
+
 .sous-menu > li > a {
     height: 50px;
-    padding-left: 20px;
+    padding-left: 10px;
     width: 100%;
     align-items: center;
     display: flex;

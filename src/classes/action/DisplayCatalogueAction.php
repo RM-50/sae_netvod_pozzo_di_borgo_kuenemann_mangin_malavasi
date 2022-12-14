@@ -25,42 +25,27 @@ class DisplayCatalogueAction extends Action
     public function execute(): string
     {
         $html = '';
-
-        return $html;
-    }
-
-    public function temp():string {
         if (isset($_SESSION['user_connected'])) {
             $user = unserialize($_SESSION['user_connected']);
             if ($user->active === 1) {
                 $html = DisplayTriAction::execute($this->http_method);
-                $idSeries = [];
-                foreach ($_POST['idSeries'] as $idSerie) {
-                    echo $idSerie;
-                    if (filter_var($idSerie,FILTER_SANITIZE_NUMBER_INT)) $idSeries[] = $idSerie;
-                    else {
-                        $idSeries = [];
-                        break;
-                    }
-                }
-                $html .= $this->afficherCatalogue($idSeries);
+                //$html .= $this->afficherCatalogue($idSeries);
             } else {
-                $html = "Le compte doit être activé pour utiliser cette fonctionnalité";
+                //$html = "Le compte doit être activé pour utiliser cette fonctionnalité";
             }
         }
         else
         {
             $html = "Il faut se connecter avant d'accéder au site";
         }
+        return $html;
     }
-
 
 
     /**
      * @param array $idSeries
      * @return string
      */
-
     public function afficherCatalogue(array $idSeries=[]):string
     {
         $html = "<div><h1> Notre catalogue : </h1></div> <br>";
