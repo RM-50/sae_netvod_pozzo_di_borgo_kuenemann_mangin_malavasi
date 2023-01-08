@@ -28,10 +28,23 @@ class DisplayCatalogueAction extends Action
         if (isset($_SESSION['user_connected'])) {
             $user = unserialize($_SESSION['user_connected']);
             if ($user->active === 1) {
-                $html = DisplayTriAction::execute($this->http_method);
-                //$html .= $this->afficherCatalogue($idSeries);
+                $html = '<div class="catalogue-action-group">
+                         <div class="catalogue-action-trie">';
+                $html .= DisplayTriAction::execute($this->http_method);
+                $html .= '</div>
+                          <div class="catalogue-action-title">';
+                $html .= "<h1> Notre catalogue : </h1>";
+                $html .= '</div>
+                            <div class="catalogue-action-item">';
+                $idSeries = Serie::getAllIdSerie();
+                foreach ($idSeries as $id) {
+                    $titre = Serie::getTitre($id);
+                    $html .= $this->getHtml($titre, $id);
+                }
+                $html .= '</div>';
+                $html .= '</div>';
             } else {
-                //$html = "Le compte doit être activé pour utiliser cette fonctionnalité";
+                $html = "Le compte doit être activé pour utiliser cette fonctionnalité";
             }
         }
         else
@@ -48,16 +61,8 @@ class DisplayCatalogueAction extends Action
      */
     public function afficherCatalogue(array $idSeries=[]):string
     {
-        $html = "<div><h1> Notre catalogue : </h1></div> <br>";
 
-        if ($idSeries == []) {
-            $idSeries = Serie::getAllIdSerie();
-        }
-        foreach ($idSeries as $id) {
-            $titre = Serie::getTitre($id);
-            $html .= $this->getHtml($titre, $id);
-        }
-        return $html;
+
     }
 
     /**
